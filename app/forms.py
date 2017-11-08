@@ -6,7 +6,7 @@ from flask_wtf.file import FileField, FileAllowed, FileRequired
 
 class Tenants(Form):
 
-	sname = StringField('Surename',[validators.DataRequired(),validators.Length(min=6,max=20)])
+	fname = StringField('Firstname',[validators.DataRequired(),validators.Length(min=6,max=20)])
 	mname = StringField('Midlename',[validators.DataRequired(),validators.Length(min=6,max=20)])
     lname = StringField('Lastname',[validators.DataRequired(),validators.Length(min=6,max=20)])
     Address = StringField('Present Address', [validators.Length(min=10,max=50)])
