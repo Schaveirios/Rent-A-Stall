@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+<div id="navigation"><a href="LINK HERE">HOME</a> | <a href="/addtenant">FORMS</a> | </div>
+
+
+<div id="addtenant">
+    <div class="container">
+        <font style="text-align: center; font-family: Calibri; color: black; font-weight:bold; font-size: 150%;">Tenant Information</font>
+        <form action="/register" method="POST">
+            {{form1.hidden_tag()}}
+                <label class="form">First Name: <br>
+                {{ form1.firstname(placeholder = "First Name") }} {% if form1.firstname.errors %}
+                {% for error in form1.firstname.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+
+
+                <label class="form" >Middle Name: <br>
+                {{ form1.middlename(placeholder = "Middle Name") }} {% if form1.middlename.errors %}
+                {% for error in form1.middlename.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+
+                <label class="form" >Last Name: <br>
+                {{ form1.lastname(placeholder = "Last Name") }} {% if form1.lastname.errors %}
+                {% for error in form1.lastname.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+
+                <label class="form"  >Contact Number: <br>
+                {{ form1.contact_no(placeholder = "Contact Number") }} {% if form1.contact_no.errors %}
+                {% for error in form1.contact_no.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+
+                <label class="form" >Present Address: <br>
+                {{ form1.present_add(placeholder = "Present Address") }} {% if form1.present_add.errors %}
+                {% for error in form1.present_add.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+
+            <br>{{ form1.submit }}
+        </form>
+    </div>
+
+    <a href="/addtenant">
+        <div id="formtag1">
+        </div>
+    </a>
+</div>
+
+<div id="addstall2">
+    <a href="/addstall">
+        <div id="formtag2">
+        </div>
+    </a>
+
+    <div class="container">
+        <font style="text-align: center; font-family: Calibri; color: #e6e6e6; font-weight:bold; font-size: 150%;">Stall Information</font>
+        <form action="/register" method="POST">
+            {{form2.hidden_tag()}}
+                <label class="form" id="label">Stall ID: <br>
+                {{ form2.stall_id(placeholder = "Stall ID") }} {% if form2.stall_id.errors %}
+                {% for error in form2.stall_id.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+
+
+                <label class="form" id="label">Stall Location: <br>
+                {{ form2.location(placeholder = "Stall Location") }} {% if form2.location.errors %}
+                {% for error in form2.location.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+
+                <label class="form" id="label">Type: <br>
+                {{ form2.type(placeholder = "Type") }} {% if form2.type.errors %}
+                {% for error in form2.type.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+
+                <label class="form" id="label">Rate: <br>
+                {{ form2.rate(placeholder = "Rate") }} {% if form2.rate.errors %}
+                {% for error in form2.rate.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+
+            <br>{{ form2.submit }}
+        </form>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}
