@@ -11,7 +11,7 @@ def tenants():
 @app.route("/AddTenants", methods = ["POST", "GET" ])
 def AddTenants():
 	if request.method == "POST"
-<<<<<<< HEAD
+
 		sname = request.form['surname']
 		fname = request.form['firstname']
 		mname = request.form['middlename']
@@ -30,7 +30,7 @@ def AddTenants():
 		msg = "Record sucessfully added."
 
 		return return_template("resultadded.html", msg=msg)
-=======
+
 		if form.validate_on_submit():
 
 			user.first_name = form.first_name.data
@@ -46,7 +46,7 @@ def AddTenants():
     		dbase.tenants.commit()
     	else:
 
->>>>>>> 86f6410ac9b75feaa7c14f8f8ff2cedee61624df
+
 
 @app.route("/stall")
 def tenants():
@@ -58,11 +58,6 @@ def AddStalls():
 		stallno = request.form['stallnumber']
 		stallloc = request.form['stalllocation']
 		rate = request.form['rate']
-<<<<<<< HEAD
-
-=======
-                
->>>>>>> 86f6410ac9b75feaa7c14f8f8ff2cedee61624df
 		stall = Stall()
 
 		msg = "Record sucessfully added."
@@ -75,13 +70,7 @@ def AddStalls():
 
 
 if __ == "__main__":
-<<<<<<< HEAD
-	app.run()
-=======
 	app.run()
 
-
-def register():
-    form = RegistrationForms(request.form)
     
->>>>>>> 86f6410ac9b75feaa7c14f8f8ff2cedee61624df
+
