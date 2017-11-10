@@ -16,16 +16,19 @@ class Branch(dbase.Model):
 
 class Stalls(dbase.Model):
     __tablename__ = 'stalls'
-    stallID = dbase.Column(dbase.Integer, primary_key=True)
+    stallID = dbase.Column(dbase.Integer, primary_key=True, autoincrement= True)
+    stall_no = dbase.Column(dbase.Integer)
     stall_rate = dbase.Column(dbase.Float)
     stall_loc = dbase.Column(dbase.String(60))
     stall_status = dbase.Column(dbase.String(60))
+    typeID = dbase.Column(dbase.Integer, dbase.ForeignKey("types.typeID"), nullable= False)
     branchID = dbase.Column(dbase.Integer, dbase.ForeignKey("branch.branchID"), nullable=False)
 
-    def __init__ (self,stall_rate, stall_loc, stall_status, branchID):
+    def __init__ (self,stall_rate, stall_loc, stall_status, branchID, stall_no):
         self.stall_rate =stall_rate
-        self.stall_status = stall_status
+        self.stall_status = '0'
         self.stall_loc = stall_loc
+        self.stall_no = stall_no
         self.branchID = branchID
 
     def __repr__(self):
@@ -33,7 +36,7 @@ class Stalls(dbase.Model):
 
 class Users(dbase.Model):
     __tablename__ ="users"
-    userID = dbase.Column(dbase.Integer,primary_key= True)
+    userID = dbase.Column(dbase.Integer,primary_key= True, autoincrement= True)
     roleID = dbase.Column(dbase.Integer)
     username = dbase.Column(dbase.String(20), unique=True)
     passwrd = dbase.Column(dbase.String(20))
@@ -58,7 +61,7 @@ class Users(dbase.Model):
 
 class Tenants(dbase.Model):
     __tablename__ = "tenants"
-    tenantID = dbase.Column(dbase.Integer, primary_key= True)
+    tenantID = dbase.Column(dbase.Integer, primary_key= True, autoincrement=True)
     contact_no = dbase.Column(dbase.String(12))
     first_name = dbase.Column(dbase.String(24))
     mid_name = dbase.Column(dbase.String(24))
@@ -81,9 +84,9 @@ class Tenants(dbase.Model):
 
 class Logs(dbase.Model):
     __tablename__ = "logs"
-    logID = dbase.Column(dbase.Integer, primary_key=True)
+    logID = dbase.Column(dbase.Integer, primary_key=True, autoincrement=True)
     details = dbase.Column(dbase.String(60))
-    log_date =dbase.Column(dbase.String(60))
+    log_date =dbase.Column(dbase.DATE)
     branchID = dbase.Column(dbase.Integer,dbase.ForeignKey("branch.branchID"), nullable=True)
 
     def __init__(self, details, log_date, branchID):
@@ -97,7 +100,7 @@ class Logs(dbase.Model):
 
 class Pays(dbase.Model):
     __tablename__ = "pays"
-    paysID = dbase.Column(dbase.Integer, primary_key=True)
+    paysID = dbase.Column(dbase.Integer, primary_key=True, autoincrement= True)
     issued_by = dbase.Column(dbase.String(60))
     reference_no = dbase.Column(dbase.String(60))
     or_no = dbase.Column(dbase.String(60))
@@ -117,4 +120,32 @@ class Pays(dbase.Model):
 
     def __repr__(self):
         return '< issued_by{}>'.format(self.issued_by)
+
+
+class Rents(dbase.Model):
+    __tablename__ = "rents"
+    rentID = dbase.Column(dbase.Integer, primary_key=True)
+    date_started = dbase.Column(dbase.DATE)
+    tenantID = dbase.Column(dbase.Integer,dbase.ForeignKey("tenants.tenantID"), nullable=True)
+    stallID = dbase.Column(dbase.Integer, dbase.ForeignKey("stalls.stallID"), nullable=True)
+
+    def __index__(self,date_started, tenantID, stallID):
+        self.date_started = date_started
+        self.tenantID = tenantID
+        self.stallID = stallID
+
+    def __repr__(self):
+        return '<date_started{}>'.format(self.date_started)
+
+class Types(dbase.Model):
+    __tablename__ = 'types'
+    typeID = dbase.Column(dbase.Integer, primary_key=True, autoincrement= True)
+    stall_type = dbase.Column(dbase.String(60))
+
+
+    def __index__(self, stall_type):
+        self.stall_type = stall_type
+
+    def __repr__(self):
+        return '<stall_type{}>'.format(self.stall_type)
 

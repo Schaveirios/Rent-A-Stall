@@ -1,5 +1,5 @@
 import models
-from flask import flask, render_template, request
+from flask import Flask, render_template, request
 from forms import Tenants, Stalls
 
 app = Flask(__name__)
@@ -44,15 +44,3 @@ def AddStalls():
 
 		return render_template("stalladded.html", msg=msg)
 
-
-
-	
-
-
-if __ == "__main__":
-	app.run()
-
-
-def register():
-    form = RegistrationForms(request.form)
-    
