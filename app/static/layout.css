@@ -1,0 +1,194 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+body {
+	background-image: url(bg1.jpg);
+	background-repeat: no-repeat;
+	background-attachment:fixed;
+	background-size: cover;
+	font-size: x-large;
+}
+
+
+.container #submit{
+    margin-left: 40%;
+}
+
+
+.form{
+    color: black;
+    font-weight:bold;
+    font-size:20px;
+}
+
+.container{
+    z-index: 4;
+    position: absolute;
+    text-align: center;
+    width:100%;
+    height:100%;
+	top: 0%;
+	left: 0%;
+	margin-top: 1%
+}
+
+.container #label{
+    color: #e6e6e6;
+}
+
+.container form{
+    margin-top:2%;
+    margin-left: 7%;
+    text-align:left;
+
+}
+
+.container input{
+    padding: 5px 10px;
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+.input submit{
+
+}
+
+
+#navigation {
+	opacity: 0.8;
+	background-color: #000;
+	height: 40px;
+	width: auto;
+	box-shadow: 0px 0px 10px 1px #00F;
+	margin: 5px;
+	color: #FFF;
+	word-spacing: 25px;
+	padding-top: 15px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	font-family: Arial, Helvetica, sans-serif;
+	text-decoration: blink;
+}
+
+#navigation a{
+    text-decoration:none;
+    color: white;
+
+}
+
+#navigation a:hover{
+    text-shadow: 0px 0px 10px white;
+}
+
+
+#addstall2{
+	z-index: 5;
+	position: absolute;
+	width: 50%;
+	height: 70%;
+	border-radius: 20px;
+	background-color: #1a1a1a;
+	box-shadow: 10px 10px 20px -5px #000;
+	top: 25%;
+	left: 27%;
+	text-align: center;
+}
+
+
+#addstall{
+	z-index: 1;
+	position: absolute;
+	width: 50%;
+	height: 70%;
+	border-radius: 20px;
+	background-color: #1a1a1a;
+	box-shadow: 10px 10px 20px -5px #000;
+	top: 25%;
+	left: 27%;
+	text-align: center;
+	-webkit-transition: left 0.5s;
+}
+
+#addstall:hover{
+    left:19%;
+}
+
+
+#formtag2{
+	z-index: 1;
+	width: 25%;
+	height: 19%;
+	position: absolute;
+	background-image: url(frm2.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-attachment:scroll;
+	top: 8%;
+	left: -22%;
+}
+
+#addtenant{
+	z-index: 3;
+	position: absolute;
+	width: 50%;
+	height: 70%;
+	border-radius: 20px;
+	background-color: #3333ff;
+	box-shadow: 20px 20px 20px -5px #333;
+	top: 18%;
+	left: 30%;
+	-webkit-transition: top 0.5s;
+}
+
+#addtenant:hover{
+    top: 10%;
+}
+
+#addtenant2{
+	z-index: 3;
+	position: absolute;
+	width: 50%;
+	height: 70%;
+	border-radius: 20px;
+	background-color: #3333ff;
+	box-shadow: 20px 20px 20px -5px #333;
+	top: 18%;
+	left: 30%;
+}
+
+
+#formtag1{
+	z-index: 3;
+	width: 25%;
+	height: 19%;
+	position: absolute;
+	background-image: url(frm1.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-attachment:scroll;
+	top: 6%;
+	left: -22%;
+	font-family: Impact;
+	color:white;
+}
+
+#add_success{
+	z-index: 1;
+	position: absolute;
+	width: 50%;
+	height: 70%;
+	text-align: center;
+	border-radius: 20px;
+	background-color: white;
+	box-shadow: 20px 20px 20px -5px #333;
+	top: 16%;
+	left: 25%;
+}
+
+#dashboard{
+    color: black;
+    text-align: center;
+}
