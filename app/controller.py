@@ -110,28 +110,33 @@ def AddTenants2():
                 dbase.session.commit()
 
             branchLoc = form.branch.data
+            loc1 = Branch.query.filter_by(branchID=branchLoc).first()
             stallnum = Stalls.query.filter_by(stall_no=stallno1).first()
-            if stallnum:
+
+            if stallnum and loc1:
                 
                 if stallnum.stall_status == "1":
                     return "<h3>Stall is Already Occupied</h3>"
                 else:
                     loc = Branch.query.filter_by(branchID=branchLoc).first()
                     stall = Stalls.query.filter(and_(Stalls.stall_no == stallno1, Stalls.branchID == loc.branchID)).first()
-                    stall.stall_status = "1"
-                    dbase.session.add(stall)
-                    dbase.session.commit()
-                    tenantForm = Tenants(contact_no=Contnum ,
-                                        first_name=firstname ,
-                                        mid_name=middlename ,
-                                        last_name=lastname ,
-                                        present_addr=Address ,
-                                        tenant_photo=TenantphotoID ,
-                                        stallID=stall.stallID
-                                        )
-                    dbase.session.add(tenantForm)
-                    dbase.session.commit()
-                    return render_template("successadd.html")
+                    if stall:
+                        stall.stall_status = "1"
+                        dbase.session.add(stall)
+                        dbase.session.commit()
+                        tenantForm = Tenants(contact_no=Contnum ,
+                                            first_name=firstname ,
+                                            mid_name=middlename ,
+                                            last_name=lastname ,
+                                            present_addr=Address ,
+                                            tenant_photo=TenantphotoID ,
+                                            stallID=stall.stallID
+                                            )
+                        dbase.session.add(tenantForm)
+                        dbase.session.commit()
+                        return render_template("successadd.html")
+                    else:
+                        return "<h3>Stall is not available in the given branch</h3>"
             else:
                 return "<h3>Stall not found</h3>"
     return render_template("clerk_addtenant.html", form1=form)    
@@ -241,12 +246,13 @@ def login():
     if request.method=='POST':
         print 'gdg'
         if form.validate_on_submit():
+            print "meememe"
             user = Users.query.filter_by(username=form.username.data).first()
             print user.username
             if user is not None and check_password_hash(user.passwrd, form.passwrd.data):
-                login(user)
+                login_user(user)
                 return redirect(url_for('index'))
             return '<h1>Invalid username or password!!!!!</h1>'
-        return '<h1>Invalid username or password</h1>'
+        return '<h1>diritso siya diri</h1>'
     return render_template('login.html', form=form)
 
