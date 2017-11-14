@@ -55,14 +55,14 @@ def AddTenants():
                 dbase.session.add(Stalltype)
                 dbase.session.commit()
 
-            branchLoc = form.stallloc.data
+            branchLoc = form.branch.data
             stallnum = Stalls.query.filter_by(stall_no=stallno1).first()
             if stallnum:
                 
                 if stallnum.stall_status == "1":
                     return "<h3>Stall is Already Occupied</h3>"
                 else:
-                    loc = Branch.query.filter_by(branch_loc=branchLoc).first()
+                    loc = Branch.query.filter_by(branchID=branchLoc).first()
                     stall = Stalls.query.filter(and_(Stalls.stall_no == stallno1, Stalls.branchID == loc.branchID)).first()
                     stall.stall_status = "1"
                     dbase.session.add(stall)
