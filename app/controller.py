@@ -1,35 +1,52 @@
 import models
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash, redirect, url_for
 from forms import addtenants, addstalls, addbranch, LogIn,RegisterForm
 from sqlalchemy import and_
 # from werkzeug import secure_filename
 #from flask_login import current_user, login_required
 from app import dbase, app
-from models import Types, Branch, Stalls, Tenants, Users, Logs, Pays
+from flask_login import login_user, login_required, logout_user, LoginManager, current_user
+from models import Types, Branch, Stalls, Tenants, Users, Logs, Pays, Anonymous
 from werkzeug.security import generate_password_hash, check_password_hash
+from decorators import required_roles
 
 
-@app.route("/", methods=["GET"])
-@app.route("//", methods=["GET"])
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.anonymous_user = Anonymous
+
+@login_manager.user_loader
+def load_user(user_id):
+    return Users.query.get(int(user_id))
+
+app.route("/dashboard", methods=["GET"])
+@app.route("/dashboard/", methods=["GET"])
+@login_required
+@required_roles(2)
 def index():
     return render_template("dashboard.html")
 
 
 @app.route("/admin_dashboard", methods=["GET"])
 @app.route("/admin_dashboard/", methods=["GET"])
+@login_required
+@required_roles(1)
 def index2():
     return render_template("admin_dashboard.html")    
 
 
 @app.route("/successadd", methods=["POST", "GET"])
 @app.route("/successadd/", methods=["POST", "GET"])
-#@login_required
+@login_required
+@required_roles(1, 2)
 def added():
     return render_template("successadd.html")
 
 
 @app.route("/AddTenants", methods=["POST", "GET"])
 @app.route("/AddTenants/", methods=["POST", "GET"])
+@login_required
+@required_roles(1,2)
 def AddTenants():
     form = addtenants()
     if request.method == "POST":
@@ -50,7 +67,7 @@ def AddTenants():
                 t = type.typeID
 
             else:
-                Stalltype = Types(stall_type=stallyTpe)
+                Stalltype = Types(stall_type=stallType)
 
                 dbase.session.add(Stalltype)
                 dbase.session.commit()
@@ -60,7 +77,7 @@ def AddTenants():
             if stallnum:
                 
                 if stallnum.stall_status == "1":
-                    return "<h3>Stall is Already Occupied</h3>"
+                    flash("stall already Occupied")
                 else:
                     loc = Branch.query.filter_by(branchID=branchLoc).first()
                     stall = Stalls.query.filter(and_(Stalls.stall_no == stallno1, Stalls.branchID == loc.branchID)).first()
@@ -79,11 +96,13 @@ def AddTenants():
                     dbase.session.commit()
                     return render_template("successadd.html")
             else:
-                return "<h3>Stall not found</h3>"
+                flash("stall already Occupied")
     return render_template("addtenant.html", form1=form)
 
 @app.route("/AddTenants2", methods=["POST", "GET"])
 @app.route("/AddTenants2/", methods=["POST", "GET"])
+@login_required
+@required_roles(1,2)
 def AddTenants2():
     form = addtenants()
     if request.method == "POST":
@@ -116,7 +135,7 @@ def AddTenants2():
             if stallnum and loc1:
                 
                 if stallnum.stall_status == "1":
-                    return "<h3>Stall is Already Occupied</h3>"
+                    flash("stall already Occupied")
                 else:
                     loc = Branch.query.filter_by(branchID=branchLoc).first()
                     stall = Stalls.query.filter(and_(Stalls.stall_no == stallno1, Stalls.branchID == loc.branchID)).first()
@@ -136,15 +155,16 @@ def AddTenants2():
                         dbase.session.commit()
                         return render_template("successadd.html")
                     else:
-                        return "<h3>Stall is not available in the given branch</h3>"
+                        flash('Stall is not available in the given branch')
             else:
-                return "<h3>Stall not found</h3>"
+                flash("Stall not found")
     return render_template("clerk_addtenant.html", form1=form)    
 
 
 @app.route("/AddStalls", methods=["POST", "GET"])
 @app.route("/AddStalls/", methods=["POST", "GET"])
-# @login_required
+@login_required
+@required_roles(1)
 def AddStalls():
     form = addstalls()
     if request.method == "POST":
@@ -169,7 +189,7 @@ def AddStalls():
 
         stallstat = Stalls.query.filter_by(stall_no=stallNo).first()
         if stallstat:
-            return "<h3>Stall is already existing</h3>"
+            flash('Stall already existing') 
         else:
             stallform = Stalls(stall_rate=Rate,
                             stall_loc=stallLoc,
@@ -221,10 +241,12 @@ def AddStalls():
 
 @app.route("/clerk", methods = ["POST", "GET" ])
 @app.route("/clerk/", methods = ["POST", "GET" ])
-# @login_required
+#@login_required
+#@required_roles(1)
 def AddClerk():
     form = RegisterForm()
     if request.method=='POST' and form.validate_on_submit():
+
         uForm = Users(username=form.username.data,
                          passwrd=form.password.data,
                          first_name=form.fname.data,
@@ -232,27 +254,53 @@ def AddClerk():
                          last_name = form.lname.data,
                          contact_no = form.ContNum.data,
                          branchID = form.branchID.data,
-                         roleID = '2'
+                         roleID = '1'
                          )
         dbase.session.add(uForm)
         dbase.session.commit()
         return render_template('successadd.html')
     return render_template("addclerk.html", form=form)
 
-@app.route('/login', methods=["GET", "POST"])
-@app.route('/login/', methods=["GET","POST"])
+@app.route('/', methods=["GET", "POST"])
+@app.route('//', methods=["GET","POST"])
 def login():
     form = LogIn()
-    if request.method=='POST':
-        print 'gdg'
-        if form.validate_on_submit():
-            print "meememe"
+    Branch.branch_types()
+    Types.stall_types()
+    print current_user
+    if current_user.is_active():
+        if current_user.roleID == '1':
+            return redirect(url_for(index2))
+        else:
+            return redirect(url_for(index))
+    else:
+        if request.method == "POST" and form.validate_on_submit():
             user = Users.query.filter_by(username=form.username.data).first()
-            print user.username
-            if user is not None and check_password_hash(user.passwrd, form.passwrd.data):
-                login_user(user)
-                return redirect(url_for('index'))
-            return '<h1>Invalid username or password!!!!!</h1>'
-        return '<h1>diritso siya diri</h1>'
-    return render_template('login.html', form=form)
+            if user:
+                if user.roleID == 2:
+                    print check_password_hash(user.passwrd, form.passwrd.data)
+                    if user is not None and check_password_hash(user.passwrd, form.passwrd.data):
+                        print check_password_hash(user.passwrd, form.passwrd.data)
+                        login_user(user)
+                        return redirect(url_for('index'))
+                    return '<h1>Invalid username or password=======</h1>'
+                elif user.roleID == 1:
+                    if user is not None and check_password_hash(user.passwrd, form.passwrd.data):
+                        login_user(user)
+                        return redirect(url_for('index2'))
+                    return '<h1>Invalid username or password!!!!!</h1>'
+
+                else:
+                    return '<h1>Invalid username or password!!!!!</h1>'
+            else:
+                return '<h1>Invalid username or password!!!!!</h1>'
+    return render_template('login.html', form= form)
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You were logged out.')
+    return redirect(url_for('login'))
 

@@ -10,6 +10,7 @@
     <script src="/static/js/jquery-3.2.1.min.js"></script>
     <script src="/static/js/bootstrap.min.js/"></script>
 
+
 </head>
 
 
@@ -54,6 +55,15 @@
 
     </div>
 </nav>
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message }} alert-dismissible" role="alert">{{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 
 {% block body %}
 {% endblock %}

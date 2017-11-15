@@ -1,5 +1,8 @@
 from app import dbase
 from werkzeug.security import generate_password_hash, check_password_hash
+from itsdangerous import JSONWebSignatureSerializer as Serializer
+from app import app
+from flask_login import AnonymousUserMixin
 
 class Branch(dbase.Model):
     __tablename__ = "branch"
@@ -68,9 +71,52 @@ class Users(dbase.Model):
         self.last_name= last_name
         self.contact_no = contact_no
         self.branchID = branchID
-        super(Users, self).__init__()
+
+
+    def is_authenticated(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def is_active(self):
+        return True
+
+    def getRole_id(self):
+        return self.roleID
+
+    def get_id(self):
+        return self.userID
+
     def __repr__(self):
         return '<roleID {}>'.format(self.roleID)
+
+    @staticmethod
+    def verify_token(token):
+        s = Serializer(app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token)
+        except:
+            return None
+        id = data.get('user')
+        if id:
+            return Users.query.get(id)
+        return None
+
+class Anonymous(AnonymousUserMixin):
+    def __init__(self):
+        self.username = 'Guest'
+
+    def isAuthenticated(self):
+        return False
+
+    def is_active(self):
+        return False
+
+    def is_anonymous(self):
+        return True
+
+
 
 class Tenants(dbase.Model):
     __tablename__ = "tenants"
