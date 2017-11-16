@@ -117,4 +117,3 @@ class Pays(dbase.Model):
 
     def __repr__(self):
         return '< issued_by{}>'.format(self.issued_by)
-
