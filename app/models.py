@@ -116,6 +116,8 @@ class Anonymous(AnonymousUserMixin):
     def is_anonymous(self):
         return True
 
+
+
 class Tenants(dbase.Model):
     __tablename__ = "tenants"
     tenantID = dbase.Column(dbase.Integer, primary_key= True, autoincrement=True)
