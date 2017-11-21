@@ -1,0 +1,71 @@
+{% extends 'admin_layout.html' %}
+
+{% block body %}
+
+<div class="form_container">
+    <div class="form_tag">
+        Clerk Form
+    </div>
+    <div class="container">
+        <form method="POST">
+            {{form.hidden_tag()}}
+            <div class="row">
+                <div class="col-lg-2">
+                    <label class="form"  >First Name: <br/>
+                    {{ form.fname(placeholder = "First Name") }}
+                        <span class="help-inline">must be something chever</span>
+                        {% if form.fname.errors %}
+                    {% for error in form.fname.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+                </div>
+                <div class="col-lg-2">
+                    <label class="form"  >Middle Name: <br>
+                    {{ form.mname(placeholder = "Middle Name") }} {% if form.mname.errors %}
+                    {% for error in form.mname.errors %} {{ error }} {% endfor %} {% endif %}</label>
+                </div>
+                <div class="col-lg-2">
+                    <label class="form"  >Last Name: <br>
+                    {{ form.lname(placeholder = "Last Name") }} {% if form.lname.errors %}
+                    {% for error in form.lname.errors %} {{ error }} {% endfor %} {% endif %}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    <label class="form"  >Contact Number: <br/>
+                    {{ form.ContNum(placeholder = "Contact Number") }}
+                        <span class="help-inline">must be something chever</span>
+                        {% if form.ContNum.errors %}
+                    {% for error in form.ContNum.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-2">
+                    <label class="form"  >Username: <br/>
+                    {{ form.username(placeholder = "Username") }}
+                        <span class="help-inline">must be something chever</span>
+                        {% if form.username.errors %}
+                    {% for error in form.username.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-2">
+                    <label class="form"  >Password: <br/>
+                    {{ form.password(placeholder = "Password") }}
+                        <span class="help-inline">must be something chever</span>
+                        {% if form.password.errors %}
+                    {% for error in form.password.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-2">
+                    <br>{{ form.submit }}
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}
