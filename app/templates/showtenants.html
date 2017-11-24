@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="\static\js\jquery-3.2.1.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    $("#myTable").dataTable({
+              "bServerSide": true,
+              "sAjaxSource": "/showtenants",
+              "bProcessing": true,
+              "sPaginationType": "full_numbers",
+              "bJQueryUI": true,
+              "aoColumns": [
+                            { "mDataProp": "first_name" },
+                            { "mDataProp": "mid_name" },
+                            { "mDataProp": "last_name" }
+                        ]
+          });
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>Tenants list</h2>
+<p>search by the name of the tenant</p>  
+<input id="myInput" type="text" placeholder="Search..">
+<br><br>
+
+<table id="myTable" class="display">
+  <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Middlename</th>
+      <th>Lastname</th>
+       <th>Stall Number</th>
+    </tr>
+  </thead>
+  <tbody>
+     {% for res in result.items %}
+        <tr>
+            <td>
+                {{ res.first_name }}
+            </td>
+            <td>
+                {{ res.mid_name }}
+            </td>
+            <td>
+                {{ res.last_name }}
+            </td>
+            <td>
+                {{ x[loop.index-1] }}
+            </td>
+        </tr>
+     {% endfor %}
+  </tbody>
+
+</table>
+  
+</body>
+</html>

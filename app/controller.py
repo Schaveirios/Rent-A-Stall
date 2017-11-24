@@ -1,10 +1,17 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
-from forms import addtenants, addstalls, RegisterForm, LogIn
+import models
+from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
+from forms import addtenants, addstalls, addbranch, LogIn,RegisterForm
 from sqlalchemy import and_
+# import dt from 'datatables.net';
+# import 'datatables.net-dt/css/jquery.datatables.css';
+# from sqlalchemy import func     
+# from datatables import datacolumns
+# from werkzeug import secure_filename
+#from flask_login import current_user, login_required
 from app import dbase, app
+from flask_login import login_user, login_required, logout_user, LoginManager, current_user
 from models import Types, Branch, Stalls, Tenants, Users, Logs, Pays, Anonymous
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, login_required, logout_user, LoginManager, current_user
 from decorators import required_roles
 
 
@@ -274,3 +281,41 @@ def logout():
     logout_user()
     flash('You were logged out.')
     return redirect(url_for('login'))
+# @app.route('/showtenants/<int:page_num>')
+# @login_required
+# def tenantlist():
+#     # columns = [
+#     #     ColumnDT(Tenants.first_name),
+#     #     ColumnDT(Tenants.mid_name),
+#     #     ColumnDT(Tenants.last_name)
+#     #             ]
+#     # query = dbase.session.query().\
+#         # select_from(Tenants)
+#     query = Tenants.query.all()
+# #     # rowTable = DataTables(request.GET, query, columns)
+# #     # params = requerst.args.to_dict()
+# #     # rowTable.output_result()
+#     return render_template("showtenants.html", query=query)
+
+# def test(page_num):
+
+#     dataSets = Tenants.query.paginate(per_page=10,page=page_num, error_out=True)
+#     stall_id = Tenants.query.filter_by(stallID)
+#     stall_ID = stall_id.s
+#     return render_template("showtenants.html",dataSets = dataSets)
+def pageFormula(total, perpage):
+    if total % perpage == 0:
+        return total / perpage
+    return (total / perpage) + 1
+
+@app.route('/showtenants', methods=["GET", "POST"])
+@app.route('/showtenants/', methods=["GET", "POST"])
+def tenantslist():
+  x = []
+  result = Tenants.query.order_by(Tenants.first_name).paginate(1,11,False)
+  for r in result.items:
+      stall = Stalls.query.filter_by(stallID=r.stallID).first()
+      x.append(stall.stall_no)
+  #x = len(Tenants.query.order_by(Tenants.first_name).all())
+  return render_template('showtenants.html',result=result, x=x)# , stry=pageFormula(x, 11))
+  # return jsonify({'firstname':firstname, 'middlename':middlename, 'lastname':lastname})

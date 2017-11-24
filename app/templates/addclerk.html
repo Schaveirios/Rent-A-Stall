@@ -8,7 +8,7 @@
     </div>
 
 
-    <form method="POST">
+    <form method="POST" >
         {{form.hidden_tag()}}
 
         <div class="row">
@@ -78,6 +78,15 @@
 
 
 </div>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message }} alert-dismissible" role="alert">{{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 
 
 {% endblock %}

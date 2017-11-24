@@ -6,17 +6,18 @@ from wtforms.validators import InputRequired,Length
 
 class addtenants(Form):
 
-    fname = StringField('Firstname',[validators.DataRequired(),validators.Length(min=3,max=20)])
-    mname = StringField('Middlename',[validators.DataRequired(),validators.Length(min=3,max=20)])
-    lname = StringField('Lastname',[validators.DataRequired(),validators.Length(min=3,max=20)])
+    fname = StringField('Firstname',[validators.DataRequired(),validators.Length(min=2,max=20)])
+    mname = StringField('Middlename',[validators.DataRequired(),validators.Length(min=2,max=20)])
+    lname = StringField('Lastname',[validators.DataRequired(),validators.Length(min=2,max=20)])
     address = StringField('Present Address', [validators.Length(min=5,max=50)])
     stalltype = StringField('stall type', [validators.Length(min=5,max=50)])
     contnum = StringField('Contact Number', [validators.Length(min=11,max=11)])
     stallno = StringField('Stall Number',[validators.DataRequired(),validators.Length(min=1,max=20)])
     tenantphotoID = FileField('TenantphotoID')
     stallloc = StringField('Stall type',[validators.DataRequired(),validators.Length(max=20)])
-    branch = SelectField(u'branches', choices=[('1', 'Tambo'), ('2', 'Palao'), ('3', 'Central Market')])
+    branch = SelectField(u'branches', choices=[('1', 'Tambo'), ('2', 'Pala-o'), ('3', 'wet market')])
     submit = SubmitField("Submit")
+
 
 
 class addstalls(Form):
@@ -30,14 +31,14 @@ class addstalls(Form):
     submit = SubmitField("Add")
 
 # class addclerk(Form):
-#
+
 #     uname = StringField('Username',[validators.DataRequired(),validators.Length(min=6,max=20)])
-#     fname = StringField('Firstname',[validators.DataRequired(),validators.Length(min=6,max=20)])
-#     mname = StringField('Middlename',[validators.DataRequired(),validators.Length(min=6,max=20)])
-#     lname = StringField('Lastname',[validators.DataRequired(),validators.Length(min=6,max=20)])
+#     fname = StringField('Firstname',[validators.DataRequired(),validators.Length(min=2,max=20)])
+#     mname = StringField('Middlename',[validators.DataRequired(),validators.Length(min=5,max=20)])
+#     lname = StringField('Lastname',[validators.DataRequired(),validators.Length(min=5,max=20)])
 #     password = PasswordField('Password', [validators.Length(min=10,max=50)])
 #     ContNum = StringField('Contact Number', [validators.Length(min=10,max=50)])
-#
+#     branchId = SelectField(u'branches', choices=[('1', 'Tambo'), ('2', 'Pala-o'), ('3', 'wet market')])
 #     submit = SubmitField("Add")
 
 class addbranch(Form):
