@@ -11,14 +11,14 @@ $(document).ready(function(){
     $("#myTable").dataTable({
               retrieve: true,
               "bServerSide": true,
-              "sAjaxSource": "/showtenants",
+              "sAjaxSource": "/showstalls",
               "bProcessing": true,
               "sPaginationType": "full_numbers",
               "bJQueryUI": true,
               "aoColumns": [
-                            { "mDataProp": "first_name" },
-                            { "mDataProp": "mid_name" },
-                            { "mDataProp": "last_name" }
+                            { "mDataProp": "stall_no" },
+                            { "mDataProp": "stall_lo" },
+                            { "mDataProp": "stall_rate" }
                         ]
           });
     var value = $(this).val().toLowerCase();
@@ -27,45 +27,36 @@ $(document).ready(function(){
     });
   });
 });
-var table = $('#myTable').DataTable();
- 
-$('#next').on( 'click', function () {
-    table.page( 'next' ).draw( 'page' );
-} );
- 
-$('#previous').on( 'click', function () {
-    table.page( 'previous' ).draw( 'page' );
-} );
 </script>
 
 </head>
 <body>
 
-<h2>Tenants list</h2>
+<h2>Stall list</h2>
 
 <input id="myInput" type="text" placeholder="Search..">
 <br><br>
 
 <table id="myTable" class="display">
   <thead>
-      <th>Firstname</th>
-      <th>Middlename</th>
-      <th>Lastname</th>
+    <tr>
       <th>Stall Number</th>
+      <th>Stall Location</th>
+      <th>Stall Rate</th>
+       <th>Stall Type</th>
+    </tr>
   </thead>
   <tbody id="myTable" >
-
-
      {% for res in result.items %}
         <tr>
             <td>
-                {{ res.first_name }}
+                {{ res.stall_no }}
             </td>
             <td>
-                {{ res.mid_name }}
+                {{ res.stall_loc }}
             </td>
             <td>
-                {{ res.last_name }}
+                {{ res.stall_rate }}
             </td>
             <td>
                 {{ x[loop.index-1] }}

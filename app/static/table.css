@@ -21,7 +21,7 @@
 
 .header-fixed > tbody {
     overflow-y: auto;
-    height: 100px;
+    height: 120px;
 }
 
 .header-fixed > tbody > tr > td,

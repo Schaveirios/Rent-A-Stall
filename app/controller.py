@@ -177,6 +177,7 @@ def AddTenants2():
 @required_roles(1)
 def AddStalls():
     form = addstalls()
+    availstalls = Stalls.query.filter_by(stall_status= '0')
     if request.method == "POST":
         stallNo = form.stallno.data
         stallLoc = form.stallloc.data
@@ -211,7 +212,7 @@ def AddStalls():
             dbase.session.add(stallform)
             dbase.session.commit()
             return render_template("successadd1.html")
-    return render_template("addstall.html", form=form)
+    return render_template("addstall.html", form=form, availstalls = availstalls)
 
 
 
@@ -281,28 +282,8 @@ def logout():
     logout_user()
     flash('You were logged out.')
     return redirect(url_for('login'))
-# @app.route('/showtenants/<int:page_num>')
-# @login_required
-# def tenantlist():
-#     # columns = [
-#     #     ColumnDT(Tenants.first_name),
-#     #     ColumnDT(Tenants.mid_name),
-#     #     ColumnDT(Tenants.last_name)
-#     #             ]
-#     # query = dbase.session.query().\
-#         # select_from(Tenants)
-#     query = Tenants.query.all()
-# #     # rowTable = DataTables(request.GET, query, columns)
-# #     # params = requerst.args.to_dict()
-# #     # rowTable.output_result()
-#     return render_template("showtenants.html", query=query)
 
-# def test(page_num):
 
-#     dataSets = Tenants.query.paginate(per_page=10,page=page_num, error_out=True)
-#     stall_id = Tenants.query.filter_by(stallID)
-#     stall_ID = stall_id.s
-#     return render_template("showtenants.html",dataSets = dataSets)
 def pageFormula(total, perpage):
     if total % perpage == 0:
         return total / perpage
@@ -312,10 +293,20 @@ def pageFormula(total, perpage):
 @app.route('/showtenants/', methods=["GET", "POST"])
 def tenantslist():
   x = []
-  result = Tenants.query.order_by(Tenants.first_name).paginate(1,11,False)
+  result = Tenants.query.order_by(Tenants.first_name).paginate(1,10,True)
   for r in result.items:
       stall = Stalls.query.filter_by(stallID=r.stallID).first()
       x.append(stall.stall_no)
   #x = len(Tenants.query.order_by(Tenants.first_name).all())
   return render_template('showtenants.html',result=result, x=x)# , stry=pageFormula(x, 11))
   # return jsonify({'firstname':firstname, 'middlename':middlename, 'lastname':lastname})
+
+@app.route('/showstalls', methods=["GET", "POST"])
+@app.route('/showstalls/', methods=["GET", "POST"])
+def stalllist():
+	x = []
+	result = Stalls.query.order_by(Stalls.stall_no).paginate(1,8,True)
+	for r in result.items:
+		tayp = Types.query.filter_by(typeID =r.typeID).first()
+		x.append(tayp.stall_type)
+	return render_template('showstalls.html', result=result, x=x)  
