@@ -1,7 +1,11 @@
 import models
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
 from forms import addtenants, addstalls, addbranch, LogIn,RegisterForm
 from sqlalchemy import and_
+# import dt from 'datatables.net';
+# import 'datatables.net-dt/css/jquery.datatables.css';
+# from sqlalchemy import func     
+# from datatables import datacolumns
 # from werkzeug import secure_filename
 #from flask_login import current_user, login_required
 from app import dbase, app
@@ -19,7 +23,8 @@ login_manager.anonymous_user = Anonymous
 def load_user(user_id):
     return Users.query.get(int(user_id))
 
-app.route("/dashboard", methods=["GET"])
+
+@app.route("/dashboard", methods=["GET"])
 @app.route("/dashboard/", methods=["GET"])
 @login_required
 @required_roles(2)
@@ -35,18 +40,19 @@ def index2():
     return render_template("admin_dashboard.html")    
 
 
-@app.route("/successadd", methods=["POST", "GET"])
-@app.route("/successadd/", methods=["POST", "GET"])
+@app.route("/successadd1", methods=["POST", "GET"])
+@app.route("/successadd1/", methods=["POST", "GET"])
 @login_required
-@required_roles(1, 2)
+@required_roles(1,2)
 def added():
-    return render_template("successadd.html")
+    return render_template("successadd1.html")
+
 
 
 @app.route("/AddTenants", methods=["POST", "GET"])
 @app.route("/AddTenants/", methods=["POST", "GET"])
 @login_required
-@required_roles(1,2)
+@required_roles(1, 2)
 def AddTenants():
     form = addtenants()
     if request.method == "POST":
@@ -75,34 +81,37 @@ def AddTenants():
             branchLoc = form.branch.data
             stallnum = Stalls.query.filter_by(stall_no=stallno1).first()
             if stallnum:
-                
+
                 if stallnum.stall_status == "1":
                     flash("stall already Occupied")
                 else:
                     loc = Branch.query.filter_by(branchID=branchLoc).first()
-                    stall = Stalls.query.filter(and_(Stalls.stall_no == stallno1, Stalls.branchID == loc.branchID)).first()
+                    print
+                    stall = Stalls.query.filter(
+                        and_(Stalls.stall_no == stallno1, Stalls.branchID == loc.branchID)).first()
                     stall.stall_status = "1"
                     dbase.session.add(stall)
                     dbase.session.commit()
-                    tenantForm = Tenants(contact_no=Contnum ,
-                                        first_name=firstname ,
-                                        mid_name=middlename ,
-                                        last_name=lastname ,
-                                        present_addr=Address ,
-                                        tenant_photo=TenantphotoID ,
-                                        stallID=stall.stallID
-                                        )
+                    tenantForm = Tenants(contact_no=Contnum,
+                                         first_name=firstname,
+                                         mid_name=middlename,
+                                         last_name=lastname,
+                                         present_addr=Address,
+                                         tenant_photo=TenantphotoID,
+                                         stallID=stall.stallID
+                                         )
                     dbase.session.add(tenantForm)
                     dbase.session.commit()
-                    return render_template("successadd.html")
+                    return render_template("successadd1.html")
             else:
                 flash("stall already Occupied")
     return render_template("addtenant.html", form1=form)
 
+
 @app.route("/AddTenants2", methods=["POST", "GET"])
 @app.route("/AddTenants2/", methods=["POST", "GET"])
 @login_required
-@required_roles(1,2)
+@required_roles(1, 2)
 def AddTenants2():
     form = addtenants()
     if request.method == "POST":
@@ -133,24 +142,25 @@ def AddTenants2():
             stallnum = Stalls.query.filter_by(stall_no=stallno1).first()
 
             if stallnum and loc1:
-                
+
                 if stallnum.stall_status == "1":
                     flash("stall already Occupied")
                 else:
                     loc = Branch.query.filter_by(branchID=branchLoc).first()
-                    stall = Stalls.query.filter(and_(Stalls.stall_no == stallno1, Stalls.branchID == loc.branchID)).first()
+                    stall = Stalls.query.filter(
+                        and_(Stalls.stall_no == stallno1, Stalls.branchID == loc.branchID)).first()
                     if stall:
                         stall.stall_status = "1"
                         dbase.session.add(stall)
                         dbase.session.commit()
-                        tenantForm = Tenants(contact_no=Contnum ,
-                                            first_name=firstname ,
-                                            mid_name=middlename ,
-                                            last_name=lastname ,
-                                            present_addr=Address ,
-                                            tenant_photo=TenantphotoID ,
-                                            stallID=stall.stallID
-                                            )
+                        tenantForm = Tenants(contact_no=Contnum,
+                                             first_name=firstname,
+                                             mid_name=middlename,
+                                             last_name=lastname,
+                                             present_addr=Address,
+                                             tenant_photo=TenantphotoID,
+                                             stallID=stall.stallID
+                                             )
                         dbase.session.add(tenantForm)
                         dbase.session.commit()
                         return render_template("successadd.html")
@@ -158,7 +168,7 @@ def AddTenants2():
                         flash('Stall is not available in the given branch')
             else:
                 flash("Stall not found")
-    return render_template("clerk_addtenant.html", form1=form)    
+    return render_template("clerk_addtenant.html", form1=form)
 
 
 @app.route("/AddStalls", methods=["POST", "GET"])
@@ -167,6 +177,7 @@ def AddTenants2():
 @required_roles(1)
 def AddStalls():
     form = addstalls()
+    availstalls = Stalls.query.filter_by(stall_status= '0')
     if request.method == "POST":
         stallNo = form.stallno.data
         stallLoc = form.stallloc.data
@@ -189,7 +200,7 @@ def AddStalls():
 
         stallstat = Stalls.query.filter_by(stall_no=stallNo).first()
         if stallstat:
-            flash('Stall already existing') 
+            flash('Stall already existing')
         else:
             stallform = Stalls(stall_rate=Rate,
                             stall_loc=stallLoc,
@@ -200,53 +211,18 @@ def AddStalls():
                             )
             dbase.session.add(stallform)
             dbase.session.commit()
-            return render_template("successadd.html")
-    return render_template("addstall.html", form=form)
+            return render_template("successadd1.html")
+    return render_template("addstall.html", form=form, availstalls = availstalls)
 
 
-
-# @app.route("/clerk", methods = ["POST", "GET" ])
-# @app.route("/clerk/", methods = ["POST", "GET" ])
-# # @login_required
-# def AddClerk():
-# 	form = addclerk()
-# 	if (request.method == "POST"):
-# 		if form.validate_on_submit():
-# 			uname = form.uname.data
-# 			first_name = form.fname.data
-# 			middle_name = form.mname.data
-# 			last_name = form.lname.data
-# 			contact_no = form.ContNum.data
-# 			photo = request.form['photo']
-
-# 			uForm = Tenants(contact_no = form.ContNum.data ,
-# 							first_name = form.fname.data ,
-# 							mid_name = form.mname.data ,
-# 							last_name = form.lname.data ,
-# 							present_addr = form.address.data ,
-# 							tenant_photo = form.tenantphotoID.data,
-# 							stall_no = form.stallno.data,
-# 							)
-# 			dbase.session.add(uForm)
-# 			dbase.session.commit()
-# 		else:
-# 			msg = "Already Occupied."
-# 	return render_template("addclerk.html", form=form)
-
-# @app.route("/login", methods = ["POST", "GET" ])
-# @app.route("/login/", methods = ["POST", "GET" ])
-# def login():
-#     form = LogIn()
-#     return render_template("login.html", form=form)
 
 @app.route("/clerk", methods = ["POST", "GET" ])
 @app.route("/clerk/", methods = ["POST", "GET" ])
-#@login_required
-#@required_roles(1)
+@login_required
+@required_roles(1)
 def AddClerk():
     form = RegisterForm()
     if request.method=='POST' and form.validate_on_submit():
-
         uForm = Users(username=form.username.data,
                          passwrd=form.password.data,
                          first_name=form.fname.data,
@@ -254,11 +230,15 @@ def AddClerk():
                          last_name = form.lname.data,
                          contact_no = form.ContNum.data,
                          branchID = form.branchID.data,
-                         roleID = '1'
+                         roleID = '2'
                          )
-        dbase.session.add(uForm)
-        dbase.session.commit()
-        return render_template('successadd.html')
+        regclerk = Users.query.filter_by(username=form.username.data).first()
+        if regclerk:
+            flash('username is already used')
+        else:
+            dbase.session.add(uForm)
+            dbase.session.commit()
+            return render_template('successadd1.html')
     return render_template("addclerk.html", form=form)
 
 @app.route('/', methods=["GET", "POST"])
@@ -270,30 +250,29 @@ def login():
     print current_user
     if current_user.is_active():
         if current_user.roleID == '1':
-            return redirect(url_for(index2))
+            return redirect(url_for('index2'))
         else:
-            return redirect(url_for(index))
+            return redirect(url_for('index'))
     else:
         if request.method == "POST" and form.validate_on_submit():
             user = Users.query.filter_by(username=form.username.data).first()
+            print user.username
             if user:
                 if user.roleID == 2:
-                    print check_password_hash(user.passwrd, form.passwrd.data)
                     if user is not None and check_password_hash(user.passwrd, form.passwrd.data):
-                        print check_password_hash(user.passwrd, form.passwrd.data)
                         login_user(user)
                         return redirect(url_for('index'))
-                    return '<h1>Invalid username or password=======</h1>'
+                    return '<h1>Invalid username or password!</h1>'
                 elif user.roleID == 1:
                     if user is not None and check_password_hash(user.passwrd, form.passwrd.data):
                         login_user(user)
                         return redirect(url_for('index2'))
-                    return '<h1>Invalid username or password!!!!!</h1>'
+                    return '<h1>Invalid username or password!</h1>'
 
                 else:
-                    return '<h1>Invalid username or password!!!!!</h1>'
+                    return '<h1>Invalid username or password!</h1>'
             else:
-                return '<h1>Invalid username or password!!!!!</h1>'
+                return '<h1>Invalid username or password!</h1>'
     return render_template('login.html', form= form)
 
 
@@ -303,4 +282,51 @@ def logout():
     logout_user()
     flash('You were logged out.')
     return redirect(url_for('login'))
+# @app.route('/showtenants/<int:page_num>') 
+# @login_required
+# def tenantlist():
+#     # columns = [
+#     #     ColumnDT(Tenants.first_name),
+#     #     ColumnDT(Tenants.mid_name),
+#     #     ColumnDT(Tenants.last_name)
+#     #             ]
+#     # query = dbase.session.query().\
+#         # select_from(Tenants)
+#     query = Tenants.query.all()
+# #     # rowTable = DataTables(request.GET, query, columns)
+# #     # params = requerst.args.to_dict()
+# #     # rowTable.output_result()
+#     return render_template("showtenants.html", query=query)
 
+# def test(page_num):
+
+#     dataSets = Tenants.query.paginate(per_page=10,page=page_num, error_out=True)
+#     stall_id = Tenants.query.filter_by(stallID)
+#     stall_ID = stall_id.s
+#     return render_template("showtenants.html",dataSets = dataSets)
+def pageFormula(total, perpage):
+    if total % perpage == 0:
+        return total / perpage
+    return (total / perpage) + 1
+
+@app.route('/showtenants', methods=["GET", "POST"])
+@app.route('/showtenants/', methods=["GET", "POST"])
+def tenantslist():
+  x = []
+  result = Tenants.query.order_by(Tenants.first_name).all()#.paginate(1,2,True)
+  for r in result:        
+      stall = Stalls.query.filter_by(stallID=r.stallID).first()
+      x.append(stall.stall_no)
+  #x = len(Tenants.query.order_by(Tenants.first_name).all())
+  return render_template('showtenants.html',result=result, x=x)# , stry=pageFormula(x, 11))
+  # return jsonify({'firstname':firstname, 'middlename':middlename, 'lastname':lastname})
+
+@app.route('/showstalls', methods=["GET", "POST"])
+@app.route('/showstalls/', methods=["GET", "POST"])
+def stalllist():
+	x = []
+	result = Stalls.query.order_by(Stalls.stall_no).all()#.paginate(1,11,True)
+	for r in result:
+		tayp = Types.query.filter_by(typeID =r.typeID).first()
+		x.append(tayp.stall_type)
+	return render_template('showstalls.html', result=result, x=x)

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Tenants</title>
+
+    <!-- Bootstrap -->
+    <link href="\static\datatable.css" rel="stylesheet">
+
+ 
+  </head>
+  <body>
+    <div class="container">
+		<h1>List of tenants</h1>
+		<table class="table table-striped table-bordered table-hover" id="myTable">
+			<thead>
+				<tr>
+					<th>Firstname</th>
+					<th>Middlename</th>
+					<th>Lastname</th>
+					<th>Stall Number</th>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<th>Firstname</th>
+					<th>Middlename</th>
+					<th>Lastname</th>
+					<th>Stall Number</th>
+				</tr>
+			
+			</tfoot>
+			<tbody>
+				{% for res in result %}
+				<tr>
+					
+					<td>
+						<a href="/home">{{ res.first_name }}</a>
+					</td>
+					<td>
+						{{ res.mid_name }} 
+					</td>
+					<td>
+						{{ res.last_name }}
+					</td>
+					<td>
+						{{ x[loop.index-1] }}
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+   
+    <script src="\static\js\jquery-3.2.1.min.js"></script>
+    <script src="\static\js\bootstrap.min.js"></script>
+	<script src="\static\js\jquery.dataTables.min.js"></script>	
+	<script src="\static\js\dataTables.bootstrap.min.js"></script>
+	<script>
+		$('#myTable').dataTable();
+	</script>
+  </body>
+</html>  

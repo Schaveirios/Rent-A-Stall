@@ -3,6 +3,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import JSONWebSignatureSerializer as Serializer
 from app import app
 from flask_login import AnonymousUserMixin
+from sqlalchemy.orm import relationship
+from sqlalchemy import Integer, ForeignKey, String, Column
 
 class Branch(dbase.Model):
     __tablename__ = "branch"
@@ -37,7 +39,7 @@ class Stalls(dbase.Model):
     stall_status = dbase.Column(dbase.String(60))
     typeID = dbase.Column(dbase.Integer, dbase.ForeignKey("types.typeID"), nullable= False)
     branchID = dbase.Column(dbase.Integer, dbase.ForeignKey("branch.branchID"), nullable=False)
-
+    t_stall_no = relationship("Tenants", backref="stallNO", lazy="dynamic" )
     def __init__ (self,stall_rate, stall_loc, stall_status, branchID, stall_no, typeID):
         self.stall_rate =stall_rate
         self.stall_status = '0'

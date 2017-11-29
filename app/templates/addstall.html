@@ -60,6 +60,29 @@
         </div>
 
     </form>
+<div>
+       <table class="table table-striped header-fixed">
+       <h1> Available Stalls</h1>
+    <thead>
+    <tr>
+        <th>Stall Number</th>
+        <th>Stall Location</th>
+        <th>Stall Rate</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for row in availstalls %}
+            <tr>
+        <td class="filterable-cell">{{row["stall_no"]}}</td>
+        <td class="filterable-cell">{{ row["stall_loc"]}}</td>
+        <td class="filterable-cell">{{ row["stall_rate"]}}</td>
+
+    </tr>
+    {%endfor%}
+    </tbody>
+    </table>
+
+</div>
 
 
 </div>
@@ -72,6 +95,5 @@
     {% endfor %}
   {% endif %}
 {% endwith %}
-
 
 {% endblock %}

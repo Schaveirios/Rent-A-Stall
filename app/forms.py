@@ -25,7 +25,7 @@ class addstalls(Form):
     stallno = IntegerField('stallno',[validators.DataRequired(),validators.Length(max=20)])
     stallloc = StringField('stallloc',[validators.DataRequired(),validators.Length(max=20)])
     rate = IntegerField('rate',[validators.DataRequired(),validators.Length(max=20)])
-    Branchloc = StringField('Stall type',[validators.DataRequired(),validators.Length(max=20)])
+    Branchloc = SelectField(u'branches', choices=[('1', 'Tambo'), ('2', 'Pala-o'), ('3', 'wet market')])
     stalltype = StringField('Stall type',[validators.DataRequired(),validators.Length(max=20)])
 
     submit = SubmitField("Add")
