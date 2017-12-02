@@ -1,18 +1,28 @@
 import models
 from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
-from forms import addtenants, addstalls, addbranch, LogIn,RegisterForm
+from forms import addtenants, addstalls, LogIn,RegisterForm
 from sqlalchemy import and_
-# import dt from 'datatables.net';
-# import 'datatables.net-dt/css/jquery.datatables.css';
-# from sqlalchemy import func     
-# from datatables import datacolumns
-# from werkzeug import secure_filename
-#from flask_login import current_user, login_required
 from app import dbase, app
 from flask_login import login_user, login_required, logout_user, LoginManager, current_user
 from models import Types, Branch, Stalls, Tenants, Users, Logs, Pays, Anonymous
 from werkzeug.security import generate_password_hash, check_password_hash
 from decorators import required_roles
+from werkzeug import secure_filename
+from PIL import Image
+import datetime
+import time
+import os
+
+now= datetime.datetime.now()
+
+
+
+img_folder = 'static/profile/'
+available_extension = set(['png', 'jpg', 'PNG', 'JPG'])
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in available_extension
 
 
 login_manager = LoginManager()
@@ -47,26 +57,26 @@ def index2():
 def added():
     return render_template("successadd1.html")
 
-
-
 @app.route("/AddTenants", methods=["POST", "GET"])
 @app.route("/AddTenants/", methods=["POST", "GET"])
 @login_required
 @required_roles(1, 2)
 def AddTenants():
     form = addtenants()
+    availstalls = Stalls.query.filter_by(stall_status= '0')
     if request.method == "POST":
         if form.validate_on_submit():
+            print "naaaaaa diiriiii"
 
             firstname = form.fname.data
             middlename = form.mname.data
             lastname = form.lname.data
             Address = form.address.data
-            Contnum = form.contnum.data
-            TenantphotoID = form.tenantphotoID.data
+            Contnum = form.contnum.data            
             stallno1 = form.stallno.data
-
             stallType = form.stalltype.data
+            piccc = form.tenantphotoID.data
+            print piccc
             type = Types.query.filter_by(stall_type=stallType).first()
 
             if type:
@@ -78,77 +88,16 @@ def AddTenants():
                 dbase.session.add(Stalltype)
                 dbase.session.commit()
 
-            branchLoc = form.branch.data
+            # branchLoc = form.branch.data
+            # loc1 = Branch.query.filter_by(branchID=branchLoc).first()
             stallnum = Stalls.query.filter_by(stall_no=stallno1).first()
+
             if stallnum:
-
                 if stallnum.stall_status == "1":
                     flash("stall already Occupied")
                 else:
-                    loc = Branch.query.filter_by(branchID=branchLoc).first()
-                    print
-                    stall = Stalls.query.filter(
-                        and_(Stalls.stall_no == stallno1, Stalls.branchID == loc.branchID)).first()
-                    stall.stall_status = "1"
-                    dbase.session.add(stall)
-                    dbase.session.commit()
-                    tenantForm = Tenants(contact_no=Contnum,
-                                         first_name=firstname,
-                                         mid_name=middlename,
-                                         last_name=lastname,
-                                         present_addr=Address,
-                                         tenant_photo=TenantphotoID,
-                                         stallID=stall.stallID
-                                         )
-                    dbase.session.add(tenantForm)
-                    dbase.session.commit()
-                    return render_template("successadd1.html")
-            else:
-                flash("stall already Occupied")
-    return render_template("addtenant.html", form1=form)
-
-
-@app.route("/AddTenants2", methods=["POST", "GET"])
-@app.route("/AddTenants2/", methods=["POST", "GET"])
-@login_required
-@required_roles(1, 2)
-def AddTenants2():
-    form = addtenants()
-    if request.method == "POST":
-        if form.validate_on_submit():
-
-            firstname = form.fname.data
-            middlename = form.mname.data
-            lastname = form.lname.data
-            Address = form.address.data
-            Contnum = form.contnum.data
-            TenantphotoID = form.tenantphotoID.data
-            stallno1 = form.stallno.data
-
-            stallType = form.stalltype.data
-            type = Types.query.filter_by(stall_type=stallType).first()
-
-            if type:
-                t = type.typeID
-
-            else:
-                Stalltype = Types(stall_type=stallType)
-
-                dbase.session.add(Stalltype)
-                dbase.session.commit()
-
-            branchLoc = form.branch.data
-            loc1 = Branch.query.filter_by(branchID=branchLoc).first()
-            stallnum = Stalls.query.filter_by(stall_no=stallno1).first()
-
-            if stallnum and loc1:
-
-                if stallnum.stall_status == "1":
-                    flash("stall already Occupied")
-                else:
-                    loc = Branch.query.filter_by(branchID=branchLoc).first()
-                    stall = Stalls.query.filter(
-                        and_(Stalls.stall_no == stallno1, Stalls.branchID == loc.branchID)).first()
+                    # loc = Branch.query.filter_by(branchID=branchLoc).first()
+                    stall = Stalls.query.filter_by(stall_no=stallno1).first()
                     if stall:
                         stall.stall_status = "1"
                         dbase.session.add(stall)
@@ -158,17 +107,131 @@ def AddTenants2():
                                              mid_name=middlename,
                                              last_name=lastname,
                                              present_addr=Address,
-                                             tenant_photo=TenantphotoID,
                                              stallID=stall.stallID
                                              )
                         dbase.session.add(tenantForm)
                         dbase.session.commit()
+
+                        profile_entry = ""
+                        te = Tenants.query.all()
+                        TenantphotoID = img_folder + str(len(te))
+                        if os.path.isdir(TenantphotoID) == False:
+                            os.makedirs(TenantphotoID)
+
+                        print form.tenantphotoID.data.filename 
+                        if form.tenantphotoID.data.filename == None or form.tenantphotoID.data.filename == "":
+                            tenants.tenant_photo = tenants.tenant_photo
+                        else:
+                            if form.tenantphotoID.data and allowed_file(form.tenantphotoID.data.filename):
+                                filename = secure_filename(form.tenantphotoID.data.filename)
+                                form.tenantphotoID.data.save(os.path.join(TenantphotoID + '/', filename))
+
+                                uploadFolder = TenantphotoID + '/'
+                                nameNew = str(int(time.time())) + '.' + str(os.path.splitext(filename)[1][1:])
+                                os.rename(uploadFolder + filename, uploadFolder + nameNew)
+                                profile_entry = uploadFolder+nameNew
+
+                                t = Tenants.query.filter_by(tenantID=len(te)).first()
+                                t.tenant_photo = profile_entry
+                                print profile_entry
+                                dbase.session.add(t)
+
+                                dbase.session.commit()
+                        return render_template("successadd1.html")
+                    else:
+                        flash('Stall is not available in the given branch')
+            else:
+                flash("Stall not found")
+
+    return render_template("addtenant.html", form1=form, availstalls = availstalls)
+
+
+@app.route("/AddTenants2", methods=["POST", "GET"])
+@app.route("/AddTenants2/", methods=["POST", "GET"])
+@login_required
+@required_roles(1, 2)
+def AddTenants2():
+    form = addtenants()
+    availstalls = Stalls.query.filter_by(stall_status= '0')
+    if request.method == "POST":
+        if form.validate_on_submit():
+            print "naaaaaa diiriiii"
+
+            firstname = form.fname.data
+            middlename = form.mname.data
+            lastname = form.lname.data
+            Address = form.address.data
+            Contnum = form.contnum.data
+            TenantphotoID = form.tenantphotoID.data
+            stallno1 = form.stallno.data
+
+            stallType = form.stalltype.data
+            type = Types.query.filter_by(stall_type=stallType).first()
+
+            if type:
+                t = type.typeID
+
+            else:
+                Stalltype = Types(stall_type=stallType)
+
+                dbase.session.add(Stalltype)
+                dbase.session.commit()
+
+            # branchLoc = form.branch.data
+            # loc1 = Branch.query.filter_by(branchID=branchLoc).first()
+            stallnum = Stalls.query.filter_by(stall_no=stallno1).first()
+
+            if stallnum:
+                if stallnum.stall_status == "1":
+                    flash("stall already Occupied")
+                else:
+                    # loc = Branch.query.filter_by(branchID=branchLoc).first()
+                    stall = Stalls.query.filter_by(stall_no=stallno1).first()
+                    if stall:
+                        stall.stall_status = "1"
+                        dbase.session.add(stall)
+                        dbase.session.commit()
+                        tenantForm = Tenants(contact_no=Contnum,
+                                             first_name=firstname,
+                                             mid_name=middlename,
+                                             last_name=lastname,
+                                             present_addr=Address,
+                                             # tenant_photo=TenantphotoID,
+                                             stallID=stall.stallID
+                                             )
+                        dbase.session.add(tenantForm)
+                        dbase.session.commit()
+
+                        profile_entry = ""
+                        te = Tenants.query.all()
+                        TenantphotoID = img_folder + str(len(te))
+                        if os.path.isdir(TenantphotoID) == False:
+                            os.makedirs(TenantphotoID)
+
+                        print form.tenantphotoID.data.filename 
+                        if form.tenantphotoID.data.filename == None or form.tenantphotoID.data.filename == "":
+                            tenants.tenant_photo = tenants.tenant_photo
+                        else:
+                            if form.tenantphotoID.data and allowed_file(form.tenantphotoID.data.filename):
+                                filename = secure_filename(form.tenantphotoID.data.filename)
+                                form.tenantphotoID.data.save(os.path.join(TenantphotoID + '/', filename))
+
+                                uploadFolder = TenantphotoID + '/'
+                                nameNew = str(int(time.time())) + '.' + str(os.path.splitext(filename)[1][1:])
+                                os.rename(uploadFolder + filename, uploadFolder + nameNew)
+                                profile_entry = uploadFolder+nameNew
+
+                                t = Tenants.query.filter_by(tenantID=len(te)).first()
+                                t.tenant_photo = profile_entry
+                                print profile_entry
+                                dbase.session.add(t)
+                                dbase.session.commit()
                         return render_template("successadd.html")
                     else:
                         flash('Stall is not available in the given branch')
             else:
                 flash("Stall not found")
-    return render_template("clerk_addtenant.html", form1=form)
+    return render_template("clerk_addtenant.html", form1=form, availstalls = availstalls)
 
 
 @app.route("/AddStalls", methods=["POST", "GET"])
@@ -177,12 +240,11 @@ def AddTenants2():
 @required_roles(1)
 def AddStalls():
     form = addstalls()
-    availstalls = Stalls.query.filter_by(stall_status= '0')
     if request.method == "POST":
         stallNo = form.stallno.data
         stallLoc = form.stallloc.data
         Rate = form.rate.data
-        BranchLoc = form.Branchloc.data
+        BranchLoc = "Palao"
         loc = Branch.query.filter_by(branch_loc=BranchLoc).first()
         locid = loc.branchID
         stalltype = form.stalltype.data
@@ -212,7 +274,7 @@ def AddStalls():
             dbase.session.add(stallform)
             dbase.session.commit()
             return render_template("successadd1.html")
-    return render_template("addstall.html", form=form, availstalls = availstalls)
+    return render_template("addstall.html", form=form)
 
 
 
@@ -222,24 +284,28 @@ def AddStalls():
 @required_roles(1)
 def AddClerk():
     form = RegisterForm()
-    if request.method=='POST' and form.validate_on_submit():
-        uForm = Users(username=form.username.data,
-                         passwrd=form.password.data,
-                         first_name=form.fname.data,
-                         mid_name=form.mname.data ,
-                         last_name = form.lname.data,
-                         contact_no = form.ContNum.data,
-                         branchID = form.branchID.data,
-                         roleID = '2'
-                         )
-        regclerk = Users.query.filter_by(username=form.username.data).first()
-        if regclerk:
-            flash('username is already used')
-        else:
-            dbase.session.add(uForm)
-            dbase.session.commit()
-            return render_template('successadd1.html')
+    if request.method=='POST':
+        if form.validate_on_submit():
+            print "akdnfjafjljlas"
+            uForm = Users(username=form.username.data,
+                            passwrd=form.password.data,
+                            first_name=form.fname.data,
+                            mid_name=form.mname.data ,
+                            last_name = form.lname.data,
+                            contact_no = form.ContNum.data,
+                            # branchID = "1",
+                            roleID = '2'
+                            )
+            regclerk = Users.query.filter_by(username=form.username.data).first()
+            if regclerk:
+                flash('username is already used')
+            else:
+                print "sjsjdjdjjdjdjdjd"
+                dbase.session.add(uForm)
+                dbase.session.commit()
+                return render_template('successadd1.html')
     return render_template("addclerk.html", form=form)
+
 
 @app.route('/', methods=["GET", "POST"])
 @app.route('//', methods=["GET","POST"])
@@ -273,7 +339,7 @@ def login():
                     return '<h1>Invalid username or password!</h1>'
             else:
                 return '<h1>Invalid username or password!</h1>'
-    return render_template('login.html', form= form)
+    return render_template('login.html', form=form)
 
 
 @app.route('/logout')
@@ -282,28 +348,7 @@ def logout():
     logout_user()
     flash('You were logged out.')
     return redirect(url_for('login'))
-# @app.route('/showtenants/<int:page_num>') 
-# @login_required
-# def tenantlist():
-#     # columns = [
-#     #     ColumnDT(Tenants.first_name),
-#     #     ColumnDT(Tenants.mid_name),
-#     #     ColumnDT(Tenants.last_name)
-#     #             ]
-#     # query = dbase.session.query().\
-#         # select_from(Tenants)
-#     query = Tenants.query.all()
-# #     # rowTable = DataTables(request.GET, query, columns)
-# #     # params = requerst.args.to_dict()
-# #     # rowTable.output_result()
-#     return render_template("showtenants.html", query=query)
 
-# def test(page_num):
-
-#     dataSets = Tenants.query.paginate(per_page=10,page=page_num, error_out=True)
-#     stall_id = Tenants.query.filter_by(stallID)
-#     stall_ID = stall_id.s
-#     return render_template("showtenants.html",dataSets = dataSets)
 def pageFormula(total, perpage):
     if total % perpage == 0:
         return total / perpage
@@ -324,9 +369,15 @@ def tenantslist():
 @app.route('/showstalls', methods=["GET", "POST"])
 @app.route('/showstalls/', methods=["GET", "POST"])
 def stalllist():
-	x = []
-	result = Stalls.query.order_by(Stalls.stall_no).all()#.paginate(1,11,True)
-	for r in result:
-		tayp = Types.query.filter_by(typeID =r.typeID).first()
-		x.append(tayp.stall_type)
-	return render_template('showstalls.html', result=result, x=x)
+    x = []
+    result = Stalls.query.order_by(Stalls.stall_no).all()#.paginate(1,11,True)
+    for r in result:
+        tayp = Types.query.filter_by(typeID =r.typeID).first()
+        x.append(tayp.stall_type)
+    return render_template('showstalls.html', result=result, x=x)
+
+@app.route('/showlogs', methods =["GET", "POST"])
+@app.route('/showlogs/', methods =["GET", "POST"])
+def showlogs():
+    showlogs = Logs.query.all()
+    return render_template('logs.html', showlogs=showlogs)

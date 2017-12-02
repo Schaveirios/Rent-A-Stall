@@ -1,44 +1,21 @@
 {% extends 'admin_layout.html' %}
 
-
 {% block body %}
 
-<div class="container" style="text-align:center;">
 
+<div class="container-fluid" style="position:absolute; left: 23%; top:15%; width:74%;">
     <div class="row">
-        <div class="col-gl-7">
-            <span style="font-size:80px;">Welcome To The Homepage</span>
+        <div class="col-lg-12" style="font-size: 150px; text-shadow: 10px 10px 20px gray;">
+            E E D M O
+            <div style="position:absolute; top:27%; left:-6%; text-shadow:none;">
+                <span style="font-size:40px">Economic Enterprises Devt & Management Office</span>
+            </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-gl-4">
-            <br/>
-            <a href="/AddTenants">
-                <button class="btn btn-success lg" style="padding: 2% 15%; font-size: 200%;">Add Tenant</button>
-            </a>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-gl-4">
-            <br/>
-            <a href="/AddStalls">
-                <button class="btn btn-success lg" style="padding: 2% 15%; font-size: 200%;">Add Stall</button>
-            </a>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-gl-4">
-            <br/>
-            <a href="/clerk">
-                <button class="btn btn-success lg" style="padding: 2% 15%; font-size: 200%;">Add Clerk</button>
-            </a>
-        </div>
-    </div>
-
-
 </div>
+
+    <script>
+    $("div").removeClass("form_container");
+    </script>
 
 {% endblock %}

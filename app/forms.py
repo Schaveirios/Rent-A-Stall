@@ -15,8 +15,9 @@ class addtenants(Form):
     stallno = StringField('Stall Number',[validators.DataRequired(),validators.Length(min=1,max=20)])
     tenantphotoID = FileField('TenantphotoID')
     stallloc = StringField('Stall type',[validators.DataRequired(),validators.Length(max=20)])
-    branch = SelectField(u'branches', choices=[('1', 'Tambo'), ('2', 'Pala-o'), ('3', 'wet market')])
+    #branch = StringField(u'branches',[validators.DataRequired(),validators.Length(max=10)])
     submit = SubmitField("Submit")
+    # status = RadioField('Approval Status',[validators.DataRequired()],choices=[('1','Approved'),('0','Pending')])
 
 
 
@@ -25,9 +26,8 @@ class addstalls(Form):
     stallno = IntegerField('stallno',[validators.DataRequired(),validators.Length(max=20)])
     stallloc = StringField('stallloc',[validators.DataRequired(),validators.Length(max=20)])
     rate = IntegerField('rate',[validators.DataRequired(),validators.Length(max=20)])
-    Branchloc = SelectField(u'branches', choices=[('1', 'Tambo'), ('2', 'Pala-o'), ('3', 'wet market')])
+    Branchloc = SelectField(u'branches',[validators.DataRequired(),validators.Length(max=10)])
     stalltype = StringField('Stall type',[validators.DataRequired(),validators.Length(max=20)])
-
     submit = SubmitField("Add")
 
 # class addclerk(Form):
@@ -41,11 +41,11 @@ class addstalls(Form):
 #     branchId = SelectField(u'branches', choices=[('1', 'Tambo'), ('2', 'Pala-o'), ('3', 'wet market')])
 #     submit = SubmitField("Add")
 
-class addbranch(Form):
+# class addbranch(Form):
 
-    location = StringField('location',[validators.DataRequired(),validators.Length(min=6,max=20)])
+#     location = StringField('location',[validators.DataRequired(),validators.Length(min=6,max=20)])
 
-    submit = SubmitField("Submit")
+#     submit = SubmitField("Submit")
 
 class LogIn(Form):
 
@@ -61,4 +61,5 @@ class RegisterForm(Form):
     mname =  StringField('Middle Name', validators=[InputRequired(), Length(min=4, max=15)])
     lname =  StringField('Last Name', validators=[InputRequired(), Length(min=2, max=15)])
     ContNum =  StringField('Contact Number', validators=[InputRequired(), Length(min=11, max=15)])
-    branchID = SelectField(u'branches', choices=[('1', 'Tambo'), ('2', 'Palao'), ('3', 'Central Market')])
+    # branchID = StringField('branches',[validators.DataRequired(),validators.Length(max=20)])
+    submit = SubmitField("Add")

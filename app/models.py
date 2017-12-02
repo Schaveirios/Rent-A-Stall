@@ -21,7 +21,7 @@ class Branch(dbase.Model):
 
     @staticmethod
     def branch_types():
-        brLoc = ['Palao', 'Tambo', 'Central Market']
+        brLoc = ['Palao']
         for b in brLoc:
             loc = Branch.query.filter_by(branch_loc = b).first()
             if loc is None:
@@ -62,9 +62,9 @@ class Users(dbase.Model):
     first_name = dbase.Column(dbase.String(24))
     mid_name = dbase.Column(dbase.String(24))
     last_name = dbase.Column(dbase.String(24))
-    branchID = dbase.Column(dbase.Integer, dbase.ForeignKey("branch.branchID"), nullable=False)
+    # branchID = dbase.Column(dbase.Integer, dbase.ForeignKey("branch.branchID"), nullable=False)
 
-    def __init__(self, roleID, username,passwrd,contact_no,first_name,mid_name,last_name,branchID):
+    def __init__(self, roleID, username,passwrd,contact_no,first_name,mid_name,last_name):
         self.roleID = roleID
         self.username = username
         self.passwrd = generate_password_hash(passwrd)
@@ -72,7 +72,7 @@ class Users(dbase.Model):
         self.mid_name= mid_name
         self.last_name= last_name
         self.contact_no = contact_no
-        self.branchID = branchID
+        # self.branchID = branchID
 
 
     def is_authenticated(self):
@@ -131,13 +131,12 @@ class Tenants(dbase.Model):
     tenant_photo = dbase.Column(dbase.String(60))
     stallID = dbase.Column(dbase.Integer, dbase.ForeignKey("stalls.stallID"), nullable=True)
 
-    def __init__(self,contact_no, first_name, mid_name, last_name, present_addr, tenant_photo, stallID):
+    def __init__(self,contact_no, first_name, mid_name, last_name, present_addr, stallID):
         self.first_name = first_name
         self.mid_name = mid_name
         self.last_name = last_name
         self.contact_no = contact_no
         self.present_addr = present_addr
-        self.tenant_photo = tenant_photo
         self.stallID = stallID
 
 

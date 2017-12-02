@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'layout.html' %}
 
-    <title>Tenants</title>
 
-    <!-- Bootstrap -->
-    <link href="\static\datatable.css" rel="stylesheet">
+{% block body %}
 
- 
-  </head>
-  <body>
-    <div class="container">
-		<h1>List of tenants</h1>
-		<table class="table table-striped table-bordered table-hover" id="myTable">
+
+		<h1 style="margin-bottom: 4%;">List of Tenants</h1>
+		<table class="table" id="myTable">
 			<thead>
 				<tr>
 					<th>Firstname</th>
@@ -38,7 +28,7 @@
 				<tr>
 					
 					<td>
-						<a href="/home">{{ res.first_name }}</a>
+						<a href="/payments/{{ res.tenantID }}/{{ x[loop.index-1] }}">{{ res.first_name }}</a>
 					</td>
 					<td>
 						{{ res.mid_name }} 
@@ -53,14 +43,13 @@
 				{% endfor %}
 			</tbody>
 		</table>
-	</div>
    
     <script src="\static\js\jquery-3.2.1.min.js"></script>
-    <script src="\static\js\bootstrap.min.js"></script>
 	<script src="\static\js\jquery.dataTables.min.js"></script>	
 	<script src="\static\js\dataTables.bootstrap.min.js"></script>
 	<script>
 		$('#myTable').dataTable();
+		$('.form_container').css({'height':'unset', 'padding':'0% 2%', 'top':'12%'});
+		$('#myTable_filter').css({'position':'absolute','top':'-68px','left':'46%'});
 	</script>
-  </body>
-</html>  
+ {% endblock %}
