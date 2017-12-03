@@ -13,16 +13,15 @@
                 <div class="col-lg-2">
                     <label class="form"  >Stall Type: <br/>
                     {{ form.stalltype(placeholder = "Stall Type") }}
-                        <span class="help-inline">must be something chever</span>
                         {% if form.stalltype.errors %}
-                    {% for error in form.stalltype.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+                    {% for error in form.stalltype.errors %} <span class="help-inline"> {{ error }} </span> {% endfor %} {% endif %}<br></label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-2">
                     <label class="form"  >Stall#: <br>
                     {{ form.stallno(placeholder = "Stall#") }} {% if form.stallno.errors %}
-                    {% for error in form.stallno.errors %} {{ error }} {% endfor %} {% endif %}</label>
+                    {% for error in form.stallno.errors %}<span class="help-inline"> {{ error }} </span>{% endfor %} {% endif %}</label>
                 </div>
             </div>
 
@@ -30,9 +29,8 @@
                 <div class="col-lg-2">
                     <label class="form"  >Stall Location: <br/>
                     {{ form.stallloc(placeholder = "Stall Location") }}
-                        <span class="help-inline">must be something chever</span>
                         {% if form.stallloc.errors %}
-                    {% for error in form.stallloc.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+                    {% for error in form.stallloc.errors %}<span class="help-inline"> {{ error }} </span>{% endfor %} {% endif %}<br></label>
                 </div>
             </div>
 
@@ -40,9 +38,8 @@
                 <div class="col-lg-2">
                     <label class="form"  >Rate: <br/>
                     {{ form.rate(placeholder = "Rate") }}
-                        <span class="help-inline">must be something chever</span>
                         {% if form.rate.errors %}
-                    {% for error in form.rate.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+                    {% for error in form.rate.errors %}<span class="help-inline"> {{ error }} </span>{% endfor %} {% endif %}<br></label>
                 </div>
             </div>
 

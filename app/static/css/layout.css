@@ -15,8 +15,8 @@ body{
 #login_container{
     position:absolute;
     width:35%;
-    height:50%;
     left:33%;
+    height: 50%;
     top:20%;
     background-color:#bfbfbf;
     box-shadow: 0 10px 30px 0px;
@@ -34,7 +34,7 @@ body{
 
 .help-inline{
     color:red;
-    font-size:13px;
+    font-size:75%;
 }
 
 .form_tag{
@@ -48,7 +48,6 @@ body{
     z-index:1;
     position:absolute;
     width:75%;
-    height:60%;
     top:24%;
     left:12%;
     box-shadow:0 13px 20px 0px #bdbdbd;

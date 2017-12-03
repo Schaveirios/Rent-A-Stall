@@ -1,0 +1,295 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"stu",
+				"students"
+			],
+			[
+				"getI",
+				"getIdNo"
+			],
+			[
+				"st",
+				"student"
+			],
+			[
+				"fi",
+				"firstName"
+			],
+			[
+				"String",
+				"StringBuilder"
+			],
+			[
+				"get",
+				"getReleaseYear"
+			],
+			[
+				"fil",
+				"filmTitle"
+			],
+			[
+				"re",
+				"releaseYear"
+			],
+			[
+				"F",
+				"filmTitle"
+			],
+			[
+				"min",
+				"maxIndex"
+			],
+			[
+				"f",
+				"findMaxBack"
+			],
+			[
+				"fin",
+				"findMinFor"
+			],
+			[
+				"right",
+				"rightMost"
+			],
+			[
+				"max",
+				"maxIndex"
+			],
+			[
+				"pu",
+				"public"
+			],
+			[
+				"sta",
+				"static"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 160.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/F/csc181project/app/templates/showtenants.html",
+		"/F/csc181project/app/controller.py",
+		"/F/app11.py",
+		"/C/Users/user/Desktop/__init__.py",
+		"/C/Users/user/Desktop/StudentSearcherDemo.java",
+		"/C/Users/user/Desktop/StudentSearcher.java",
+		"/C/Users/user/Desktop/Student.java",
+		"/C/Users/user/Desktop/Kyuubae/JavaFiles2ndSem/Sorting.java",
+		"/C/Users/user/Desktop/Kyuubae/CSc 102/FINALS/CSC_102_LAB_11_28_2016/Student.java",
+		"/C/Users/user/Desktop/Kyuubae/CSc 102/FINALS/CSC_102_LAB_11_28_2016/SetDemo.java",
+		"/C/Users/user/Desktop/Kyuubae/CSc 102/FINALS/CSC_102_LAB_11_28_2016/ListDemo.java",
+		"/C/Users/user/Desktop/Kyuubae/JavaFiles2ndSem/Exam_05/Exam04_Practice/Student.java",
+		"/C/Users/user/Desktop/Kyuubae/Exam_03 JAVA/FilmDirector.java",
+		"/C/Users/user/Desktop/Kyuubae/JavaFiles2ndSem/Student.java",
+		"/C/Users/user/Desktop/Kyuubae/JavaFiles2ndSem/Exam_05/Exam04_Practice/Student.kava",
+		"/C/Users/user/Desktop/Kyuubae/JavaFiles2ndSem/Exam_05/_ADVANCED_HEAP_STACK/Demo03.java",
+		"/C/Users/user/Desktop/Kyuubae/JavaFiles2ndSem/Exam_05/_ADVANCED_HEAP_STACK/Demo.java",
+		"/C/Users/user/Desktop/Kyuubae/JavaFiles2ndSem/Exam_05/_ADVANCED_HEAP_STACK/Demo02.java",
+		"/C/Users/user/Desktop/Kyuubae/Exam_03 JAVA/EXAM_03/Film.java",
+		"/C/Users/user/Desktop/Kyuubae/Exam_03 JAVA/EXAM_03/Actor.java",
+		"/C/Users/user/Desktop/Kyuubae/Exam_03 JAVA/Film.java",
+		"/C/Users/user/Desktop/Kyuubae/Exam_03 JAVA/Demo.java",
+		"/C/Users/user/Desktop/Kyuubae/Exam_03 JAVA/EXAM_03/Demo.java",
+		"/C/Users/user/Desktop/Kyuubae/Exam_03 JAVA/EXAM_03/Book.java",
+		"/C/Users/user/Desktop/Kyuubae/Exam_03 JAVA/EXAM_03/Book (2).java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/MMfinal.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/LabActDemo2.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/SortingUtil.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/Sorting.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/ShiftingUtil.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/ShiftingDemo.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/SortingDemo.java",
+		"/C/Users/user/Desktop/teeam.cfg",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/ALLKFinal.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/MaxMinFinal.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/MaxMinFinal.class",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/ArrFind.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/Arrayfind.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/Arrayfind.class",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/ALLKFinal",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/CharSearchFinal.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/DoubleArray.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/ShiftingLRdemo.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/ShiftingLR.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/MinMax.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/ArrFind.class",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/LabActDemo2.java~",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/CharSearch.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/CharSearchFinal.class",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/CharSearch.class",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/StrDemo.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/Stringfind.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/Main.java",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/HelloWorld.java",
+		"/C/Users/user/AppData/Roaming/Sublime Text 3/Packages/User/Javac.sublime-build",
+		"/C/Users/user/Desktop/Kyuubae/Sublime Text 3/Packages/MyJava.sublime-build",
+		"/C/Users/user/Desktop/Kyuubae/Sublime Text 3/Packages/Java.sublime-build",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/ArrFind.java~",
+		"/C/Program Files/Sublime Text 3/Packages/MyJava.sublime-build",
+		"/C/Program Files/Sublime Text 3/Packages/Java.sublime-package",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/HelloWorld.class",
+		"/C/Users/user/Desktop/MyJava.sublime-build",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/MMfinal.java~",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/ArrIntDemo.java",
+		"/C/Users/user/AppData/Roaming/Sublime Text 3/Packages/User/MyJava.sublime-build",
+		"/C/Users/user/Desktop/Kyuubae/CSC-102/MaxMinFinal.java~"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"}"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/User/Javac.sublime-build",
+	"project": "run.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

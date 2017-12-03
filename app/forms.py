@@ -23,10 +23,9 @@ class addtenants(Form):
 
 class addstalls(Form):
 
-    stallno = IntegerField('stallno',[validators.DataRequired(),validators.Length(max=20)])
+    stallno = StringField('stallno',[validators.DataRequired(),validators.Length(max=20)])
     stallloc = StringField('stallloc',[validators.DataRequired(),validators.Length(max=20)])
-    rate = IntegerField('rate',[validators.DataRequired(),validators.Length(max=20)])
-    Branchloc = SelectField(u'branches',[validators.DataRequired(),validators.Length(max=10)])
+    rate = StringField('rate',[validators.DataRequired(),validators.length(max=20)])
     stalltype = StringField('Stall type',[validators.DataRequired(),validators.Length(max=20)])
     submit = SubmitField("Add")
 
@@ -63,3 +62,13 @@ class RegisterForm(Form):
     ContNum =  StringField('Contact Number', validators=[InputRequired(), Length(min=11, max=15)])
     # branchID = StringField('branches',[validators.DataRequired(),validators.Length(max=20)])
     submit = SubmitField("Add")
+	
+class PaymentForm(Form):
+    month = StringField('Month', validators=[InputRequired(), Length(min=1, max=64)])
+    amount = StringField('Amount', validators=[InputRequired(), Length(min=1, max=64)])
+    sCharge = StringField('S. Charge', validators=[InputRequired(), Length(min=1, max=64)])
+    total = StringField('Total', validators=[InputRequired(), Length(min=1, max=64)])
+    or_no = StringField('OR Num', validators=[InputRequired(), Length(min=1, max=64)])
+    date_issued = StringField('Date Issued', validators=[InputRequired(), Length(min=3, max=64)])
+    issued_by = StringField('Issued By', validators=[InputRequired(), Length(min=4, max=64)])
+    submit = SubmitField("Submit")

@@ -1,24 +1,27 @@
+
+{% if current_user.roleID==1 %}
+{% extends 'admin_layout.html' %}
+{% else %}
 {% extends 'layout.html' %}
-
-
+{% endif %}
 {% block body %}
 
 
-		<h1 style="margin-bottom: 4%;">List of Tenants</h1>
-		<table class="table" id="myTable">
+		<h1  style="margin-bottom: 4%;">List of Tenants</h1>
+		<table class="table table-striped table-bordered table-hover" id="myTable">
 			<thead>
 				<tr>
-					<th>Firstname</th>
-					<th>Middlename</th>
-					<th>Lastname</th>
+					<th>First Name</th>
+					<th>Middle Name</th>
+					<th>Last Name</th>
 					<th>Stall Number</th>
 				</tr>
 			</thead>
 			<tfoot>
 				<tr>
-					<th>Firstname</th>
-					<th>Middlename</th>
-					<th>Lastname</th>
+					<th>First Name</th>
+					<th>Middle Name</th>
+					<th>Last Name</th>
 					<th>Stall Number</th>
 				</tr>
 			
@@ -26,12 +29,11 @@
 			<tbody>
 				{% for res in result %}
 				<tr>
-					
 					<td>
-						<a href="/payments/{{ res.tenantID }}/{{ x[loop.index-1] }}">{{ res.first_name }}</a>
+						<a href = "/payment_table/{{res.tenantID}}/{{res.stallID}}">{{ res.first_name }} </a>
 					</td>
 					<td>
-						{{ res.mid_name }} 
+						{{ res.mid_name }}
 					</td>
 					<td>
 						{{ res.last_name }}
@@ -43,13 +45,15 @@
 				{% endfor %}
 			</tbody>
 		</table>
-   
+	</div>
+    
     <script src="\static\js\jquery-3.2.1.min.js"></script>
-	<script src="\static\js\jquery.dataTables.min.js"></script>	
+   	<script src="\static\js\jquery.dataTables.min.js"></script>	
 	<script src="\static\js\dataTables.bootstrap.min.js"></script>
 	<script>
 		$('#myTable').dataTable();
 		$('.form_container').css({'height':'unset', 'padding':'0% 2%', 'top':'12%'});
 		$('#myTable_filter').css({'position':'absolute','top':'-68px','left':'46%'});
 	</script>
- {% endblock %}
+
+{% endblock %}

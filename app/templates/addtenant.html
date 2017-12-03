@@ -13,17 +13,17 @@
                     <label class="">First Name: <br>
                     {{ form1.fname(placeholder = "First Name", style="width:80%;") }}
                         {% if form1.fname.errors %}
-                        {% for error in form1.fname.errors %} <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}<br></label>
+                        {% for error in form1.fname.errors %} <br> <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}<br></label>
                 </div>
                 <div class="col-lg-2">
                     <label class="">Middle Name: <br>
                     {{ form1.mname(placeholder = "Middle Name", style="width:80%;") }}{% if form1.mname.errors %}
-                    {% for error in form1.mname.errors %} <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}<br></label>
+                    {% for error in form1.mname.errors %} <br> <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}<br></label>
                 </div>
                 <div class="col-lg-2">
                     <label class="">Last Name: <br>
                     {{ form1.lname(placeholder = "Last Name", style="width:80%;") }} {% if form1.lname.errors %}
-                    {% for error in form1.lname.errors %} <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}<br></label>
+                    {% for error in form1.lname.errors %} <br> <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}<br></label>
                 </div>
             </div>
             <div class="row">
@@ -32,12 +32,12 @@
                     {{ form1.contnum(placeholder = "Contact Number", style="width:80%;") }}
                       
                         {% if form1.contnum.errors %}
-                    {% for error in form1.contnum.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+                    {% for error in form1.contnum.errors %} <br> <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br></label>
                 </div>
                 <div class="col-lg-3">
                     <label class="" >Present Address: <br>
                     {{ form1.address(placeholder = "Present Address", style="width:100%;") }} {% if form1.address.errors %}
-                    {% for error in form1.address.errors %} {{ error }} {% endfor %} {% endif %}</label>
+                    {% for error in form1.address.errors %} <br> <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}</label>
                 </div>
             </div>
             <div class="row">
@@ -46,13 +46,17 @@
                     {{ form1.stalltype(placeholder = "Stall Type", style="width:80%;") }}
                         
                         {% if form1.stalltype.errors %}
-                    {% for error in form1.stalltype.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+                    {% for error in form1.stalltype.errors %} <br> <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br></label>
                 </div>
                 <div class="col-lg-2">
                     <label class="form"  >Stall#: <br>
                     {{ form1.stallno(placeholder = "Stall#", style="width:80%;") }} {% if form1.stallno.errors %}
-                    {% for error in form1.stallno.errors %} {{ error }} {% endfor %} {% endif %}</label>
+                    {% for error in form1.stallno.errors %} <br> <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}</label>
+                <div style="position: absolute; left:80%; top:22%;">
+                    <button type="button" class="btn btn-primary" id="available_stalls">available stalls</button>
+                </div>                    
                 </div>
+
             </div>
             <div class="row">
                 <div class="col-lg-2">
@@ -60,7 +64,7 @@
                     {{ form1.stallloc(placeholder = "Stall Location", style="width:80%;") }}
                         
                         {% if form1.stallloc.errors %}
-                    {% for error in form1.stallloc.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+                    {% for error in form1.stallloc.errors %} <br> <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br></label>
                 </div>
             </div>
           
@@ -86,8 +90,10 @@
                 </div>
             </div>
 
-<div style="position: absolute; left:0%; top:110%; background-color: gray; box-shadow:0 -2px 20px 0px #bdbdbd; padding: 2% 2%; width: 100%; height:100%; overflow: scroll;">
+<div id="stalls" style="visibility:hidden; position: absolute; left:0%; top:0%; background-color: gray; box-shadow:0 -2px 20px 0px #bdbdbd; padding: 2% 2%; width: 100%;">
    <table id="myTable" class="table table-striped header-fixed">
+        
+        <button type="button" class="btn btn-info" id="back_addtenants"><span class="glyphicon glyphicon-arrow-left"></span>Back to Addtenants</button>
         <h1> Available Stalls</h1>
         <thead>
             <tr>
@@ -122,6 +128,22 @@
 
 
 </div>
+
+    <script>
+    $(document).ready(function(){
+        var a = 0;
+        $("#available_stalls").click(function(){
+            $("#flex_form").css({"visibility":"hidden"});
+            $("#stalls").css({"visibility":"visible"});
+        });
+        $("#back_addtenants").click(function(){
+            $("#flex_form").css({"visibility":"visible"});
+            $("#stalls").css({"visibility":"hidden"});
+        });
+
+    });
+    </script>
+
 
 
 {% endblock %}

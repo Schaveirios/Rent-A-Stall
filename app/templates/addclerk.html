@@ -9,7 +9,7 @@
             <div class="col-lg-2">
                 <label id="label">Username: <br>
                 {{ form.username(placeholder = "Username") }} {% if form.username.errors %}
-                {% for error in form.username.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+                {% for error in form.username.errors %}  <br> <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br></label>
             </div>
         </div>
 
@@ -17,7 +17,7 @@
             <div class="col-lg-2">
                 <label id="label">Password: <br>
                 {{ form.password(placeholder = "Password") }} {% if form.password.errors %}
-                {% for error in form.password.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+                {% for error in form.password.errors %}  <br> <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br></label>
             </div>
         </div>
 
@@ -26,7 +26,7 @@
             <div class="col-lg-4">
                 <label id="label">First Name: <br>
                 {{ form.fname(placeholder = "First Name") }} {% if form.fname.errors %}
-                {% for error in form.fname.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+                {% for error in form.fname.errors %}  <br> <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br></label>
             </div>
         </div>
 
@@ -34,7 +34,7 @@
             <div class="col-lg-4">
                 <label id="label">Middle Name: <br>
                 {{ form.mname(placeholder = "Middle Name") }} {% if form.mname.errors %}
-                {% for error in form.mname.errors %} {{error }} {% endfor %} {% endif %}<br></label>
+                {% for error in form.mname.errors %}  <br> <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br></label>
             </div>
         </div>
 
@@ -42,7 +42,7 @@
             <div class="col-lg-4">
                 <label id="label">Last Name: <br>
                 {{ form.lname(placeholder = "Last Name") }} {% if form.lname.errors %}
-                {% for error in form.lname.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+                {% for error in form.lname.errors %}  <br> <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br></label>
             </div>
         </div>
 
@@ -50,7 +50,7 @@
             <div class="col-lg-4">
                 <label id="label">Contact Number: <br>
                 {{ form.ContNum(placeholder = "Contact Number") }} {% if form.ContNum.errors %}
-                {% for error in form.ContNum.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+                {% for error in form.ContNum.errors %}<br> <span class="help-inline">{{ error }} </span>{% endfor %} {% endif %}<br></label>
             </div>
         </div>
 

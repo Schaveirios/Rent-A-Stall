@@ -15,23 +15,27 @@
 </head>
 <body style="background-color:white;">
 
-<div class="container login" >
 
+<div style="position:absolute;left:0px;right:0px;width:100%;height:100%;background-color:#00000021;"></div>
+
+<div id="login_container">
+    <div id="login_header" style="padding:2px;font-size:31px; text-align:center; border-radius: 20px 20px 0 0; background-color:#312f2f; color:white;width:100%;height:15%;">LOGIN</div>
+    <div class="login_form" style="text-align:left;background-color:#4c4e4c;height:85%;padding: 4% 10%;">
 
     <form method="POST">
           {{ form.csrf_token }}
 
-        <div class="row">
+<!--         <div class="row">
             <div class="col-lg-12">
                 <span style="font-size: 200%;"><strong>LOGIN</strong></span>
             </div>
         </div>
-
+ -->
 
         <div class="row">
             <div class="col-lg-12">
                 <br><label id="label">Username: <br>
-                {{ form.username(placeholder = "username") }} {% if form.username.errors %}
+                {{ form.username(placeholder = "username", id="user_form", style="text-align:center;") }} {% if form.username.errors %}
                 {% for error in form.username.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
             </div>
         </div>
@@ -39,7 +43,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <label id="label">Password: <br>
-                {{ form.passwrd(placeholder = "password") }} {% if form.passwrd.errors %}
+                {{ form.passwrd(placeholder = "password", id="user_form", style="text-align:center;") }} {% if form.passwrd.errors %}
                 {% for error in form.passwrd.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
             </div>
         </div>
@@ -50,12 +54,14 @@
             </div>
         </div>-->
 
-        <div class="row">
-            <div class="col-lg-2">
+<!--         <div class="row">
+            <div class="col-lg-2 login" style="position:absolute; top:80%;left:34%;">
                 <input id="submit" name="submit" type="submit" value="Submit">
             </div>
-        </div>
-
+        </div> -->
+            <div class="login" style="position:absolute; top:80%;left:29%;">
+                <input id="submit" name="submit" type="submit" value="Submit">
+            </div>
     </form>
 
 

@@ -1,6 +1,6 @@
 import models
 from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
-from forms import addtenants, addstalls, LogIn,RegisterForm
+from forms import addtenants, addstalls, LogIn,RegisterForm, PaymentForm
 from sqlalchemy import and_
 from app import dbase, app
 from flask_login import login_user, login_required, logout_user, LoginManager, current_user
@@ -14,7 +14,7 @@ import time
 import os
 
 now= datetime.datetime.now()
-
+datelog = str(now)
 
 
 img_folder = 'static/profile/'
@@ -72,11 +72,11 @@ def AddTenants():
             middlename = form.mname.data
             lastname = form.lname.data
             Address = form.address.data
-            Contnum = form.contnum.data            
+            Contnum = form.contnum.data
+            TenantphotoID = form.tenantphotoID.data
             stallno1 = form.stallno.data
+
             stallType = form.stalltype.data
-            piccc = form.tenantphotoID.data
-            print piccc
             type = Types.query.filter_by(stall_type=stallType).first()
 
             if type:
@@ -98,19 +98,23 @@ def AddTenants():
                 else:
                     # loc = Branch.query.filter_by(branchID=branchLoc).first()
                     stall = Stalls.query.filter_by(stall_no=stallno1).first()
-                    if stall:
-                        stall.stall_status = "1"
-                        dbase.session.add(stall)
-                        dbase.session.commit()
+                    if stall:                        
                         tenantForm = Tenants(contact_no=Contnum,
                                              first_name=firstname,
                                              mid_name=middlename,
                                              last_name=lastname,
                                              present_addr=Address,
+                                             # tenant_photo=TenantphotoID,
                                              stallID=stall.stallID
                                              )
-                        dbase.session.add(tenantForm)
-                        dbase.session.commit()
+                        if form.tenantphotoID.data:
+                            stall.stall_status = "1"
+                            dbase.session.add(stall)
+                            dbase.session.commit()
+                            dbase.session.add(tenantForm)
+                            dbase.session.commit()
+                        else:
+                            return render_template("addtenant.html", form1=form, availstalls = availstalls)
 
                         profile_entry = ""
                         te = Tenants.query.all()
@@ -135,14 +139,18 @@ def AddTenants():
                                 t.tenant_photo = profile_entry
                                 print profile_entry
                                 dbase.session.add(t)
-
+                                user = current_user
+                                lgdate= str(now)
+                                msg = user.username + " added a tenant "
+                                logmessage = Logs(details = msg,
+                                                    log_date = lgdate)
+                                dbase.session.add(logmessage)
                                 dbase.session.commit()
                         return render_template("successadd1.html")
                     else:
                         flash('Stall is not available in the given branch')
             else:
                 flash("Stall not found")
-
     return render_template("addtenant.html", form1=form, availstalls = availstalls)
 
 
@@ -187,10 +195,7 @@ def AddTenants2():
                 else:
                     # loc = Branch.query.filter_by(branchID=branchLoc).first()
                     stall = Stalls.query.filter_by(stall_no=stallno1).first()
-                    if stall:
-                        stall.stall_status = "1"
-                        dbase.session.add(stall)
-                        dbase.session.commit()
+                    if stall:                        
                         tenantForm = Tenants(contact_no=Contnum,
                                              first_name=firstname,
                                              mid_name=middlename,
@@ -199,8 +204,14 @@ def AddTenants2():
                                              # tenant_photo=TenantphotoID,
                                              stallID=stall.stallID
                                              )
-                        dbase.session.add(tenantForm)
-                        dbase.session.commit()
+                        if form.tenantphotoID.data:
+                            stall.stall_status = "1"
+                            dbase.session.add(stall)
+                            dbase.session.commit()
+                            dbase.session.add(tenantForm)
+                            dbase.session.commit()
+                        else:
+                            return render_template("clerk_addtenant.html", form1=form, availstalls = availstalls)
 
                         profile_entry = ""
                         te = Tenants.query.all()
@@ -225,6 +236,12 @@ def AddTenants2():
                                 t.tenant_photo = profile_entry
                                 print profile_entry
                                 dbase.session.add(t)
+                                user = current_user
+                                lgdate= str(now)
+                                msg = user.username + " added a tenant "
+                                logmessage = Logs(details = msg,
+                                                    log_date = lgdate)
+                                dbase.session.add(logmessage)
                                 dbase.session.commit()
                         return render_template("successadd.html")
                     else:
@@ -233,7 +250,6 @@ def AddTenants2():
                 flash("Stall not found")
     return render_template("clerk_addtenant.html", form1=form, availstalls = availstalls)
 
-
 @app.route("/AddStalls", methods=["POST", "GET"])
 @app.route("/AddStalls/", methods=["POST", "GET"])
 @login_required
@@ -241,39 +257,42 @@ def AddTenants2():
 def AddStalls():
     form = addstalls()
     if request.method == "POST":
-        stallNo = form.stallno.data
-        stallLoc = form.stallloc.data
-        Rate = form.rate.data
-        BranchLoc = "Palao"
-        loc = Branch.query.filter_by(branch_loc=BranchLoc).first()
-        locid = loc.branchID
-        stalltype = form.stalltype.data
-        type = Types.query.filter_by(stall_type=stalltype).first()
-        if type:
-            t = type.typeID
-        else:
-            Stalltype = Types(stall_type=stalltype)
+        if form.validate_on_submit():
+            stallNo = form.stallno.data
+            stallLoc = form.stallloc.data
+            Rate = form.rate.data
+            stalltype = form.stalltype.data
+            type = Types.query.filter_by(stall_type=stalltype).first()
+            if type:
+                t = type.typeID
+            else:
+                Stalltype = Types(stall_type=stalltype)
 
-            dbase.session.add(Stalltype)
-            dbase.session.commit()
+                dbase.session.add(Stalltype)
+                dbase.session.commit()
 
-            type1 = Types.query.filter_by(stall_type=stalltype).first()
-            t = type1.typeID
+                type1 = Types.query.filter_by(stall_type=stalltype).first()
+                t = type1.typeID
 
-        stallstat = Stalls.query.filter_by(stall_no=stallNo).first()
-        if stallstat:
-            flash('Stall already existing')
-        else:
-            stallform = Stalls(stall_rate=Rate,
-                            stall_loc=stallLoc,
-                            stall_status="0",
-                            stall_no=stallNo,
-                            branchID=locid,
-                            typeID=t
-                            )
-            dbase.session.add(stallform)
-            dbase.session.commit()
-            return render_template("successadd1.html")
+            stallstat = Stalls.query.filter_by(stall_no=stallNo).first()
+            if stallstat:
+                flash('Stall already existing')
+            else:
+                stallform = Stalls(stall_rate=int(Rate),
+                                stall_loc=stallLoc,
+                                stall_status="0",
+                                stall_no=int(stallNo),
+                                typeID=t
+                                )
+                dbase.session.add(stallform)
+                user = current_user
+                lgdate= str(now)
+                msg = user.username + " added a tenant "
+                logmessage = Logs(details = msg,
+                                        log_date = lgdate)
+                dbase.session.add(logmessage)
+                dbase.session.commit()
+                return render_template("successadd1.html")
     return render_template("addstall.html", form=form)
 
 
@@ -302,6 +321,12 @@ def AddClerk():
             else:
                 print "sjsjdjdjjdjdjdjd"
                 dbase.session.add(uForm)
+                user = current_user
+                lgdate= str(now)
+                msg = user.username + " added a clerk "
+                logmessage = Logs(details = msg,
+                                    log_date = lgdate)
+                dbase.session.add(logmessage)
                 dbase.session.commit()
                 return render_template('successadd1.html')
     return render_template("addclerk.html", form=form)
@@ -315,7 +340,7 @@ def login():
     Types.stall_types()
     print current_user
     if current_user.is_active():
-        if current_user.roleID == '1':
+        if current_user.roleID == 1:
             return redirect(url_for('index2'))
         else:
             return redirect(url_for('index'))
@@ -326,11 +351,24 @@ def login():
             if user:
                 if user.roleID == 2:
                     if user is not None and check_password_hash(user.passwrd, form.passwrd.data):
+                        msg = user.username + " logs in"
+                        lgdate = str(now)
+                        print lgdate
+                        logmessage = Logs(details = msg,
+                                          log_date = lgdate)
+                        dbase.session.add(logmessage)
                         login_user(user)
                         return redirect(url_for('index'))
                     return '<h1>Invalid username or password!</h1>'
                 elif user.roleID == 1:
                     if user is not None and check_password_hash(user.passwrd, form.passwrd.data):
+                        msg = user.username + " logs in"
+                        lgdate = str(now)
+                        print lgdate
+                        logmessage = Logs(details = msg,
+                                          log_date = lgdate)
+                        dbase.session.add(logmessage)
+                        login_user(user)
                         login_user(user)
                         return redirect(url_for('index2'))
                     return '<h1>Invalid username or password!</h1>'
@@ -343,8 +381,16 @@ def login():
 
 
 @app.route('/logout')
+@app.route('/logout/')
 @login_required
 def logout():
+    user = current_user
+    lgdate = str(now)
+    msg = user.username + " logs out "
+    logmessage = Logs(details=msg,
+                      log_date=lgdate)
+    dbase.session.add(logmessage)
+    dbase.session.commit()
     logout_user()
     flash('You were logged out.')
     return redirect(url_for('login'))
@@ -356,19 +402,39 @@ def pageFormula(total, perpage):
 
 @app.route('/showtenants', methods=["GET", "POST"])
 @app.route('/showtenants/', methods=["GET", "POST"])
+@login_required
+@required_roles(1,2)
 def tenantslist():
-  x = []
-  result = Tenants.query.order_by(Tenants.first_name).all()#.paginate(1,2,True)
-  for r in result:        
+    user = current_user
+    lgdate = str(now)
+    msg = user.username + " viewed the tenant list "
+    logmessage = Logs(details=msg,
+                      log_date=lgdate)
+    dbase.session.add(logmessage)
+    dbase.session.commit()
+    x = []  
+    result = Tenants.query.order_by(Tenants.first_name).all()#.paginate(1,2,True)
+    for r in result:        
       stall = Stalls.query.filter_by(stallID=r.stallID).first()
       x.append(stall.stall_no)
-  #x = len(Tenants.query.order_by(Tenants.first_name).all())
-  return render_template('showtenants.html',result=result, x=x)# , stry=pageFormula(x, 11))
-  # return jsonify({'firstname':firstname, 'middlename':middlename, 'lastname':lastname})
+
+    #x = len(Tenants.query.order_by(Tenants.first_name).all())
+    return render_template('showtenants.html',result=result, x=x)# , stry=pageFormula(x, 11))
+    # return jsonify({'firstname':firstname, 'middlename':middlename, 'lastname':lastname})
 
 @app.route('/showstalls', methods=["GET", "POST"])
 @app.route('/showstalls/', methods=["GET", "POST"])
+@login_required
+@required_roles(1,2)
 def stalllist():
+    user = current_user
+    lgdate = str(now)
+    print lgdate
+    msg = user.username + " viewed the stalls "
+    logmessage = Logs(details=msg,
+                      log_date=lgdate)
+    dbase.session.add(logmessage)
+    dbase.session.commit()
     x = []
     result = Stalls.query.order_by(Stalls.stall_no).all()#.paginate(1,11,True)
     for r in result:
@@ -376,8 +442,62 @@ def stalllist():
         x.append(tayp.stall_type)
     return render_template('showstalls.html', result=result, x=x)
 
-@app.route('/showlogs', methods =["GET", "POST"])
-@app.route('/showlogs/', methods =["GET", "POST"])
-def showlogs():
+
+@app.route('/logs', methods=["GET", "POST"])
+@app.route('/logs/', methods=["GET", "POST"])
+@login_required
+@required_roles(1)
+def logs():
+    print datelog   
+    user = current_user
+    lgdate = datelog
+    msg = user.username + " viewed the logs "
+    logmessage = Logs(details=msg,
+                      log_date=lgdate)
+    dbase.session.add(logmessage)
+    dbase.session.commit()
     showlogs = Logs.query.all()
     return render_template('logs.html', showlogs=showlogs)
+
+@app.route('/payment/<int:id>/<int:s_id>/', methods=["GET", "POST"])
+@login_required
+@required_roles(1,2)
+def payment(id, s_id):
+    someNum = Stalls.query.filter_by(stallID=s_id).first()
+    typee = Types.query.filter_by(typeID=someNum.typeID).first()
+    tenant_1 = Tenants.query.filter(and_(Tenants.tenantID==id, Tenants.stallID==someNum.stallID)).first()
+
+    form = PaymentForm()
+    if request.method=='POST' and form.validate_on_submit():
+        uForms = Pays(month=form.month.data,
+                        amount=form.amount.data,
+                         sCharge=form.sCharge.data,
+                         total=form.total.data ,
+                         or_no=form.or_no.data,
+                         date_issued=form.date_issued.data,
+                         issued_by=form.issued_by.data,
+                        tenantID = tenant_1.tenantID,
+                        stallID = someNum.stallID
+                       )
+
+        dbase.session.add(uForms)
+        dbase.session.commit()
+        return redirect(url_for("paymenttable", id=id, s_id=s_id))
+    if current_user.roleID == 1:
+        return render_template("payment_admin.html", form=form, tenant=tenant_1, stall=someNum, typee=typee)
+    return render_template("payment.html", form=form, tenant=tenant_1, stall=someNum, typee=typee)
+
+
+@app.route('/payment_table/<int:id>/<int:s_id>/', methods = ["GET", "POST"])
+@login_required
+@required_roles(1,2)
+def paymenttable(id, s_id):
+    pays = Pays.query.filter(and_(Pays.tenantID==id, Pays.stallID==s_id)).all()
+    someNum = Stalls.query.filter_by(stallID=s_id).first()
+    tenant_1 = Tenants.query.filter(and_(Tenants.tenantID==id, Tenants.stallID==someNum.stallID)).first()
+    typee = Types.query.filter_by(typeID=someNum.typeID).first()
+
+    if current_user.roleID == 1:
+        return render_template('paymenttable_admin.html', pays=pays, id=id, s_id=s_id, stall=someNum, typee=typee, tenant=tenant_1)
+    return render_template('paymenttable.html', pays=pays, id=id, s_id=s_id, stall=someNum, typee=typee, tenant=tenant_1)
+
