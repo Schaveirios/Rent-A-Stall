@@ -71,4 +71,5 @@ class PaymentForm(Form):
     or_no = StringField('OR Num', validators=[InputRequired(), Length(min=1, max=64)])
     date_issued = StringField('Date Issued', validators=[InputRequired(), Length(min=3, max=64)])
     issued_by = StringField('Issued By', validators=[InputRequired(), Length(min=4, max=64)])
+    remark = SelectField(u'Remark', choices=[('1', 'Full'), ('2', 'Advance'), ('3', 'Partial')])
     submit = SubmitField("Submit")

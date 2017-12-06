@@ -83,9 +83,16 @@
 
 
 
-        <script src="\static\js\jquery-3.2.1.min.js"></script>
+    <script src="\static\js\jquery-3.2.1.min.js"></script>
     <script src="\static\js\jquery.dataTables.min.js"></script> 
     <script src="\static\js\dataTables.bootstrap.min.js"></script>
+    <script src="\static\js\dataTables.buttons.min.js"></script>
+    <script src="\static\js\buttons.flash.min.js"></script>
+    <script src="\static\js\buttons.print.min.js"></script>
+    <script src="\static\js\buttons.html5.min.js"></script>
+    <script src="\static\js\pdfmake.min.js"></script>
+    <script src="\static\js\jszip.min.js"></script>
+    <script src="\static\js\vfs_fonts.min.js"></script>
 
     <script>
     $("#paneltoggle").attr("id","paneltoggle2");
@@ -105,8 +112,23 @@
                 a=0;
             }
         });
-    });
-    $('#myTable').dataTable();
+    // });
+    $('#myTable').DataTable( {
+        dom: 'Blfrtip',
+        buttons: [
+            'copy', 
+            'csv', 
+            'excel', 
+            'print'
+         
+        ]
+    
+    } );
+    table.buttons().container()
+        .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
+} );
+        $('.form_container').css({'height':'unset', 'padding':'0% 2%', 'top':'12%'});
+        $('#myTable_filter').css({'position':'absolute','top':'-68px','left':'46%'});
 </script>
 
 {% endblock %}

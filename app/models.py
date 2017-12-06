@@ -170,13 +170,14 @@ class Pays(dbase.Model):
     amount = dbase.Column(dbase.Float)
     total = dbase.Column(dbase.Float)
     date_issued =dbase.Column(dbase.DATE)
+    Remark = dbase.Column(dbase.String(10))
     tenantID = dbase.Column(dbase.Integer,dbase.ForeignKey("tenants.tenantID"), nullable=True)
     stallID = dbase.Column(dbase.Integer, dbase.ForeignKey("stalls.stallID"), nullable=True)
 
-    def __init__(self, issued_by,or_no,sCharge, tenantID, stallID,month, amount,total,date_issued):
+    def __init__(self, issued_by,or_no,sCharge, tenantID, stallID,month, amount,total,date_issued,Remark):
         self.issued_by = issued_by
         self.or_no = or_no
-        # self.rent = rent
+        self.Remark = Remark
         self.sCharge = sCharge
         self.tenantID = tenantID
         self.stallID = stallID

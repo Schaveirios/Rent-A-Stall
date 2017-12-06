@@ -20,15 +20,6 @@
 					<th>Type</th>
 				</tr>
 			</thead>
-			<tfoot>
-				<tr>
-					<th>Stall Number</th>
-					<th>Location</th>
-					<th>Rate</th>
-					<th>Type</th>
-				</tr>
-			
-			</tfoot>
 			<tbody>
 				{% for res in result %}
 				<tr>
@@ -49,36 +40,37 @@
 			</tbody>
 		</table>
 	</div>
-    <script src="\static\js\jquery-3.2.1.min.js"></script>
+ <script src="\static\js\jquery-3.2.1.min.js"></script>
    	<script src="\static\js\jquery.dataTables.min.js"></script>	
 	<script src="\static\js\dataTables.bootstrap.min.js"></script>
-	<script type="\static\js\dataTables.buttons.min.js"></script>
-	<script type="\static\js\buttons.html5.min.js"></script>
-	<script type="\static\js\buttons.flash.min.js"></script>
-	<script type="\static\js\buttons.print.min.js"></script>
-	<script type="\static\js\jszip.min.js"></script>
-	<script type="\static\js\pdfmake.min.js"></script>
-	<script type="\static\js\buttons.html5.min.js"></script>
-	<script type="\static\js\vfs_fonts.js"></script>
-	<script type="\static\js\buttons.colVis.min.js"></script>
-	<script src="\static\js\jquery-1.12.4.min.js"></script>	
-    <script>
-    	$(document).ready(function() {
-    	var table = $('#myTable').dataTable( {
-        lengthChange: false,
-        buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
-    } );
-		table.buttons().container()
-        .appendTo( '#example_wrapper' );
-} );
-    </script>
+	<script src="\static\js\dataTables.buttons.min.js"></script>
+	<script src="\static\js\buttons.flash.min.js"></script>
+	<script src="\static\js\buttons.print.min.js"></script>
+	<script src="\static\js\buttons.html5.min.js"></script>
+	<script src="\static\js\pdfmake.min.js"></script>
+	<script src="\static\js\jszip.min.js"></script>
+	<script src="\static\js\vfs_fonts.min.js"></script>
 
+	
 	<script>
-
-
+	$(document).ready(function() {
+    $('#myTable').DataTable( {
+        dom: 'Blfrtip',
+        buttons: [
+            'copy', 
+            'csv', 
+            'excel', 
+            'print'
+         
+        ]
+    
+    } );
+    table.buttons().container()
+        .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
+} );
 		$('.form_container').css({'height':'unset', 'padding':'0% 2%', 'top':'12%'});
 		$('#myTable_filter').css({'position':'absolute','top':'-68px','left':'46%'});
-
 	</script>
+
 
 {% endblock %}

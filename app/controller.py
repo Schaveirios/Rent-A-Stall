@@ -17,7 +17,7 @@ now= datetime.datetime.now()
 datelog = str(now)
 
 
-img_folder = 'static/profile/'
+img_folder = 'app/static/profile/'
 available_extension = set(['png', 'jpg', 'PNG', 'JPG'])
 
 def allowed_file(filename):
@@ -467,17 +467,21 @@ def payment(id, s_id):
     typee = Types.query.filter_by(typeID=someNum.typeID).first()
     tenant_1 = Tenants.query.filter(and_(Tenants.tenantID==id, Tenants.stallID==someNum.stallID)).first()
 
+
+
+
     form = PaymentForm()
     if request.method=='POST' and form.validate_on_submit():
         uForms = Pays(month=form.month.data,
                         amount=form.amount.data,
-                         sCharge=form.sCharge.data,
-                         total=form.total.data ,
-                         or_no=form.or_no.data,
-                         date_issued=form.date_issued.data,
-                         issued_by=form.issued_by.data,
+                        sCharge=form.sCharge.data,
+                        total=form.total.data ,
+                        or_no=form.or_no.data,
+                        date_issued=form.date_issued.data,
+                        issued_by=form.issued_by.data,
                         tenantID = tenant_1.tenantID,
-                        stallID = someNum.stallID
+                        stallID = someNum.stallID,
+                        Remark = form.remark.data
                        )
 
         dbase.session.add(uForms)
