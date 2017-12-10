@@ -2,58 +2,76 @@
 
 {% block body %}
 
-<div class="form_container">
-    <div class="form_tag">
+
+    <div class="form_tag" style="left:2%; top:-17%;">
         Stall Form
     </div>
     <div class="container">
         <form method="POST">
             {{form.hidden_tag()}}
             <div class="row">
-                <div class="col-lg-2">
-                    <label class="form"  >Stall Type: <br/>
-                    {{ form.stalltype(placeholder = "Stall Type") }}
-                        <span class="help-inline">must be something chever</span>
-                        {% if form.stalltype.errors %}
-                    {% for error in form.stalltype.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-2">
-                    <label class="form"  >Stall#: <br>
-                    {{ form.stallno(placeholder = "Stall#") }} {% if form.stallno.errors %}
-                    {% for error in form.stallno.errors %} {{ error }} {% endfor %} {% endif %}</label>
-                </div>
-            </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="stalltype">Stall Type:</label> <br>
+                            {{ form.stalltype(placeholder = "Stall Type", class="form-control", id="stalltype") }}
+                                {% if form.stalltype.errors %}
+                                {% for error in form.stalltype.errors %}<span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}<br>
+                        <label for="stallno"  >Stall#: </label><br>
+                        {{ form.stallno(placeholder = "Stall#", class="form-control", id="stallno") }} {% if form.stallno.errors %}
+                        {% for error in form.stallno.errors %} <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br>
+                        <label for="stallloc"  >Stall Location: </label><br/>
+                        {{ form.stallloc(placeholder = "Stall Location", class="form-control", id="stallloc") }}
+                            {% if form.stallloc.errors %}
+                        {% for error in form.stallloc.errors %}  <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br>
+                         <label for="rate"  >Rate: </label><br>
+                        {{ form.rate(placeholder = "Rate", class="form-control", id="rate") }} {% if form.rate.errors %}
+                        {% for error in form.rate.errors %} <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br>
 
-            <div class="row">
-                <div class="col-lg-2">
-                    <label class="form"  >Stall Location: <br/>
-                    {{ form.stallloc(placeholder = "Stall Location") }}
-                        <span class="help-inline">must be something chever</span>
-                        {% if form.stallloc.errors %}
-                    {% for error in form.stallloc.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+                    </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-lg-2">
-                    <label class="form"  >Rate: <br/>
-                    {{ form.rate(placeholder = "Rate") }}
-                        <span class="help-inline">must be something chever</span>
-                        {% if form.rate.errors %}
-                    {% for error in form.rate.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
-                </div>
-            </div>
-
             <div class="row">
                 <div class="col-lg-2">
                     <br>{{ form.submit }}
                 </div>
             </div>
+                    <!--<label class="form"  >Stall Type: <br/>-->
+                    <!--{{ form.stalltype(placeholder = "Stall Type") }}-->
+                        <!--{% if form.stalltype.errors %}-->
+                    <!--{% for error in form.stalltype.errors %} <span class="help-inline"> {{ error }} </span> {% endfor %} {% endif %}<br></label>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+                <!--<div class="col-lg-2">-->
+                    <!--<label class="form"  >Stall#: <br>-->
+                    <!--{{ form.stallno(placeholder = "Stall#") }} {% if form.stallno.errors %}-->
+                    <!--{% for error in form.stallno.errors %}<span class="help-inline"> {{ error }} </span>{% endfor %} {% endif %}</label>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="row">-->
+                <!--<div class="col-lg-2">-->
+                    <!--<label class="form"  >Stall Location: <br/>-->
+                    <!--{{ form.stallloc(placeholder = "Stall Location") }}-->
+                        <!--{% if form.stallloc.errors %}-->
+                    <!--{% for error in form.stallloc.errors %}<span class="help-inline"> {{ error }} </span>{% endfor %} {% endif %}<br></label>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="row">-->
+                <!--<div class="col-lg-2">-->
+                    <!--<label class="form"  >Rate: <br/>-->
+                    <!--{{ form.rate(placeholder = "Rate") }}-->
+                        <!--{% if form.rate.errors %}-->
+                    <!--{% for error in form.rate.errors %}<span class="help-inline"> {{ error }} </span>{% endfor %} {% endif %}<br></label>-->
+                <!--</div>-->
+
+            <!--</div>-->
+
+
 
         </form>
     </div>
-</div>
+
 
 {% endblock %}

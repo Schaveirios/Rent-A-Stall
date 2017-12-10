@@ -10,11 +10,13 @@ body{
     left:0px;
 }
 
+
+
 #login_container{
     position:absolute;
     width:35%;
-    height:50%;
     left:33%;
+    height: 50%;
     top:20%;
     background-color:#bfbfbf;
     box-shadow: 0 10px 30px 0px;
@@ -30,15 +32,22 @@ body{
     border-radius:10px
 }
 
+#myTable3_filter input{
+    width:100%;
+}
+#myTable4_filter input{
+    width:100%;
+}
+
 .help-inline{
     color:red;
-    font-size:13px;
+    font-size:90%;
 }
 
 .form_tag{
     position:absolute;
-    top:-17%;
-    left:1%;
+    top:-6%;
+    left:3%;
     font-size: 55px
 }
 
@@ -46,7 +55,6 @@ body{
     z-index:1;
     position:absolute;
     width:75%;
-    height:60%;
     top:24%;
     left:12%;
     box-shadow:0 13px 20px 0px #bdbdbd;
@@ -63,26 +71,29 @@ body{
     left:-18%;
     top:0px;
     padding-top:52px;
-    background-color: #c52d2d;
+    background-color: #47a6b7;
 }
 
+.list-group-item{
+    text-decoration:none;
+    color:black;
+}
 
-
-.panel_button{
-    position:relative;
-    overflow:hidden;
-    padding-top:5px;
-    margin-bottom: 1px;
-    font-weight:strong;
-    font-size:25px;
-    text-align:center;
-    color: white;
-    background-color:#c15d5d;
-    height: 50px;
+#panel_button {
+    color:white;
+    font-weight: 200;
+    font-size: 115%;
+    background-color:#2a636d;
     -webkit-transition: background-color;
 }
-
-.panel_button:hover{
-    background-color: #7d6d6d;
+#panel_button:hover{
+    background-color: #398896;
 }
 
+.boxes div{
+    background-color: #5bc0de;
+    -webkit-transition: background-color;
+}
+.boxes div:hover{
+    background-color: #92dbf1;
+}
