@@ -1,0 +1,149 @@
+{% extends 'admin_layout.html' %}
+
+
+{% block body %}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="row">
+                        Tenant Name: {{ tenant.last_name }},{{ tenant.first_name }}&nbsp;{{ tenant.mid_name }}
+                    </div>
+                    <div class="row">
+                        Contact No.:
+                    </div>
+                    <div class="row">
+                        Address:
+                    </div>
+                    <div class="row">
+                        Stall#: {{ stall.stall_no }}
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        Stall Type: {{ stall.stall_type }}
+                    </div>
+                    <div class="row">
+                        Stall Location: {{ stall.stall_loc }}
+                    </div>
+                    <div class="row">
+                        Rate: {{ stall.stall_rate }}
+                    </div>
+                    <div class="row">
+                        Balance:
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">Panel Content</div>
+</div>
+
+    <!--<div class="form_tag" style="top:-29%;">-->
+        <!--Payment Logs-->
+    <!--</div>-->
+
+    <!--<div class="container" style="font-size:135%;">-->
+        <!--<div class="row">-->
+            <!--<div class="col-lg-6">-->
+                <!--Tenant Name: {{ tenant.last_name }},{{ tenant.first_name }}&nbsp;{{ tenant.mid_name }}-->
+            <!--</div>-->
+            <!--<div class="col-lg-6">-->
+                <!--Stall#: {{ stall.stall_no }}-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="row">-->
+            <!--<div class="col-lg-6">-->
+                <!--Stall Type: {{ typee.stall_type }}-->
+            <!--</div>-->
+            <!--<div class="col-lg-6">-->
+                <!--Rate: {{ stall.stall_rate }}-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="row">-->
+            <!--<div class="col-lg-6">-->
+                <!--Stall Location: {{ stall.stall_loc }}-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<a class="btn btn-primary" href="/payment/{{id}}/{{stall.stallID}}/">Add Payment</a>-->
+
+    <!--<div class="container" style="font-size:135%;">-->
+            <!---->
+                <!---->
+                    <!--<table  id="myTable" style="border:1px; border-collapse: collapse;">-->
+                        <!--<thead>-->
+                            <!--<th>Month</th>-->
+                            <!--<th>Amount</th>-->
+                            <!--<th>S.Charge</th>-->
+                            <!--<th>Total</th>-->
+                            <!--<th>OR#</th>-->
+                            <!--<th>Date Issued</th>-->
+                            <!--<th>Issued By:</th>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                        <!--{% for p in pays %}-->
+                        <!--<tr>-->
+                            <!--<td  style="width:1%;">-->
+                                    <!--{{ p.month }}-->
+                            <!--</td>-->
+                            <!--<td  style="width:1%;">-->
+                                    <!--{{ p.amount }}-->
+                            <!--</td>-->
+                            <!--<td  style="width:1%;">-->
+                                    <!--{{ p.sCharge }}-->
+                            <!--</td>-->
+                            <!--<td style="width:1%;">-->
+                                    <!--{{ p.total }}-->
+                            <!--</td>-->
+
+
+                            <!--<td style="width:1%;">-->
+                                    <!--{{ p.or_no }}-->
+                            <!--</td>-->
+                            <!--<td style="width:1%;">-->
+                                    <!--{{ p.date_issued }}-->
+                            <!--</td>-->
+                            <!--<td style="width:6%;">-->
+                                    <!--{{ p.issued_by }}-->
+                            <!--</td>-->
+
+                        <!--</tr>-->
+                        <!--{% endfor %}-->
+                    <!--</tbody>-->
+                    <!--</table>-->
+    <!---->
+    <!--</div>-->
+
+
+
+        <script src="\static\js\jquery-3.2.1.min.js"></script>
+    <script src="\static\js\jquery.dataTables.min.js"></script> 
+    <script src="\static\js\dataTables.bootstrap.min.js"></script>
+
+    <script>
+    $("#paneltoggle").attr("id","paneltoggle2");
+    $(".form_container").css({"left":"1%","height":"74%","width":"98%"});
+
+    $(document).ready(function(){
+        var a = 0;
+        $("#paneltoggle2").click(function(){
+            if(a==0){
+                $("#panel").animate({left: '0%'}, 300);
+                $("#flexible_form").animate({left: '22%', width: '73%'}, 300);
+                a=1;
+            }
+            else{
+                $("#panel").animate({left: '-18%'}, 300);
+                $("#flexible_form").animate({left: '4%', width: '91%'}, 300);
+                a=0;
+            }
+        });
+    });
+    $('#myTable').dataTable();
+</script>
+
+{% endblock %}

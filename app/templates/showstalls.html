@@ -1,0 +1,84 @@
+
+{% if current_user.roleID==1 %}
+{% extends 'admin_layout.html' %}
+{% else %}
+{% extends 'layout.html' %}
+{% endif %}
+{% block body %}
+
+
+		<h1  style="margin-bottom: 4%;">List of Stalls</h1>
+		
+		<table class="table table-striped table-bordered table-hover" id="myTable3">
+		
+					<div id="example_wrapper" class="dataTables_wrapper form-inline df-bootstrap"></div>
+			<thead>
+				<tr>
+					<th>Stall Number</th>
+					<th>Location</th>
+					<th>Rate</th>
+					<th>Type</th>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<th>Stall Number</th>
+					<th>Location</th>
+					<th>Rate</th>
+					<th>Type</th>
+				</tr>
+			
+			</tfoot>
+			<tbody>
+				{% for res in result %}
+				<tr>
+					<td>
+						{{ res.stall_no }}
+					</td>
+					<td>
+						{{ res.stall_loc }}
+					</td>
+					<td>
+						{{ res.stall_rate }}
+					</td>
+					<td>
+						{{ x[loop.index-1] }}
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+    <script src="\static\js\jquery-3.2.1.min.js"></script>
+   	<script src="\static\js\jquery.dataTables.min.js"></script>	
+	<script src="\static\js\dataTables.bootstrap.min.js"></script>
+	<script type="\static\js\dataTables.buttons.min.js"></script>
+	<script type="\static\js\buttons.html5.min.js"></script>
+	<script type="\static\js\buttons.flash.min.js"></script>
+	<script type="\static\js\buttons.print.min.js"></script>
+	<script type="\static\js\jszip.min.js"></script>
+	<script type="\static\js\pdfmake.min.js"></script>
+
+	<script type="\static\js\vfs_fonts.js"></script>
+	<script type="\static\js\buttons.colVis.min.js"></script>
+	<script src="\static\js\jquery-1.12.4.min.js"></script>	
+    <script>
+    	$(document).ready(function() {
+    	var table = $('#myTable3').dataTable( {
+        lengthChange: false,
+        buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
+    } );
+		table.buttons().container()
+        .appendTo( '#example_wrapper' );
+} );
+    </script>
+
+	<script>
+
+
+		$('.form_container').css({'height':'unset', 'padding':'0% 2%', 'top':'12%'});
+		$('#myTable_filter').css({'position':'absolute','top':'-68px','left':'46%'});
+
+	</script>
+
+{% endblock %}
