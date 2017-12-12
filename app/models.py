@@ -5,7 +5,16 @@ from app import app
 from flask_login import AnonymousUserMixin
 from sqlalchemy.orm import relationship
 from sqlalchemy import Integer, ForeignKey, String, Column
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 from datetime import datetime
+=======
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
 
 class Branch(dbase.Model):
     __tablename__ = "branch"
@@ -22,7 +31,19 @@ class Branch(dbase.Model):
 
     @staticmethod
     def branch_types():
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
         brLoc = ['Palao']
+=======
+        brLoc = ['Palao', 'Tambo', 'Central Market']
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+        brLoc = ['Palao', 'Tambo', 'Central Market']
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+        brLoc = ['Palao', 'Tambo', 'Central Market']
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
         for b in brLoc:
             loc = Branch.query.filter_by(branch_loc = b).first()
             if loc is None:
@@ -39,19 +60,44 @@ class Stalls(dbase.Model):
     stall_loc = dbase.Column(dbase.String(60))
     stall_status = dbase.Column(dbase.String(60))
     typeID = dbase.Column(dbase.Integer, dbase.ForeignKey("types.typeID"), nullable= False)
+<<<<<<< HEAD
     # branchID = dbase.Column(dbase.Integer, dbase.ForeignKey("branch.branchID"), nullable=False)
     t_stall_no = relationship("Tenants", backref="stallNO", lazy="dynamic" )
     def __init__ (self,stall_rate, stall_loc, stall_status, stall_no, typeID):
+=======
+    branchID = dbase.Column(dbase.Integer, dbase.ForeignKey("branch.branchID"), nullable=False)
+    t_stall_no = relationship("Tenants", backref="stallNO", lazy="dynamic" )
+    def __init__ (self,stall_rate, stall_loc, stall_status, branchID, stall_no, typeID):
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
         self.stall_rate =stall_rate
         self.stall_status = '0'
         self.stall_loc = stall_loc
         self.stall_no = stall_no
+<<<<<<< HEAD
         # self.branchID = branchID
+=======
+        self.branchID = branchID
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
         self.typeID = typeID
 
     def __repr__(self):
         return '<stall_rate{}>'.format(self.stall_rate)
         
+
+
+
 
 class Users(dbase.Model):
     __tablename__ ="users"
@@ -74,6 +120,54 @@ class Users(dbase.Model):
         self.last_name= last_name
         self.contact_no = contact_no
         # self.branchID = branchID
+
+
+    def is_authenticated(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def is_active(self):
+        return True
+
+    def getRole_id(self):
+        return self.roleID
+
+    def get_id(self):
+        return self.userID
+
+
+    def is_authenticated(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def is_active(self):
+        return True
+
+    def getRole_id(self):
+        return self.roleID
+
+    def get_id(self):
+        return self.userID
+
+
+    def is_authenticated(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def is_active(self):
+        return True
+
+    def getRole_id(self):
+        return self.roleID
+
+    def get_id(self):
+        return self.userID
 
 
     def is_authenticated(self):

@@ -1,5 +1,17 @@
 from flask_wtf import Form
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 from wtforms import StringField, PasswordField, validators, SubmitField, SelectField, IntegerField, DateField
+=======
+from wtforms import StringField, PasswordField, validators, SubmitField, SelectField, IntegerField
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+from wtforms import StringField, PasswordField, validators, SubmitField, SelectField, IntegerField
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+from wtforms import StringField, PasswordField, validators, SubmitField, SelectField, IntegerField
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms.validators import InputRequired,Length
 
@@ -15,8 +27,20 @@ class addtenants(Form):
     stallno = StringField('Stall Number',[validators.DataRequired(),validators.Length(min=1,max=20)])
     tenantphotoID = FileField('TenantphotoID')
     stallloc = StringField('Stall type',[validators.DataRequired(),validators.Length(max=20)])
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     datestarted = DateField('Date Started', format="%m/%d/%Y")
     #branch = StringField(u'branches',[validators.DataRequired(),validators.Length(max=10)])
+=======
+    branch = SelectField(u'branches', choices=[('1', 'Tambo'), ('2', 'Pala-o'), ('3', 'wet market')])
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+    branch = SelectField(u'branches', choices=[('1', 'Tambo'), ('2', 'Pala-o'), ('3', 'wet market')])
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+    branch = SelectField(u'branches', choices=[('1', 'Tambo'), ('2', 'Pala-o'), ('3', 'wet market')])
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
     submit = SubmitField("Submit")
     # status = RadioField('Approval Status',[validators.DataRequired()],choices=[('1','Approved'),('0','Pending')])
 
@@ -24,6 +48,9 @@ class addtenants(Form):
 
 class addstalls(Form):
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     stallno = StringField('stallno',[validators.DataRequired(),validators.Length(max=20)])
     stallloc = StringField('stallloc',[validators.DataRequired(),validators.Length(max=20)])
     rate = StringField('rate',[validators.DataRequired(),validators.length(max=20)])
@@ -32,6 +59,24 @@ class addstalls(Form):
 
 # class addclerk(Form):
 
+=======
+=======
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+    stallno = IntegerField('stallno',[validators.DataRequired(),validators.Length(max=20)])
+    stallloc = StringField('stallloc',[validators.DataRequired(),validators.Length(max=20)])
+    rate = IntegerField('rate',[validators.DataRequired(),validators.Length(max=20)])
+    Branchloc = StringField('Stall type',[validators.DataRequired(),validators.Length(max=20)])
+    stalltype = StringField('Stall type',[validators.DataRequired(),validators.Length(max=20)])
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+    submit = SubmitField("Add")
+
+# class addclerk(Form):
+
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
 #     uname = StringField('Username',[validators.DataRequired(),validators.Length(min=6,max=20)])
 #     fname = StringField('Firstname',[validators.DataRequired(),validators.Length(min=2,max=20)])
 #     mname = StringField('Middlename',[validators.DataRequired(),validators.Length(min=5,max=20)])
@@ -40,12 +85,17 @@ class addstalls(Form):
 #     ContNum = StringField('Contact Number', [validators.Length(min=10,max=50)])
 #     branchId = SelectField(u'branches', choices=[('1', 'Tambo'), ('2', 'Pala-o'), ('3', 'wet market')])
 #     submit = SubmitField("Add")
+<<<<<<< HEAD
 
 # class addbranch(Form):
 
 #     location = StringField('location',[validators.DataRequired(),validators.Length(min=6,max=20)])
 
 #     submit = SubmitField("Submit")
+=======
+
+class addbranch(Form):
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
 
 class LogIn(Form):
 
@@ -74,6 +124,41 @@ class PaymentForm(Form):
     issued_by = StringField('Issued By', validators=[InputRequired(), Length(min=4, max=64)])
     submit = SubmitField("Submit")
 
+<<<<<<< HEAD
+=======
+
+    submit = SubmitField("Add")
+
+# class addclerk(Form):
+
+#     uname = StringField('Username',[validators.DataRequired(),validators.Length(min=6,max=20)])
+#     fname = StringField('Firstname',[validators.DataRequired(),validators.Length(min=2,max=20)])
+#     mname = StringField('Middlename',[validators.DataRequired(),validators.Length(min=5,max=20)])
+#     lname = StringField('Lastname',[validators.DataRequired(),validators.Length(min=5,max=20)])
+#     password = PasswordField('Password', [validators.Length(min=10,max=50)])
+#     ContNum = StringField('Contact Number', [validators.Length(min=10,max=50)])
+#     branchId = SelectField(u'branches', choices=[('1', 'Tambo'), ('2', 'Pala-o'), ('3', 'wet market')])
+#     submit = SubmitField("Add")
+=======
+
+    submit = SubmitField("Add")
+
+# class addclerk(Form):
+
+#     uname = StringField('Username',[validators.DataRequired(),validators.Length(min=6,max=20)])
+#     fname = StringField('Firstname',[validators.DataRequired(),validators.Length(min=2,max=20)])
+#     mname = StringField('Middlename',[validators.DataRequired(),validators.Length(min=5,max=20)])
+#     lname = StringField('Lastname',[validators.DataRequired(),validators.Length(min=5,max=20)])
+#     password = PasswordField('Password', [validators.Length(min=10,max=50)])
+#     ContNum = StringField('Contact Number', [validators.Length(min=10,max=50)])
+#     branchId = SelectField(u'branches', choices=[('1', 'Tambo'), ('2', 'Pala-o'), ('3', 'wet market')])
+#     submit = SubmitField("Add")
+
+class addbranch(Form):
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+
+class addbranch(Form):
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
 
 class edit_tenant_form(Form):
 
@@ -84,3 +169,34 @@ class edit_tenant_form(Form):
     contnum = StringField('Contact Number', [validators.Length(min=11,max=11)])
     tenantphotoID = FileField('TenantphotoID')
     submit = SubmitField("Submit")
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+class LogIn(Form):
+
+    username = StringField('Username',[validators.DataRequired(),validators.Length(min=6,max=20)])
+    passwrd = PasswordField('Password ',[validators.DataRequired(),validators.Length(min=6,max=20)])
+
+    submit = SubmitField("Login")
+
+class RegisterForm(Form):
+    username = StringField('Username', validators=[InputRequired(), Length(min=4, max=15)])
+    password = PasswordField('Password', validators=[InputRequired(), Length(min=8, max=80)])
+    fname = StringField('First Name', validators=[InputRequired(), Length(min=3, max=15)])
+    mname =  StringField('Middle Name', validators=[InputRequired(), Length(min=4, max=15)])
+    lname =  StringField('Last Name', validators=[InputRequired(), Length(min=2, max=15)])
+    ContNum =  StringField('Contact Number', validators=[InputRequired(), Length(min=11, max=15)])
+    branchID = SelectField(u'branches', choices=[('1', 'Tambo'), ('2', 'Palao'), ('3', 'Central Market')])
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
