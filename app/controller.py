@@ -12,7 +12,10 @@ from PIL import Image
 import datetime
 import time
 import os
+# from VideoCapture import Device
 
+
+# cam = Device()
 now= datetime.datetime.now()
 datelog = str(now)
 
@@ -76,6 +79,7 @@ def AddTenants():
             TenantphotoID = form.tenantphotoID.data
             stallno1 = form.stallno.data
 
+            # TenantphotoID = cam
             stallType = form.stalltype.data
             type = Types.query.filter_by(stall_type=stallType).first()
 
@@ -118,7 +122,13 @@ def AddTenants():
 
                         profile_entry = ""
                         te = Tenants.query.all()
-                        TenantphotoID = img_folder + str(len(te))
+                        tee = []
+                        for et in te:
+                            tee.append(et.tenantID)
+
+                        storer = tee[len(tee)-1]
+                        print storer
+                        TenantphotoID = img_folder + str(storer)
                         if os.path.isdir(TenantphotoID) == False:
                             os.makedirs(TenantphotoID)
 
@@ -135,8 +145,9 @@ def AddTenants():
                                 os.rename(uploadFolder + filename, uploadFolder + nameNew)
                                 profile_entry = uploadFolder+nameNew
 
-                                t = Tenants.query.filter_by(tenantID=len(te)).first()
-                                t.tenant_photo = profile_entry
+                                t = Tenants.query.filter_by(tenantID=storer).first()
+                                #t.tenant_photo = profile_entry
+                                t.tenant_photo = 'static/profile/'+str(storer)+'/'+nameNew
                                 print profile_entry
                                 dbase.session.add(t)
                                 user = current_user
@@ -215,7 +226,13 @@ def AddTenants2():
 
                         profile_entry = ""
                         te = Tenants.query.all()
-                        TenantphotoID = img_folder + str(len(te))
+                        tee = []
+                        for et in te:
+                            tee.append(et.tenantID)
+
+                        storer = tee[len(tee)-1]
+                        print storer
+                        TenantphotoID = img_folder + str(storer)
                         if os.path.isdir(TenantphotoID) == False:
                             os.makedirs(TenantphotoID)
 
@@ -233,7 +250,8 @@ def AddTenants2():
                                 profile_entry = uploadFolder+nameNew
 
                                 t = Tenants.query.filter_by(tenantID=len(te)).first()
-                                t.tenant_photo = profile_entry
+                                #t.tenant_photo = profile_entry
+                                t.tenant_photo = 'static/profile/'+str(storer)+'/'+nameNew
                                 print profile_entry
                                 dbase.session.add(t)
                                 user = current_user
