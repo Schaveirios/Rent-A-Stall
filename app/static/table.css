@@ -20,8 +20,22 @@
 }
 
 .header-fixed > tbody {
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+   height: 120px;
+=======
     overflow-y: auto;
     height: 120px;
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+    overflow-y: auto;
+    height: 120px;
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
+=======
+    overflow-y: auto;
+    height: 120px;
+>>>>>>> 4c1cc099ebe8db15bb397ea19131ebf53fa4492a
 }
 
 .header-fixed > tbody > tr > td,
