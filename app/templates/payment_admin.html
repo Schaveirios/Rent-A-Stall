@@ -1,0 +1,126 @@
+{% extends 'admin_layout.html' %}
+
+
+{% block body %}
+
+
+    <div class="form_tag" style="top:-29%;">
+        Payment Form
+    </div>
+
+    <div id="tenantphoto" style="position: absolute; left:80%; top:5%; width: 15%; height: 45%;">
+        <div style="background-color:gray; width:100%; height: 75%;">
+        </div>
+    </div>
+
+    <div class="container" style="font-size:135%;">
+        <div class="row">
+            <div class="col-lg-6">
+                Tenant Name: {{ tenant.last_name }},{{ tenant.first_name }}&nbsp;{{ tenant.mid_name }}
+            </div>
+            <div class="col-lg-6">
+                Stall#: {{ stall.stall_no }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                Stall Type: {{ typee.stall_type }}
+            </div>
+            <div class="col-lg-6">
+                Rate: {{ stall.stall_rate }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                Stall Location: {{ stall.stall_loc }}
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="font-size:135%;">
+        <form method="POST">
+            {{form.hidden_tag()}}
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <table style="border:1px; border-collapse: collapse;">
+                        <tr>
+                            <th>Month</th>
+                            <th>Amount</th>
+                            <th>S.Charge</th>
+                            <th>Total</th>
+                            <th>OR#</th>
+                            <th>Date Issued</th>
+                            <th>Issued By:</th>
+                        </tr>
+                        <tr>
+                            <td  style="width:1%;">
+                                {{ form.month(placeholder = "month" ,style="width:100%;") }} {% if form.month.errors %}
+                                {% for error in form.month.errors %} {{ error }} {% endfor %} {% endif %}
+                            </td>
+                            <td  style="width:1%;">
+                                {{ form.amount(placeholder = "amount", style="width:100%;") }} {% if form.amount.errors %}
+                                {% for error in form.amount.errors %} {{ error }} {% endfor %} {% endif %}
+                            </td>
+                            <td  style="width:1%;">
+                                {{ form.sCharge(placeholder = "s.charge",style="width:100%;") }} {% if form.sCharge.errors %}
+                                {% for error in form.sCharge.errors %} {{ error }} {% endfor %} {% endif %}
+                            </td>
+                            <td style="width:1%;">
+                                {{ form.total(placeholder = "total", style="width:100%;") }} {% if form.total.errors %}
+                                {% for error in form.total.errors %} {{ error }} {% endfor %} {% endif %}
+                            </td>
+
+
+                            <td style="width:1%;">
+                                {{ form.or_no(placeholder = "OR#",style="width:100%;") }} {% if form.or_no.errors %}
+                                {% for error in form.or_no.errors %} {{ error }} {% endfor %} {% endif %}
+                            </td>
+                            <td style="width:1%;">
+                                {{ form.date_issued(placeholder = "mm/dd/yr",style="width:100%;") }} {% if form.date_issued.errors %}
+                                {% for error in form.date_issued.errors %} {{ error }} {% endfor %} {% endif %}
+                            </td>
+                            <td style="width:6%;">
+                                {{ form.issued_by(placeholder = "Issued by",style="width:53%;") }} {% if form.issued_by.errors %}
+                                {% for error in form.issued_by.errors %} {{ error }} {% endfor %} {% endif %}
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-2">
+                    <br>{{ form.submit }}
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+    $("#paneltoggle").attr("id","paneltoggle2");
+    $(".form_container").css({"left":"4%","height":"60%","width":"91%","overflow":"scroll"});
+
+    $(document).ready(function(){
+        var a = 0;
+        $("#paneltoggle2").click(function(){
+            if(a==0){
+                $("#panel").animate({left: '0%'}, 300);
+                $("#flex_form").animate({left: '22%', width: '73%'}, 300);
+                a=1;
+            }
+            else{
+                $("#panel").animate({left: '-18%'}, 300);
+                $("#flex_form").animate({left: '4%', width: '91%'}, 300);
+                a=0;
+            }
+        });
+    });
+    </script>
+
+    
+
+
+{% endblock %}
