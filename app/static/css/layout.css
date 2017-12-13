@@ -87,16 +87,3 @@ body{
     background-color: #7d6d6d;
 }
 
-.photo{
-   width: 400px;
-   background-color: #ccc;
-   border: 10px solid #ddd;
-   margin:0 auto;
-    width: 100%;
-    background-color: gray;
-    position:absolute;
-    left:75%;
-    top:8%;
-    width:20%;
-    height:65%;
-}

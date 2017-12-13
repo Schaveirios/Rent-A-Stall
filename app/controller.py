@@ -32,6 +32,22 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.anonymous_user = Anonymous
 
+def search_panel(cond):
+    if cond==1:
+        y = []
+        result2 = Stalls.query.order_by(Stalls.stall_no).all()#.paginate(1,11,True)
+        for r in result2:
+            type = Types.query.filter_by(typeID =r.typeID).first()
+            y.append(type.stall_type)
+        return result2, y
+
+    x = []
+    result = Tenants.query.order_by(Tenants.first_name).all()#.paginate(1,2,True)
+    for r in result:
+      stall = Stalls.query.filter_by(stallID=r.stallID).first()
+      x.append(stall.stall_no)
+    return result, x
+
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
@@ -42,7 +58,8 @@ def load_user(user_id):
 @login_required
 @required_roles(2)
 def index():
-    return render_template("dashboard.html")
+    return render_template("dashboard.html", result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
+
 
 
 @app.route("/admin_dashboard", methods=["GET"])
@@ -50,15 +67,14 @@ def index():
 @login_required
 @required_roles(1)
 def index2():
-    return render_template("admin_dashboard.html")    
-
+    return render_template("admin_dashboard.html", result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
 
 @app.route("/successadd1", methods=["POST", "GET"])
 @app.route("/successadd1/", methods=["POST", "GET"])
 @login_required
 @required_roles(1,2)
 def added():
-    return render_template("successadd1.html")
+    return render_template("successadd1.html", result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
 
 @app.route("/AddTenants", methods=["POST", "GET"])
 @app.route("/AddTenants/", methods=["POST", "GET"])
@@ -66,7 +82,20 @@ def added():
 @required_roles(1, 2)
 def AddTenants():
     form = addtenants()
-    availstalls = Stalls.query.filter_by(stall_status= '0')
+    #availstalls = Stalls.query.filter_by(stall_status= '0').all()
+
+    availstalls_y = []
+    availstalls = Stalls.query.filter_by(stall_status= '0').all()#.paginate(1,11,True)
+    for r in availstalls:
+        type = Types.query.filter_by(typeID =r.typeID).first()
+        availstalls_y.append(type.stall_type)
+
+    x = []
+    result = Tenants.query.order_by(Tenants.first_name).all()#.paginate(1,2,True)
+    for r in result:
+      stall = Stalls.query.filter_by(stallID=r.stallID).first()
+      x.append(stall.stall_no)
+
     if request.method == "POST":
         if form.validate_on_submit():
             print "naaaaaa diiriiii"
@@ -118,7 +147,7 @@ def AddTenants():
                             dbase.session.add(tenantForm)
                             dbase.session.commit()
                         else:
-                            return render_template("addtenant.html", form1=form, availstalls = availstalls)
+                            return render_template("addtenant.html", form1=form, availstalls = availstalls, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
 
                         profile_entry = ""
                         te = Tenants.query.all()
@@ -157,12 +186,12 @@ def AddTenants():
                                                     log_date = lgdate)
                                 dbase.session.add(logmessage)
                                 dbase.session.commit()
-                        return render_template("successadd1.html")
+                        return render_template("successadd1.html", result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
                     else:
                         flash('Stall is not available in the given branch')
             else:
                 flash("Stall not found")
-    return render_template("addtenant.html", form1=form, availstalls = availstalls)
+    return render_template("addtenant.html", form1=form, availstalls = availstalls, availstalls_y=availstalls_y, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
 
 
 @app.route("/AddTenants2", methods=["POST", "GET"])
@@ -171,7 +200,20 @@ def AddTenants():
 @required_roles(1, 2)
 def AddTenants2():
     form = addtenants()
-    availstalls = Stalls.query.filter_by(stall_status= '0')
+    availstalls = Stalls.query.filter_by(stall_status= '0').all()
+
+    y = []
+    result2 = Stalls.query.order_by(Stalls.stall_no).all()#.paginate(1,11,True)
+    for r in result2:
+        type = Types.query.filter_by(typeID =r.typeID).first()
+        y.append(type.stall_type)
+
+    x = []
+    result = Tenants.query.order_by(Tenants.first_name).all()#.paginate(1,2,True)
+    for r in result:
+      stall = Stalls.query.filter_by(stallID=r.stallID).first()
+      x.append(stall.stall_no)
+
     if request.method == "POST":
         if form.validate_on_submit():
             print "naaaaaa diiriiii"
@@ -222,7 +264,7 @@ def AddTenants2():
                             dbase.session.add(tenantForm)
                             dbase.session.commit()
                         else:
-                            return render_template("clerk_addtenant.html", form1=form, availstalls = availstalls)
+                            return render_template("clerk_addtenant.html", form1=form, availstalls = availstalls, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
 
                         profile_entry = ""
                         te = Tenants.query.all()
@@ -261,12 +303,12 @@ def AddTenants2():
                                                     log_date = lgdate)
                                 dbase.session.add(logmessage)
                                 dbase.session.commit()
-                        return render_template("successadd.html")
+                        return render_template("successadd.html", result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
                     else:
                         flash('Stall is not available in the given branch')
             else:
                 flash("Stall not found")
-    return render_template("clerk_addtenant.html", form1=form, availstalls = availstalls)
+    return render_template("clerk_addtenant.html", form1=form, availstalls = availstalls, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
 
 @app.route("/AddStalls", methods=["POST", "GET"])
 @app.route("/AddStalls/", methods=["POST", "GET"])
@@ -310,8 +352,8 @@ def AddStalls():
                                         log_date = lgdate)
                 dbase.session.add(logmessage)
                 dbase.session.commit()
-                return render_template("successadd1.html")
-    return render_template("addstall.html", form=form)
+                return render_template("successadd1.html", result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
+    return render_template("addstall.html", form=form, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
 
 
 
@@ -346,8 +388,8 @@ def AddClerk():
                                     log_date = lgdate)
                 dbase.session.add(logmessage)
                 dbase.session.commit()
-                return render_template('successadd1.html')
-    return render_template("addclerk.html", form=form)
+                return render_template('successadd1.html', result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
+    return render_template("addclerk.html", form=form, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -430,15 +472,13 @@ def tenantslist():
                       log_date=lgdate)
     dbase.session.add(logmessage)
     dbase.session.commit()
-    x = []  
-    result = Tenants.query.order_by(Tenants.first_name).all()#.paginate(1,2,True)
-    for r in result:        
+    x1 = []  
+    result_tenants = Tenants.query.order_by(Tenants.first_name).all()#.paginate(1,2,True)
+    for r in result_tenants:        
       stall = Stalls.query.filter_by(stallID=r.stallID).first()
-      x.append(stall.stall_no)
+      x1.append(stall.stall_no)
 
-    #x = len(Tenants.query.order_by(Tenants.first_name).all())
-    return render_template('showtenants.html',result=result, x=x)# , stry=pageFormula(x, 11))
-    # return jsonify({'firstname':firstname, 'middlename':middlename, 'lastname':lastname})
+    return render_template('showtenants.html',result_tenants=result_tenants, x1=x1, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
 
 @app.route('/showstalls', methods=["GET", "POST"])
 @app.route('/showstalls/', methods=["GET", "POST"])
@@ -453,12 +493,12 @@ def stalllist():
                       log_date=lgdate)
     dbase.session.add(logmessage)
     dbase.session.commit()
-    x = []
-    result = Stalls.query.order_by(Stalls.stall_no).all()#.paginate(1,11,True)
-    for r in result:
+    x1 = []
+    result_stall = Stalls.query.order_by(Stalls.stall_no).all()#.paginate(1,11,True)
+    for r in result_stall:
         tayp = Types.query.filter_by(typeID =r.typeID).first()
-        x.append(tayp.stall_type)
-    return render_template('showstalls.html', result=result, x=x)
+        x1.append(tayp.stall_type)
+    return render_template('showstalls.html', result_stall=result_stall, x1=x1, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
 
 
 @app.route('/logs', methods=["GET", "POST"])
@@ -475,7 +515,7 @@ def logs():
     dbase.session.add(logmessage)
     dbase.session.commit()
     showlogs = Logs.query.all()
-    return render_template('logs.html', showlogs=showlogs)
+    return render_template('logs.html', showlogs=showlogs, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
 
 @app.route('/payment/<int:id>/<int:s_id>/', methods=["GET", "POST"])
 @login_required
@@ -484,9 +524,6 @@ def payment(id, s_id):
     someNum = Stalls.query.filter_by(stallID=s_id).first()
     typee = Types.query.filter_by(typeID=someNum.typeID).first()
     tenant_1 = Tenants.query.filter(and_(Tenants.tenantID==id, Tenants.stallID==someNum.stallID)).first()
-
-
-
 
     form = PaymentForm()
     if request.method=='POST' and form.validate_on_submit():
@@ -506,8 +543,8 @@ def payment(id, s_id):
         dbase.session.commit()
         return redirect(url_for("paymenttable", id=id, s_id=s_id))
     if current_user.roleID == 1:
-        return render_template("payment_admin.html", form=form, tenant=tenant_1, stall=someNum, typee=typee)
-    return render_template("payment.html", form=form, tenant=tenant_1, stall=someNum, typee=typee)
+        return render_template("payment_admin.html", form=form, tenant=tenant_1, stall=someNum, typee=typee, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
+    return render_template("payment.html", form=form, tenant=tenant_1, stall=someNum, typee=typee,result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
 
 
 @app.route('/payment_table/<int:id>/<int:s_id>/', methods = ["GET", "POST"])
@@ -520,6 +557,6 @@ def paymenttable(id, s_id):
     typee = Types.query.filter_by(typeID=someNum.typeID).first()
 
     if current_user.roleID == 1:
-        return render_template('paymenttable_admin.html', pays=pays, id=id, s_id=s_id, stall=someNum, typee=typee, tenant=tenant_1)
-    return render_template('paymenttable.html', pays=pays, id=id, s_id=s_id, stall=someNum, typee=typee, tenant=tenant_1)
+        return render_template('paymenttable_admin.html', pays=pays, id=id, s_id=s_id, stall=someNum, typee=typee, tenant=tenant_1, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
+    return render_template('paymenttable.html', pays=pays, id=id, s_id=s_id, stall=someNum, typee=typee, tenant=tenant_1, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
 

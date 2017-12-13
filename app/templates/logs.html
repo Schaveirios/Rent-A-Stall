@@ -3,29 +3,29 @@
 
 
 		<h1  style="margin-bottom: 4%;">Logs</h1>
-		<table class="table table-striped table-bordered table-hover" id="myTable">
+		<table class="table table-striped table-bordered table-hover" id="myTable_1">
 			<thead>
 				<tr>
-					<th>Date and Time</th>
 					<th>Details</th>
+					<th>Date and Time</th>
 
 				</tr>
 			</thead>
-			<tfoot>
-				<tr>
-					<th>Date and Time</th>
-					<th>Details</th>
-				</tr>
-			
-			</tfoot>
+			<!--<tfoot>-->
+				<!--<tr>-->
+					<!--<th>Details</th>-->
+					<!--<th>Date and Time</th>-->
+				<!--</tr>-->
+			<!---->
+			<!--</tfoot>-->
 			<tbody>
 				{% for res in showlogs %}
 				<tr>
 					<td>
-						{{ res.log_date }}
+						{{ res.details }}
 					</td>
 					<td>
-						{{ res.details }}
+						{{ res.log_date }}
 					</td>
 				</tr>
 				{% endfor %}
@@ -37,7 +37,7 @@
    	<script src="\static\js\jquery.dataTables.min.js"></script>	
 	<script src="\static\js\dataTables.bootstrap.min.js"></script>
 	<script>
-		$('#myTable').dataTable();
+		$('#myTable_1').dataTable();
 		$('.form_container').css({'height':'unset', 'padding':'0% 2%', 'top':'12%'});
 		$('#myTable_filter').css({'position':'absolute','top':'-68px','left':'46%'});
 	</script>
