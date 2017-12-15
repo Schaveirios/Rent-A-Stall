@@ -6,26 +6,26 @@
 		<table class="table table-striped table-bordered table-hover" id="myTable">
 			<thead>
 				<tr>
-					<th>Details</th>
 					<th>Date and Time</th>
+					<th>Details</th>
 
 				</tr>
 			</thead>
-			<!--<tfoot>-->
-				<!--<tr>-->
-					<!--<th>Details</th>-->
-					<!--<th>Date and Time</th>-->
-				<!--</tr>-->
-			<!---->
-			<!--</tfoot>-->
+			<tfoot>
+				<tr>
+					<th>Date and Time</th>
+					<th>Details</th>
+				</tr>
+			
+			</tfoot>
 			<tbody>
 				{% for res in showlogs %}
 				<tr>
 					<td>
-						{{ res.details }}
+						{{ res.log_date }}
 					</td>
 					<td>
-						{{ res.log_date }}
+						{{ res.details }}
 					</td>
 				</tr>
 				{% endfor %}

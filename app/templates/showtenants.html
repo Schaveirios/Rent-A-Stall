@@ -14,6 +14,8 @@
 					<th>Name</th>
 					<!--<th>Middle Name</th>-->
 					<!--<th>Last Name</th>-->
+					<th>Contact Number</th>
+					<th>Address</th>
 					<th>Stall Number</th>
 					<th>Status</th>
 					<th>Action</th>
@@ -33,7 +35,7 @@
 				{% for res in result %}
 				<tr>
 					<td>
-						<a href = "/payment_table/{{res.tenantID}}/{{res.stallID}}">{{ res.last_name }} , {{ res.first_name }} &nbsp; {{ res.mid_name }} </a>
+						<a href = "/payment_table/{{res.tenantID}}/{{res.stallID}}">{{ res.last_name }} , {{ res.first_name }} &nbsp;{{ res.mid_name }} </a>
 					</td>
 					<!--<td>-->
 						<!--{{ res.mid_name }}-->
@@ -42,29 +44,61 @@
 						<!--{{ res.last_name }}-->
 					<!--</td>-->
 					<td>
+						{{ res.contact_no }}
+					</td>
+					<td>
+						{{ res.present_addr }}
+					</td>
+
+					<td>
 						{{ x[loop.index-1] }}
 					</td>
 					<td>
 						lalalalaala
 					</td>
 					<td>
-						&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> &nbsp;&nbsp;
-						<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;
-						<span class="glyphicon glyphicon-usd"></span>
+						&nbsp;&nbsp;
+
+						<button type="button" class="btn btn-primary">
+							<a href="/edit_tenant/{{res.tenantID}}/{{res.stallID}}" data-toggle="tooltip" data-placement="top" title="Edit Tenant">
+								<span class="glyphicon glyphicon-edit" style="color:white;"></span>
+							</a>
+						</button>
+
+
+
+						&nbsp;&nbsp;
+						<button type="button" class="btn btn-success">
+							<a href="/payment_table/{{res.tenantID}}/{{res.stallID}}" data-toggle="tooltip" data-placement="top" title="Add payment">
+								<span class="glyphicon glyphicon-usd" style="color: white;"></span>
+							</a>
+						</button>
+
+						&nbsp;
+
+						<button type="button" class="btn btn-danger">
+							<a href="#" data-toggle="tooltip" data-placement="top" title="Remove Tenant">
+								<span class="glyphicon glyphicon-remove" style="color: white;"></span>
+							</a>
+						</button>
+
 					</td>
 				</tr>
 				{% endfor %}
 			</tbody>
 		</table>
 	</div>
-    
-    <script src="\static\js\jquery-3.2.1.min.js"></script>
-   	<script src="\static\js\jquery.dataTables.min.js"></script>	
-	<script src="\static\js\dataTables.bootstrap.min.js"></script>
-	<script>
-		$('#myTable1').dataTable();
-		$('.form_container').css({'height':'unset', 'padding':'0% 2%', 'top':'12%'});
 
-	</script>
+<script src="\static\js\jquery-3.2.1.min.js"></script>
+<script src="\static\js\jquery.dataTables.min.js"></script>
+<script src="\static\js\dataTables.bootstrap.min.js"></script>
+<script>
+	$('#myTable1').dataTable();
+	$('.form_container').css({'height':'unset', 'padding':'0% 2%', 'top':'12%', 'width':'90%','left':'5%'});
+	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+</script>
+
 
 {% endblock %}

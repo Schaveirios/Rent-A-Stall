@@ -1,126 +1,264 @@
-{% extends 'layout.html' %}
+{% extends 'admin_layout.html' %}
 
 
 {% block body %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                Tenant Profile
+            </div>
+            <div class="panel-body">
 
+                <div class="container" id="selecta">
+                    <div class="row">
+                        <div style="position:absolute; width:9%; height:52%; left:3%; top:30%; background-color:gray;">
+                            <!--&nbsp;-->
+                        </div>
+                        <div class="col-lg-2" style="width:10%;">
+                            <div style="width:100%;height:100%;">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="row">
+                                Tenant Name:
+                            </div>
+                            <div class="row">
+                                Contact No.:
+                            </div>
+                            <div class="row">
+                                Address:
+                            </div>
+                            <div class="row">
+                                Stall#:
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="row">
+                                Stall Type:
+                            </div>
+                            <div class="row">
+                                Stall Location:
+                            </div>
+                            <div class="row">
+                                Rate:
+                            </div>
+                            <div class="row">
+                                Balance:
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="form_tag" style="top:2%; font-size:250%;">
-        Payment Form
-    </div>
-
-    <div id="tenantphoto" style="position: absolute; left:80%; top:5%; width: 15%; height: 45%;">
-        <div style="background-color:gray; width:100%; height: 75%;">
+            </div>
         </div>
     </div>
+</div>
 
-    <div class="container" style="font-size:135%;">
+
+
+<div class="row">
+
+    <div class="col-lg-4">
         <div class="row">
-            <div class="col-lg-6">
-                Tenant Name: {{ tenant.last_name }},{{ tenant.first_name }}&nbsp;{{ tenant.mid_name }}
-            </div>
-            <div class="col-lg-6">
-                Stall#: {{ stall.stall_no }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                Stall Type: {{ typee.stall_type }}
-            </div>
-            <div class="col-lg-6">
-                Rate: {{ stall.stall_rate }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                Stall Location: {{ stall.stall_loc }}
-            </div>
-        </div>
-    </div>
-
-    <div class="container" style="font-size:135%;">
-        <form method="POST">
-            {{form.hidden_tag()}}
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <table style="border:1px; border-collapse: collapse;">
-                        <tr>
-                            <th>Month</th>
-                            <th>Amount</th>
-                            <th>S.Charge</th>
-                            <th>Total</th>
-                            <th>OR#</th>
-                            <th>Date Issued</th>
-                            <th>Issued By:</th>
-                        </tr>
-                        <tr>
-                            <td  style="width:1%;">
-                                {{ form.month(placeholder = "month" ,style="width:100%;") }} {% if form.month.errors %}
-                                {% for error in form.month.errors %} {{ error }} {% endfor %} {% endif %}
-                            </td>
-                            <td  style="width:1%;">
-                                {{ form.amount(placeholder = "amount", style="width:100%;") }} {% if form.amount.errors %}
-                                {% for error in form.amount.errors %} {{ error }} {% endfor %} {% endif %}
-                            </td>
-                            <td  style="width:1%;">
-                                {{ form.sCharge(placeholder = "s.charge",style="width:100%;") }} {% if form.sCharge.errors %}
-                                {% for error in form.sCharge.errors %} {{ error }} {% endfor %} {% endif %}
-                            </td>
-                            <td style="width:1%;">
-                                {{ form.total(placeholder = "total", style="width:100%;") }} {% if form.total.errors %}
-                                {% for error in form.total.errors %} {{ error }} {% endfor %} {% endif %}
-                            </td>
+            <div class="col-lg-12" style="margin-left:1%;">
+                <div style="width:100%;top:0%;left:0%;box-shadow:0 0px 5px 0px #bdbdbd;background-color:#f0f0f0;padding: 2% 7%;">
 
 
-                            <td style="width:1%;">
-                                {{ form.or_no(placeholder = "OR#",style="width:100%;") }} {% if form.or_no.errors %}
-                                {% for error in form.or_no.errors %} {{ error }} {% endfor %} {% endif %}
-                            </td>
-                            <td style="width:1%;">
-                                {{ form.date_issued(placeholder = "mm/dd/yr",style="width:100%;") }} {% if form.date_issued.errors %}
-                                {% for error in form.date_issued.errors %} {{ error }} {% endfor %} {% endif %}
-                            </td>
-                            <td style="width:6%;">
-                                {{ form.issued_by(placeholder = "Issued by",style="width:53%;") }} {% if form.issued_by.errors %}
-                                {% for error in form.issued_by.errors %} {{ error }} {% endfor %} {% endif %}
-                            </td>
+                        <div class="row" style="text-align:center; font-size:200%;">
+                            Add Payment
+                        </div>
+                        <div class="form-group" id="payment">
+                            {{form.hidden_tag()}}
+                                <div class="row" style="margin-bottom:2%;">
+                                    <!--<label for="month" >Month: </label>-->
+                                    <!--{{ form.month(placeholder = "month", class="form-control") }} {% if form.month.errors %}-->
+                                    <!--{% for error in form.month.errors %} <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}-->
+                                     <!--<span class="help-inline">Form required chuchu chever chever</span>-->
+                                    <label for="month">Month:</label><br/>
+                                    {{form.month(class="btn btn-info", id="month")}}
+                                </div>
+                                <div class="row">
+                                    <label for="amount" >Amount: </label>
+                                    {{ form.amount(placeholder = "amount", class="form-control", id="amount") }} {% if form.amount.errors %}
+                                    {% for error in form.amount.errors %} <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}
+                                </div>
+                                <div class="row">
+                                    <label for="sCharge" >Service Charge: </label>
+                                    {{ form.sCharge(placeholder = "Service Charge", class="form-control", id="scharge") }} {% if form.sCharge.errors %}
+                                    {% for error in form.sCharge.errors %} <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}
+                                </div>
+                                <div class="row">
+                                    <label for="total" >Total: </label>
+                                    {{ form.total(placeholder = "Total", class="form-control", id="total") }} {% if form.total.errors %}
+                                    {% for error in form.total.errors %} <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}
+                                </div>
+                                <div class="row">
+                                    <label for="or_no" >OR#: </label>
+                                    {{ form.or_no(placeholder = "OR#", class="form-control", id="or_no") }} {% if form.or_no.errors %}
+                                    {% for error in form.or_no.errors %} <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}
+                                </div>
+                                <div class="row">
+                                    <label for="date_issued" >date issued: </label>
+                                    {{ form.date_issued(placeholder = "date issued", class="form-control", id="date_issued") }} {% if form.date_issued.errors %}
+                                    {% for error in form.date_issued.errors %} <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}
+                                </div>
+                                <div class="row">
+                                    <label for="issued_by" >Issued By: </label>
+                                    {{ form.issued_by(placeholder = "Issued by", class="form-control", id="issued_by") }} {% if form.issued_by.errors %}
+                                    {% for error in form.issued_by.errors %} <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}
+                                </div>
+                                <!--<div class="row">-->
+                                    <!--<label for="remark">Remark: </label>-->
+                                    <!--{{ form.remark(class="btn btn-success") }}-->
+                                <!--</div>-->
+                                <div class="row">
+                                    <br><button class="btn btn-primary" onclick="pay_tenant()">Submit</button>
+                                </div>
+                        </div>
 
-                        </tr>
-                    </table>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-lg-2">
-                    <br>{{ form.submit }}
-                </div>
-            </div>
-
-        </form>
+        </div>
     </div>
 
-    <script>
-    $("#paneltoggle").attr("id","paneltoggle2");
-    $(".form_container").css({"left":"4%","height":"60%","width":"91%","overflow":"scroll", "padding-top":"6%","top":"14%"});
 
-    $(document).ready(function(){
-        var a = 0;
-        $("#paneltoggle2").click(function(){
-            if(a==0){
-                $("#panel").animate({left: '0%'}, 300);
-                $("#flex_form").animate({left: '22%', width: '73%'}, 300);
-                a=1;
-            }
-            else{
-                $("#panel").animate({left: '-18%'}, 300);
-                $("#flex_form").animate({left: '4%', width: '91%'}, 300);
-                a=0;
-            }
+    <div class="col-lg-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                List of Tenants
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-striped table-bordered table-hover" id="myTable1">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Stall Number</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Stall Number</th>
+                        </tr>
+
+                    </tfoot>
+                    <tbody>
+                        {% for res in result %}
+                        <tr>
+                            <td>
+                                <a onclick="select_tenant({{ res.tenantID }}, {{ res.stallID }})">{{ res.first_name }} &nbsp; {{ res.mid_name }} &nbsp; {{ res.last_name }} </a>
+                            </td>
+                            <td>
+                                {{ x[loop.index-1] }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% block scripts %}
+<script>
+    $('#myTable1').dataTable();
+
+var  glob_tenant_id, glob_stall_id;
+
+function render_tenant(tn, cn, add, sn, st, sl, ra, bal){
+    return         '<div class="row">'+
+                        '<div style="position:absolute; width:9%; height:52%; left:3%; top:30%; background-color:gray;">'+
+
+                        '</div>'+
+                        '<div class="col-lg-2" style="width:10%;">'+
+                            '<div style="width:100%;height:100%;">'+
+                                '&nbsp;'+
+                            '</div>'+
+                        '</div>'+
+                        '<div class="col-lg-4">'+
+                            '<div class="row">'+
+                                'Tenant Name:'+tn+
+                            '</div>'+
+                            '<div class="row">'+
+                                'Contact No.:'+cn+
+                            '</div>'+
+                            '<div class="row">'+
+                                'Address:'+add+
+                            '</div>'+
+                            '<div class="row">'+
+                                'Stall#:'+sn+
+                            '</div>'+
+                        '</div>'+
+                        '<div class="col-lg-4">'+
+                            '<div class="row">'+
+                                'Stall Type:'+st+
+                            '</div>'+
+                            '<div class="row">'+
+                                'Stall Location:'+sl+
+                            '</div>'+
+                            '<div class="row">'+
+                                'Rate:'+ra+
+                            '</div>'+
+                            '<div class="row">'+
+                                'Balance:'+bal+
+                            '</div>'+
+                        '</div>'+
+                        '</div>';
+}
+function select_tenant(tenant_id, stall_id){
+      $.getJSON('/alternate/payment', {
+              tenant_id : tenant_id,
+              stall_id : stall_id
+            }, function(data) {
+            glob_tenant_id=tenant_id;
+            glob_stall_id = stall_id;
+            console.log(glob_tenant_id);
+            console.log(glob_stall_id);
+
+            $('#selecta').html("");
+              var stringRes = "";
+              stringRes = render_tenant(JSON.stringify(data.name), JSON.stringify(data.cnum), JSON.stringify(data.addr), JSON.stringify(data.stallnum), JSON.stringify(data.stalltype), JSON.stringify(data.stallloc), JSON.stringify(data.rate), JSON.stringify(data.balance));
+            $('#selecta').append(stringRes);
+
+
         });
-    });
+        return false;
+}
 
-    </script>
-    
+
+function pay_tenant(){
+      $.getJSON('/alternate/payment/transac', {
+              tenant_id : glob_tenant_id,
+              stall_id : glob_stall_id,
+              month: $('#month').val(),
+              amount: $('#amount').val(),
+              scharge: $('#scharge').val(),
+              total: $('#total').val(),
+              or_no: $('#or_no').val(),
+              date_issued: $('#date_issued').val(),
+              issued_by: $('#issued_by').val(),
+            }, function(data) {
+                alert(data.msg);
+              $('#amount').val('');
+              $('#scharge').val('');
+              $('#total').val('');
+              $('#or_no').val('');
+              $('#date_issued').val('');
+              $('#issued_by').val('');
+        });
+        return false;
+}
+</script>
+{% endblock %}
+<script>
+    $(".form_container").css({"top":"9%","left":"1%","height":"74%","width":"98%","box-shadow":"unset","background-color":"unset"});
+</script>
 
 
 {% endblock %}

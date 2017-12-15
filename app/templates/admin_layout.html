@@ -394,7 +394,10 @@
 <script src="\static\js\dataTables.bootstrap.min.js"></script>
 <script>
     $('#myTable').dataTable();
+    $('#myTable2').dataTable();
 </script>
+{% block scripts %}
+{% endblock %}
 
 <script type="\static\js\dataTables.buttons.min.js"></script>
 <script type="\static\js\buttons.html5.min.js"></script>
@@ -405,16 +408,9 @@
 
 <script type="\static\js\vfs_fonts.js"></script>
 <script type="\static\js\buttons.colVis.min.js"></script>
-<script src="\static\js\jquery-1.12.4.min.js"></script>
+
     <script>
     	$(document).ready(function() {
-    	var table = $('#myTable2').dataTable( {
-        lengthChange: false,
-        buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
-    } );
-		table.buttons().container()
-        .appendTo( '#example_wrapper' );
-} );
     </script>
 
 	<!--<script>-->
@@ -424,7 +420,6 @@
 		<!--$('#myTable_filter').css({'position':'absolute','top':'-68px','left':'46%'});-->
 
 	<!--</script>-->
-
 
 
 </body>
