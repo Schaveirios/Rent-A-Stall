@@ -198,11 +198,21 @@
 </div>
 
   
-
-
-        <script src="\static\js\jquery-3.2.1.min.js"></script>
-    <script src="\static\js\jquery.dataTables.min.js"></script> 
+   <script src="\static\js\jquery-3.2.1.min.js"></script> 
     <script src="\static\js\dataTables.bootstrap.min.js"></script>
+
+    <script src="\static\js\jquery.dataTables.min.js"></script> 
+    <script src="\static\js\dataTables.buttons.min.js"></script>
+    <script src="\static\js\buttons.flash.min.js"></script>
+    <script src="\static\js\buttons.print.min.js"></script>
+    <script src="\static\js\buttons.html5.min.js"></script>
+    <script src="\static\js\pdfmake.min.js"></script>
+    <script src="\static\js\jszip.min.js"></script>
+    <script src="\static\js\vfs_fonts.min.js"></script>
+
+
+
+     
 
     <script>
     $(".form-control").css({"margin-bottom":"1%"});
@@ -227,7 +237,30 @@
     </script>
 
     <script>
-        $('#myTable_main').dataTable();
+    //     $('#myTable_main').dataTable({
+    //               dom: 'Blfrtip',
+    //     buttons: [
+    //   {
+    //     extend: 'collection',
+    //     text: 'Export',
+    //     buttons: [
+    //       'copy',
+    //       'excel',
+    //       'csv',
+    //       'pdf',
+    //       'print'
+    //     ]
+    //   }         
+    // ]
+    
+    //     });
+    $('#myTable_main').DataTable( {
+        dom: 'Blfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'print'
+        ]
+    } );
+
     </script>
 
 {% endblock %}

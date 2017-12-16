@@ -56,24 +56,9 @@
 	<script>
 	$(document).ready(function() {
     $('#myTable3').DataTable( {
-        dom: 'Blfrtip',
-        buttons: [
-      {
-        extend: 'collection',
-        text: 'Export',
-        buttons: [
-          'copy',
-          'excel',
-          'csv',
-          'pdf',
-          'print'
-        ]
-      }         
-    ]
-    
+  
     } );
-    table.buttons().container()
-        .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
+
 } );
 		$('.form_container').css({'height':'unset', 'padding':'0% 2%', 'top':'12%'});
 		$('#myTable_filter').css({'position':'absolute','top':'-68px','left':'46%'});
