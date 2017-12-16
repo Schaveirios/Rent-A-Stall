@@ -1,0 +1,76 @@
+{% extends 'admin_layout.html' %}
+
+{% block body %}
+
+
+<div class="container-fluid" style="position:absolute; left: 23%; top:15%; width:74%;">
+    <div class="row">
+        <div class="col-lg-12" style="font-size: 150px; text-shadow: 10px 10px 20px gray;">
+            E E D M O
+            <div style="position:absolute; top:27%; left:-6%; text-shadow:none;">
+                <span style="font-size:40px">Economic Enterprises Devt & Management Office</span>
+            </div>
+        </div>
+    </div>
+    <a href="/AddTenants" style="color: #333333">
+    <div class="boxes" style="position:absolute; left:-20%; top:155%; width: 20%; height: 65%;">
+        <div style="width:100%;text-align: center; height:130%; border-radius:10%;">
+            <span style=" font-size:600%; padding-top: 5%;" class="glyphicon glyphicon-user"></span><br/>
+            <span style="font-size:150%;"> ADD TENANT</span><br/><br/>
+            <!--<a href="/AddTenants" style="text-align:center; color:black;">-->
+                <!--<span class="glyphicon glyphicon-plus"></span> Add Tenant-->
+            <!--</a>-->
+
+        </div>
+    </div>
+    </a>
+    <a href="/AddStalls" style="color: #333333">
+    <div class="boxes" style="position:absolute; left:10%; top:155%; width: 20%; height: 65%;">
+        <div style="width:100%;text-align: center; height:130%; border-radius:10%;">
+            <span style=" font-size:600%; padding-top: 5%;" class="glyphicon glyphicon-home"></span><br/>
+                <span style="font-size:150%;">  ADD STALL</span><br/><br/>
+
+            <!--<a href="/AddStalls" style="text-align:center; color:black;">-->
+                <!--<span class="glyphicon glyphicon-plus"></span> Add Stall-->
+            <!--</a>-->
+        </div>
+    </div>
+    </a>
+    <a href="/payment" style="color: #333333">
+    <div class="boxes" style="position:absolute; left:40%; top:155%; width: 20%; height: 84%;">
+        <div style="width:100%;text-align: center; height:100%; border-radius:10%;">
+            <span style=" font-size:650%; ">₱<br></span>
+
+            <div style="text-align:center; position:absolute; top:55%; left:19%; background-color: unset;">
+                <span style="font-size:150%;"> ADD PAYMENT</span><br/><br/>
+                <!--<a href="/payment" style="text-align:center; color:black;">-->
+                    <!--<span class="glyphicon glyphicon-plus"></span> Add Payment-->
+                <!--</a>-->
+
+            </div>
+        </div>
+    </div>
+    </a>
+    <a href="/clerk" style="color: #333333">
+    <div class="boxes" style="position:absolute; left:70%; top:155%; width: 20%; height: 65%;">
+        <div style="width:100%;text-align: center; height:130%; border-radius:10%;">
+            <span style=" font-size:600%; padding-top: 5%;" class="glyphicon glyphicon-briefcase"></span><br/>
+            <span style="font-size:150%;"> ADD CLERK</span>
+            <!--<div style="text-align:center; background-color: unset;"><br/>-->
+            <!--<a href="/clerk" style="text-align:center; color:black;">-->
+                <!--<span class="glyphicon glyphicon-plus"></span> Add Clerk-->
+            <!--</a>-->
+            <!--</div>-->
+
+        </div>
+    </div>
+    </a>
+
+
+</div>
+
+    <script>
+    $("div").removeClass("form_container");
+    </script>
+
+{% endblock %}

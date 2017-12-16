@@ -1,0 +1,42 @@
+{% extends 'admin_layout.html' %}
+
+
+{% block body %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Notifications</title>
+</head>
+
+    <div class="row">
+        <div class="col-lg-2 panel panel-primary" style="background-color:white; color: black; margin-top:0%; border-radius:3%; padding: 0%">
+            <div class="panel-heading"><span class="glyphicon glyphicon-bell" ></span> <strong style="font-size:130%;">Notifications</strong><br></div>
+            <div class="panel panel-body" style="margin-bottom: 0%; padding: 0%; margin-left:10%">
+                <div class="row">
+                <h4><a href="#" style="color: gray;">All</a></h4>
+                </div>
+                <div class="row">
+                <h4><a href="#" style="color: gray;">Warning</a></h4>
+                </div>
+                <div class="row">
+                <h4><a href="#" style="color: gray;">Due</a></h4>
+                </div>
+                <div class="row">
+                <h4><a href="#" style="color: gray;">3 Months</a></h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 panel panel-primary" style="margin-left:3%; padding:0%;">
+            <div class="panel-heading"><strong>All Notifications</strong></div>
+            <div class="panel panel-body" style="margin-bottom: 0%">Gi friendzone ka saimohang crush </div>
+
+
+        </div>
+    </div>
+    <!--<h1 style="text-align: center;"> NOTIFICATIONS </h1></div>-->
+
+    <script>
+        $(".form_container").css({"width":"96%", "height":"100%", "background":"unset", "box-shadow":"unset", "left":"2%", "top":"10%"});
+
+    </script>
+{% endblock %}
