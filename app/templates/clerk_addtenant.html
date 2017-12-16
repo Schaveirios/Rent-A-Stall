@@ -2,106 +2,316 @@
 
 {% block body %}
 
-<div class="container fillup-form" style="width:70%; padding:20px 30px;">
-    <div class="row">
-        <div class="col-lg-12"><center><h2>Tenant Information</h2></center></div>
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>Add Tenants</title>-->
+<!--</head>-->
+
+    <!--<div class="form_tag">-->
+        <!--Tenant Form-->
+    <!--</div>-->
+    <!--<form method="POST" enctype="multipart/form-data">-->
+        <!--<div class="container">-->
+
+            <!--{{form1.hidden_tag()}}-->
+            <!--<div class="row">-->
+                <!--<div class="col-lg-2">-->
+                    <!--<label class="">First Name: <br>-->
+                    <!--{{ form1.fname(placeholder = "First Name", style="width:80%;") }}-->
+                        <!--{% if form1.fname.errors %}-->
+                        <!--{% for error in form1.fname.errors %} <br> <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}<br></label>-->
+                <!--</div>-->
+                <!--<div class="col-lg-2">-->
+                    <!--<label class="">Middle Name: <br>-->
+                    <!--{{ form1.mname(placeholder = "Middle Name", style="width:80%;") }}{% if form1.mname.errors %}-->
+                    <!--{% for error in form1.mname.errors %} <br> <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}<br></label>-->
+                <!--</div>-->
+                <!--<div class="col-lg-2">-->
+                    <!--<label class="">Last Name: <br>-->
+                    <!--{{ form1.lname(placeholder = "Last Name", style="width:80%;") }} {% if form1.lname.errors %}-->
+                    <!--{% for error in form1.lname.errors %} <br> <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}<br></label>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+                <!--<div class="col-lg-2">-->
+                    <!--<label class=""  >Contact Number: <br>-->
+                    <!--{{ form1.contnum(placeholder = "Contact Number", style="width:80%;") }}-->
+
+                        <!--{% if form1.contnum.errors %}-->
+                    <!--{% for error in form1.contnum.errors %} <br> <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br></label>-->
+                <!--</div>-->
+                <!--<div class="col-lg-3">-->
+                    <!--<label class="" >Present Address: <br>-->
+                    <!--{{ form1.address(placeholder = "Present Address", style="width:100%;") }} {% if form1.address.errors %}-->
+                    <!--{% for error in form1.address.errors %} <br> <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}</label>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+                <!--<div class="col-lg-2">-->
+                    <!--<label class="form"  >Stall Type: <br/>-->
+                    <!--{{ form1.stalltype(placeholder = "Stall Type", style="width:80%;") }}-->
+
+                        <!--{% if form1.stalltype.errors %}-->
+                    <!--{% for error in form1.stalltype.errors %} <br> <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br></label>-->
+                <!--</div>-->
+                <!--<div class="col-lg-2">-->
+                    <!--<label class="form"  >Stall#: <br>-->
+                    <!--{{ form1.stallno(placeholder = "Stall#", style="width:80%;") }} {% if form1.stallno.errors %}-->
+                    <!--{% for error in form1.stallno.errors %} <br> <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}</label>-->
+                <!--<div style="position: absolute; left:80%; top:22%;">-->
+                    <!--<button type="button" class="btn btn-primary" id="available_stalls">available stalls</button>-->
+                <!--</div>-->
+                <!--</div>-->
+
+            <!--</div>-->
+            <!--<div class="row">-->
+                <!--<div class="col-lg-2">-->
+                    <!--<label class="form"  >Stall Location: <br/>-->
+                    <!--{{ form1.stallloc(placeholder = "Stall Location", style="width:80%;") }}-->
+
+                        <!--{% if form1.stallloc.errors %}-->
+                    <!--{% for error in form1.stallloc.errors %} <br> <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br></label>-->
+                <!--</div>-->
+            <!--</div>-->
+
+
+
+
+        <!--</div>-->
+        <!--<div id="tenantphoto" style="position:absolute;left:75%;top:8%;width:20%;height:65%;">-->
+            <!--<div style="width:100%;height:75%;background-color:gray;">-->
+            <!--</div>-->
+            <!--{{form1.tenantphotoID}}-->
+        <!--</div>-->
+        <!--<div style="position:absolute; left:72%; top:73%;">-->
+            <!--<label>Approval Status:-->
+            <!--{{form1.status}}-->
+            <!--</label>-->
+
+        <!--</div>-->
+
+          <!--<div class="row">-->
+                <!--<div class="col-lg-12">-->
+                    <!--<br>{{ form1.submit }}-->
+                <!--</div>-->
+            <!--</div>-->
+
+
+
+<!--<div id="stalls" style="visibility:hidden; position: absolute; left:0%; top:0%; background-color: gray; box-shadow:0 -2px 20px 0px #bdbdbd; padding: 2% 2%; width: 100%;">-->
+   <!--<table id="myTable" class="table table-striped header-fixed">-->
+
+        <!--<button type="button" class="btn btn-info" id="back_addtenants"><span class="glyphicon glyphicon-arrow-left"></span>Back to Addtenants</button>-->
+        <!--<h1> Available Stalls</h1>-->
+        <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>Stall Number</th>-->
+                <!--<th>Stall Location</th>-->
+                <!--<th>Stall Rate</th>-->
+            <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--{% for row in availstalls %}-->
+            <!--<tr style="background-color: white;">-->
+                <!--<td class="filterable-cell">{{row["stall_no"]}}</td>-->
+                <!--<td class="filterable-cell">{{ row["stall_loc"]}}</td>-->
+                <!--<td class="filterable-cell">{{ row["stall_rate"]}}</td>-->
+            <!--</tr>-->
+        <!--{%endfor%}-->
+        <!--</tbody>-->
+        <!--<script src="\static\js\jquery-3.2.1.min.js"></script>-->
+
+    <!--<script src="\static\js\jquery.dataTables.min.js"></script>-->
+    <!--<script src="\static\js\dataTables.bootstrap.min.js"></script>-->
+    <!--<script>-->
+        <!--$('#myTable').dataTable();-->
+    <!--</script>-->
+    <!--</table>-->
+<!--</div>-->
+
+
+    <!--</form>-->
+
+    <!--<script>-->
+    <!--$(document).ready(function(){-->
+        <!--var a = 0;-->
+        <!--$("#available_stalls").click(function(){-->
+            <!--$("#flex_form").css({"visibility":"hidden"});-->
+            <!--$("#stalls").css({"visibility":"visible"});-->
+        <!--});-->
+        <!--$("#back_addtenants").click(function(){-->
+            <!--$("#flex_form").css({"visibility":"visible"});-->
+            <!--$("#stalls").css({"visibility":"hidden"});-->
+        <!--});-->
+
+    <!--});-->
+    <!--</script>-->
+
+
+<div class="container" style="width:96%;position:absolute; top:29%; left: 3%;">
+    <div class="form_tag" style="left:2%; top:-10%;">
+        Tenant Form
     </div>
 
-    <div class="photoId" id="photoId">
+    <div class="row" style="box-shadow:0 13px 20px 0px #bdbdbd; background-color:white; width:100%; padding:2% 1%;">
+
+        <div class="col-lg-9" >
+            <div class="row">
+                <div class="col-lg-4">
+                    <label for="fname">First Name:</label> <br>
+                    {{ form1.fname(placeholder = "Juan", class="form-control", id="fname") }}
+                    {% if form1.fname.errors %}
+                    {% for error in form1.fname.errors %}<span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}<br>
+                </div>
+                <div class="col-lg-4">
+                     <label for="mname">Middle Name:</label> <br>
+                    {{ form1.mname(placeholder = "Reyes", class="form-control", id="mname") }}{% if form1.mname.errors %}
+                    {% for error in form1.mname.errors %}<span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}<br>
+                </div>
+                <div class="col-lg-4">
+                    <label for="lname">Last Name:</label> <br>
+                    {{ form1.lname(placeholder = "Dela Cruz", class="form-control", id="lname") }} {% if form1.lname.errors %}
+                    {% for error in form1.lname.errors %} <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}<br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <label for="address" >Present Address: </label><br>
+                    {{ form1.address(placeholder = "P-8 Isabel Village, Cirilo St., Upper Portion, Pala-o, Iligan City" , class="form-control", id="address") }} {% if form1.address.errors %}
+                    {% for error in form1.address.errors %}  <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br>
+                </div>
+                <div class="col-lg-4">
+                    <label for="contnum"  >Contact Number:</label> <br>
+                    {{ form1.contnum(placeholder = "09123456789", class="form-control", id="contnum") }}
+                        {% if form1.contnum.errors %}
+                    {% for error in form1.contnum.errors %} <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    <label for="stallno"  >Stall#: </label><br>
+                    {{ form1.stallno(placeholder = "123", class="form-control", id="stallno") }} {% if form1.stallno.errors %}
+                    {% for error in form1.stallno.errors %} <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br>
+                </div>
+                <div class="col-lg-2">
+                    <label for="rate"  >rate: </label><br>
+                    {{ form1.rate(placeholder = "Rate", class="form-control", id="rate") }} {% if form1.rate.errors %}
+                    {% for error in form1.rate.errors %} <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br>
+                </div>
+                <div class="col-lg-2" style="width:14%;" >
+                        <label for="status">Status:</label><br/>
+                        {{form1.status( class="btn btn-success")}}
+                </div>
+                <div class="col-lg-3" style="margin-top:2.5%;">
+                        {{form1.submit( class="btn btn-primary")}}
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-lg-3">
+            <div style="position:absolute; left:15%; width:72%; height: 90%; top:9%; background-color:gray;">
+                {{form1.tenantphotoID( style="position:absolute; top:103%; left:0%;")}}
+            </div>
+            &nbsp;
+            <div class="row" style="margin-top:64%;">
+            </div>
+        </div>
     </div>
+    <div class="row" >
+        <div class="col-lg-5" style="box-shadow:0 13px 20px 0px #bdbdbd; background-color:white; padding:1% 1%; margin-top:1%; width:48%;">
+            <h1  style="margin-bottom: 4%;">List of Tenants</h1>
+            <table class="table table-striped table-bordered table-hover" id="myTable3">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Contact#</th>
+                        <th>Stall#</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Contact#</th>
+                        <th>Stall#</th>
 
+                    </tr>
 
-    <div class="label_id">
-        <span>Tenant ID:</span>
+                </tfoot>
+                <tbody>
+                    {% for res in result %}
+                    <tr>
+                        <td>
+                            <a href = "/payment_table/{{res.tenantID}}/{{res.stallID}}">{{ res.first_name }} &nbsp; {{ res.mid_name }} &nbsp; {{ res.last_name }} </a>
+                        </td>
+                        <td>
+                            {{res.contact_no}}
+                        </td>
+                        <td>
+                            {{ x[loop.index-1] }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-5" style="box-shadow:0 13px 20px 0px #bdbdbd; background-color:white; padding:1% 1%; margin-top:1%; margin-left:1.5%; width:48%;">
+            <h1  style="margin-bottom: 4%;">List of Stalls</h1>
+
+            <table class="table table-striped table-bordered table-hover" id="myTable4">
+
+                        <div id="example_wrapper" class="dataTables_wrapper form-inline df-bootstrap"></div>
+                <thead>
+                    <tr>
+                        <th>Stall Number</th>
+                        <th>Location</th>
+                        <th>Rate</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Stall Number</th>
+                        <th>Location</th>
+                        <th>Rate</th>
+                        <th>Type</th>
+                    </tr>
+
+                </tfoot>
+                <tbody>
+                    {% for res in result2 %}
+                    <tr>
+                        <td>
+                            {{ res.stall_no }}
+                        </td>
+                        <td>
+                            {{ res.stall_loc }}
+                        </td>
+                        <td>
+                            {{ res.stall_rate }}
+                        </td>
+                        <td>
+                            {{ y[loop.index-1] }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
     </div>
-
-<!--
-        <script>
-            var x = document.getElementById("photoId");
-            var y = document.getElementById("label_id");
-
-            y.style.top = x.style.top;
-        </script>
--->
-
-    <form method="POST">
-        {{form1.hidden_tag()}}
-
-        <div class="row">
-            <div class="col-lg-3">
-                <label>Branch: {{ form1.branch }}</label>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-2">
-                <label class="">First Name: <br>
-                {{ form1.fname(placeholder = "First Name") }} {% if form1.fname.errors %}
-                {% for error in form1.fname.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-2">
-                <label class="" >Middle Name: <br>
-                {{ form1.mname(placeholder = "Middle Name") }} {% if form1.mname.errors %}
-                {% for error in form1.mname.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-2">
-                <label class="" >Last Name: <br>
-                {{ form1.lname(placeholder = "Last Name") }} {% if form1.lname.errors %}
-                {% for error in form1.lname.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-2">
-                <label class=""  >Contact Number: <br>
-                {{ form1.contnum(placeholder = "Contact Number") }} {% if form1.contnum.errors %}
-                {% for error in form1.contnum.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-2">
-                <label class="" >Present Address: <br>
-                {{ form1.address(placeholder = "Present Address") }} {% if form1.address.errors %}
-                {% for error in form1.address.errors %} {{ error }} {% endfor %} {% endif %}</label>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-2">
-                <label class="form"  >Stall Type: <br/>
-                {{ form1.stalltype(placeholder = "Stall Type") }} {% if form1.stalltype.errors %}
-                {% for error in form1.stalltype.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-2">
-                <label class="form"  >Stall#: <br>
-                {{ form1.stallno(placeholder = "Stall#") }} {% if form1.stallno.errors %}
-                {% for error in form1.stallno.errors %} {{ error }} {% endfor %} {% endif %}</label>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-2">
-                <label class="form"  >Stall Location: <br/>
-                {{ form1.stallloc(placeholder = "Stall Location") }} {% if form1.stallloc.errors %}
-                {% for error in form1.stallloc.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
-            </div>
-        </div>
-
-        <br>{{ form1.submit }}
-    </form>
-
-
 </div>
+
+<script src="\static\js\jquery-3.2.1.min.js"></script>
+<script src="\static\js\jquery.dataTables.min.js"></script>
+<script src="\static\js\dataTables.bootstrap.min.js"></script>
+
+<script>
+    $('#myTable3').dataTable();
+    $('#myTable4').dataTable();
+    $('.form_container').removeClass('form_container');
+</script>
 
 
 

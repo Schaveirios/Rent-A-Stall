@@ -1,0 +1,41 @@
+{% block content %}
+
+
+<h1> Welcome </h1>
+<div>
+	
+
+</div>
+
+ <div class="container">
+        <font style="text-align: center; font-family: Calibri; color: #e6e6e6; font-weight:bold; font-size: 150%;">Stall Information</font>
+        <form mothod = "POST" action="/Stall">
+		<input type="submit" value="Add Stall" />
+            
+
+                <label class="form2" style="color:white;">BRANCH:
+                {{form2.Branchloc}}
+                </label><br/>
+
+                <label class="form2" id="label">Stall No: <br>
+                {{ form2.stallno(placeholder = "Stall No") }} {% if form2.stallno.errors %}
+                {% for error in form2.stallno.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+
+
+                <label class="form2" id="label">Stall Location: <br>
+                {{ form2.stallloc(placeholder = "Stall Location") }} {% if form2.stallloc.errors %}
+                {% for error in form2.stallloc.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+
+                <label class="form2" id="label">Type: <br>
+                {{ form2.stalltype(placeholder = "Type") }} {% if form2.stalltype.errors %}
+                {% for error in form2.stalltype.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+
+                <label class="form2" id="label">Rate: <br>
+                {{ form2.rate(placeholder = "Rate") }} {% if form2.rate.errors %}
+                {% for error in form2.rate.errors %} {{ error }} {% endfor %} {% endif %}<br></label>
+
+            
+        </form>
+    </div>
+
+{% endblock%}
