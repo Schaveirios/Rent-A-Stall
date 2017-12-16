@@ -2,16 +2,16 @@
 		// Configure a few settings and attach camera
 		function configure(){
 			Webcam.set({
-				
-				width: 200,
-				height: 200,
+				width: 320,
+				height: 240,
 				image_format: 'jpeg',
-				jpeg_quality: 100
+				jpeg_quality: 90
 			});
 			Webcam.attach( '#my_camera' );
 		}
 		// A button for taking snaps
-	
+		
+
 		function take_snapshot() {
 			// play sound effect
 			shutter.play();
@@ -30,7 +30,7 @@
 			// Get base64 value from <img id='imageprev'> source
 			var base64image =  document.getElementById("imageprev").src;
 
-			 Webcam.upload( base64image, '{{form1.tenantphotoID}}', function(code, text) {
+			 Webcam.upload( base64image, 'results', function(code, text) {
 				 console.log('Save successfully');
 				 //console.log(text);
             });

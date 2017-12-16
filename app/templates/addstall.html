@@ -3,13 +3,13 @@
 {% block body %}
 
 
-    <div class="form_tag" style="left:23%; top:-17%;">
+    <div class="form_tag" style="left:3%; top:-12%;">
         Stall Form
     </div>
         <form method="POST">
             {{form.hidden_tag()}}
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <div class="form-group">
                         <label for="stalltype">Stall Type:</label> <br>
                             {{ form.stalltype(placeholder = "Stall Type", class="form-control", id="stalltype") }}
@@ -27,13 +27,74 @@
                         {% for error in form.rate.errors %} <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br>
 
                     </div>
-                </div>
-            </div>
-            <div class="row">
+                    <div class="row">
                 <div class="col-lg-2">
                     <br>{{ form.submit(class="btn btn-primary") }}
                 </div>
             </div>
+                <!-- <div class="form-group">
+                    <div class='input-group date' id='datepicker1'>
+                        <input type='text' class="form-control" />
+                        <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                    </div>
+                    <script>
+                        $(function () {
+                            $('#datepicker1').datetimepicker();
+                        });
+                    </script>
+                </div> -->
+
+                </div>
+                <div class="col-lg-6">
+                    <h1  style="margin-bottom: 4%;">List of Stalls</h1>
+
+                    <table class="table table-striped table-bordered table-hover" id="myTable5">
+
+                                <div id="example_wrapper" class="dataTables_wrapper form-inline df-bootstrap"></div>
+                        <thead>
+                            <tr>
+                                <th>Stall Number</th>
+                                <th>Location</th>
+                                <th>Rate</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Stall Number</th>
+                                <th>Location</th>
+                                <th>Rate</th>
+                                <th>Type</th>
+                            </tr>
+
+                        </tfoot>
+                        <tbody>
+                            {% for res in result2 %}
+                            <tr>
+                                <td>
+                                    {{ res.stall_no }}
+                                </td>
+                                <td>
+                                    {{ res.stall_loc }}
+                                </td>
+                                <td>
+                                    {{ res.stall_rate }}
+                                </td>
+                                <td>
+                                    {{ y[loop.index-1] }}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+            
                     <!--<label class="form"  >Stall Type: <br/>-->
                     <!--{{ form.stalltype(placeholder = "Stall Type") }}-->
                         <!--{% if form.stalltype.errors %}-->
@@ -66,12 +127,90 @@
                 <!--</div>-->
 
             <!--</div>-->
+                <!--<div class="col-lg-12" style="box-shadow:0 13px 20px 0px #bdbdbd; background-color:white; margin-top:3%;">-->
+                    <!--<h1  style="margin-bottom: 4%;">List of Stalls</h1>-->
+
+                    <!--<table class="table table-striped table-bordered table-hover" id="myTable4">-->
+
+                                <!--<div id="example_wrapper" class="dataTables_wrapper form-inline df-bootstrap"></div>-->
+                        <!--<thead>-->
+                            <!--<tr>-->
+                                <!--<th>Stall Number</th>-->
+                                <!--<th>Location</th>-->
+                                <!--<th>Rate</th>-->
+                                <!--<th>Type</th>-->
+                            <!--</tr>-->
+                        <!--</thead>-->
+                        <!--<tfoot>-->
+                            <!--<tr>-->
+                                <!--<th>Stall Number</th>-->
+                                <!--<th>Location</th>-->
+                                <!--<th>Rate</th>-->
+                                <!--<th>Type</th>-->
+                            <!--</tr>-->
+
+                        <!--</tfoot>-->
+                        <!--<tbody>-->
+                            <!--{% for res in result2 %}-->
+                            <!--<tr>-->
+                                <!--<td>-->
+                                    <!--{{ res.stall_no }}-->
+                                <!--</td>-->
+                                <!--<td>-->
+                                    <!--{{ res.stall_loc }}-->
+                                <!--</td>-->
+                                <!--<td>-->
+                                    <!--{{ res.stall_rate }}-->
+                                <!--</td>-->
+                                <!--<td>-->
+                                    <!--{{ y[loop.index-1] }}-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                            <!--{% endfor %}-->
+                        <!--</tbody>-->
+                    <!--</table>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+<!--<script src="\static\js\jquery-3.2.1.min.js"></script>-->
+<!--<script src="\static\js\jquery.dataTables.min.js"></script>-->
+<!--<script src="\static\js\dataTables.bootstrap.min.js"></script>-->
+
+<!--<script>-->
+    <!--$('#myTable3').dataTable();-->
+    <!--$('#myTable4').dataTable();-->
+<!--</script>-->
 
 
 
         </form>
 
-    <script>
-    $("#flex_form").css({"width":"30%", "left":"35%"});
-    </script>
+
+<script src="\static\js\jquery-3.2.1.min.js"></script>
+<script src="\static\js\jquery.dataTables.min.js"></script>
+<script src="\static\js\dataTables.bootstrap.min.js"></script>
+
+<script>
+    $('#myTable5').dataTable();
+</script>
+
+<script>
+    $('#datepicker').datepicker();
+    $("#flex_form").css({"width":"70%", "left":"15%"});
+    $(".form-control").css({"width":"70%", "padding":"5px 7px"});
+
+    $(function () {
+        $('#datepicker1').datetimepicker();
+    });
+
+
+    function update(){
+        $('#stallno').val('');
+        $('#stallloc').val('');
+        $('#stalltype').val('');
+        $('#rate').val('');
+    }
+</script>
 {% endblock %}

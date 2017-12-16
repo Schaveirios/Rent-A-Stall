@@ -130,8 +130,8 @@ class Tenants(dbase.Model):
     last_name = dbase.Column(dbase.String(24))
     present_addr = dbase.Column(dbase.String(60))
     tenant_photo = dbase.Column(dbase.String(60))
+    tenant_status = dbase.Column(dbase.String(2))
     stallID = dbase.Column(dbase.Integer, dbase.ForeignKey("stalls.stallID"), nullable=True)
-    tenant_status = dbase.Column(dbase.String(10))
 
     def __init__(self,contact_no, first_name, mid_name, last_name, present_addr, stallID):
         self.first_name = first_name
@@ -140,7 +140,7 @@ class Tenants(dbase.Model):
         self.contact_no = contact_no
         self.present_addr = present_addr
         self.stallID = stallID
-        self.tenant_status = "1"
+        self.tenant_status = '1'
 
 
     def __repr__(self):
@@ -169,17 +169,17 @@ class Pays(dbase.Model):
     # rent = dbase.Column(dbase.Float)
     sCharge = dbase.Column(dbase.Float)
     month = dbase.Column(dbase.String(20))
+    remark = dbase.Column(dbase.String(20))
     amount = dbase.Column(dbase.Float)
     total = dbase.Column(dbase.Float)
     date_issued =dbase.Column(dbase.DATE)
-    Remark = dbase.Column(dbase.String(10))
     tenantID = dbase.Column(dbase.Integer,dbase.ForeignKey("tenants.tenantID"), nullable=True)
     stallID = dbase.Column(dbase.Integer, dbase.ForeignKey("stalls.stallID"), nullable=True)
 
-    def __init__(self, issued_by,or_no,sCharge, tenantID, stallID,month, amount,total,date_issued,Remark):
+    def __init__(self, issued_by,or_no,sCharge, tenantID, stallID,month, amount,total,date_issued, remark):
         self.issued_by = issued_by
         self.or_no = or_no
-        self.Remark = Remark
+        # self.rent = rent
         self.sCharge = sCharge
         self.tenantID = tenantID
         self.stallID = stallID
@@ -187,6 +187,7 @@ class Pays(dbase.Model):
         self.amount = amount
         self.total = total
         self.date_issued = date_issued
+        self.remark = remark
 
     def __repr__(self):
         return '< issued_by{}>'.format(self.issued_by)

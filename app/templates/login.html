@@ -14,6 +14,17 @@
 
 </head>
 <body style="background-color:white;">
+    
+     {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <script>
+      var messages = {{ messages | safe }};
+      for (var i=0; i<messages.length; i++) {
+        swal(messages[i]);
+      }
+    </script>
+  {% endif %}
+{% endwith %}
 
 
 <div style="position:absolute;left:0px;right:0px;width:100%;height:100%;background-color:#00000021;"></div>

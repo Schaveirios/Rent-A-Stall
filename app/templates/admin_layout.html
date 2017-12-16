@@ -2,206 +2,34 @@
 <html lang="en">
 <head>
 
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/static/css/layout.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/buttons.bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/sweetalert.css"/>
 
     <script src="/static/js/jquery-3.2.1.min.js"></script>
     <script src="/static/js/bootstrap.min.js/"></script>
+    <script src="/static/js/sweetalert.min.js/"></script>
 
-<!--l 23 w 45-->
+ </head>
+ <body>
 
-<!--{% if page=='addtenant' %}-->
-    <!--<script>-->
-    <!--$(document).ready(function(){-->
-        <!--$(".form_container").css({"left":"0%","width":"100%","box-shadow":"none","background-color":"transparent","padding":"2% 0 0 2%"});-->
-        <!--var a = 0;-->
-        <!--$("#paneltoggle").click(function(){-->
-            <!--if(a==0){-->
-                <!--$("#panel").animate({left: '0%'});-->
-                <!--$("#flex_form").animate({left: '18%', width:'82%'},300);-->
-                <!--a=1;-->
-            <!--}-->
-            <!--else{-->
-                <!--$("#panel").animate({left: '-18%'});-->
-                <!--$("#flex_form").animate({left: '0%', width:'100%'},300);-->
-                <!--a=0;-->
-            <!--}-->
-        <!--});-->
-    <!--});-->
-    <!--</script>-->
-<!--{% else %}-->
-    <!--<script>-->
-    <!--$(document).ready(function(){-->
-        <!--var a = 0;-->
-        <!--$("#paneltoggle").click(function(){-->
-            <!--if(a==0){-->
-                <!--$("#panel").animate({left: '0%'});-->
-                <!--$("#flex_form").animate({left: '30%', width:'57%'},300);-->
-                <!--a=1;-->
-            <!--}-->
-            <!--else{-->
-                <!--$("#panel").animate({left: '-18%'});-->
-                <!--$("#flex_form").animate({left: '12%', width:'75%'},300);-->
-                <!--a=0;-->
-            <!--}-->
-        <!--});-->
-    <!--});-->
-    <!--</script>-->
-<!--{% endif %}-->
-
-<!--</head>-->
-
-
-<!--<body>-->
-
-
-<!--<div class="container" id="panel" style="text-align:center; text-decoration:none;" >-->
-
-    <!--<div class="panel-group" id="pg">-->
-        <!--<div class="panel panel-default">-->
-            <!--<div class="panel-heading" id="panel_button" data-toggle="collapse" data-parent="pg" data-target="#tenant">-->
-                <!--TENANT&nbsp;<span class="caret"></span>-->
-            <!--</div>-->
-            <!--<div id="tenant" class="panel-collapse collapse in">-->
-                <!--<div class="panel-body" style="padding: 1% 0 0% 0;">-->
-                    <!--<ul class="list-group">-->
-                        <!--<a href="/AddTenants" >-->
-                            <!--<li class="list-group-item" style="text-decoration:none; color:black;">-->
-                                <!--Add Tenant-->
-                            <!--</li>-->
-                        <!--</a>-->
-                        <!--<a href="/showtenants" >-->
-                            <!--<li class="list-group-item">-->
-                            <!--Tenant List-->
-                            <!--</li>-->
-                        <!--</a>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="panel panel-default">-->
-            <!--<div class="panel-heading" id="panel_button" data-toggle="collapse" data-parent="pg" data-target="#stall">-->
-                <!--STALL&nbsp;<span class="caret"></span>-->
-            <!--</div>-->
-            <!--<div id="stall" class="panel-collapse collapse in">-->
-                <!--<div class="panel-body" style="padding: 1% 0 0% 0;">-->
-                    <!--<ul class="list-group">-->
-                        <!--<a href="/AddStalls" >-->
-                            <!--<li class="list-group-item">-->
-                                <!--Add Stall-->
-                            <!--</li>-->
-                        <!--</a>-->
-                        <!--<a href="/showstalls">-->
-                            <!--<li class="list-group-item">-->
-                            <!--Stall List-->
-                            <!--</li>-->
-                        <!--</a>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="panel panel-default">-->
-            <!--<div class="panel-heading" id="panel_button" data-toggle="collapse" data-parent="pg" data-target="#payment">-->
-                <!--PAYMENT&nbsp;<span class="caret"></span>-->
-            <!--</div>-->
-            <!--<div id="payment" class="panel-collapse collapse in">-->
-                <!--<div class="panel-body" style="padding: 1% 0 0% 0;">-->
-                    <!--<ul class="list-group">-->
-                        <!--<a href="/payment" >-->
-                           <!--<li class="list-group-item">-->
-                               <!--Add Payment-->
-                           <!--</li>-->
-                        <!--</a>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="panel panel-default">-->
-            <!--<div class="panel-heading" id="panel_button" data-toggle="collapse" data-parent="pg" data-target="#clerk">-->
-                <!--CLERK&nbsp;<span class="caret"></span>-->
-            <!--</div>-->
-            <!--<div id="clerk" class="panel-collapse collapse in">-->
-                <!--<div class="panel-body" style="padding: 1% 0 0% 0;">-->
-                    <!--<ul class="list-group">-->
-                        <!--<a href="/clerk" >-->
-                            <!--<li class="list-group-item">-->
-                               <!--Add Clerk-->
-                            <!--</li>-->
-                        <!--</a>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="panel panel-default">-->
-            <!--<div class="panel-heading" id="panel_button" data-parent="pg">-->
-                <!--<a href="/logs">-->
-                <!--LOGS-->
-                <!--</a>-->
-            <!--</div>-->
-        <!--</div>-->
-
-
-
-    <!--</div>-->
-<!--</div>-->
-    <!--<div class="row">-->
-        <!--<div class="col-lg-12" style="">-->
-            <!--<center><h5>EEDMO FORMS</h5></center>-->
-            <!--<hr>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="row">-->
-        <!--<a href="/AddTenants"><div class="col-lg-12 panel_button">-->
-            <!--Add Tenant-->
-        <!--</div></a>-->
-    <!--</div>-->
-    <!--<div class="row">-->
-        <!--<a href="/AddStalls"><div class="col-lg-12 panel_button">-->
-            <!--Add Stall-->
-        <!--</div></a>-->
-    <!--</div>-->
-    <!--<div class="row">-->
-        <!--<a href="/clerk"><div class="col-lg-12 panel_button">-->
-            <!--Add Clerk-->
-        <!--</div></a>-->
-    <!--</div>-->
-        <!--<div class="row">-->
-        <!--<a href="/showtenants"><div class="col-lg-12 panel_button">-->
-            <!--Tenants List-->
-        <!--</div></a>-->
-    <!--</div>-->
-        <!--<div class="row">-->
-        <!--<a href="/showstalls"><div class="col-lg-12 panel_button">-->
-           <!--Stall List-->
-        <!--</div></a>-->
-    <!--</div>-->
-        <!--<div class="row">-->
-        <!--<a href="/logs"><div class="col-lg-12 panel_button">-->
-            <!--Logs-->
-        <!--</div></a>-->
-    <!--</div>-->
-
-
-<!--</div>-->
-
-<body>
+     {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <script>
+      var messages = {{ messages | safe }};
+      for (var i=0; i<messages.length; i++) {
+        swal(messages[i]);
+      }
+    </script>
+  {% endif %}
+{% endwith %}
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid" style="z-index:10;">
         <ul class="nav navbar-nav">
-            <!--<li>-->
-                <!--<a href="#" id="paneltoggle" style="padding: 5px 0; color:white;">-->
-                    <!--<span class="glyphicon glyphicon-list" style="font-size:30px;"></span>-->
-                <!--</a>-->
-            <!--</li>-->
-            <!--<li>-->
-                <!--<a href="/admin_dashboard" style="font-size: 25px; color:white;">Home</a>-->
-            <!--</li>-->
+          
             <li style="background-color:#5BC0DC;">
                 <a href="/#" style="color:black;"> <strong style="font-size:110%;">EEDMO</strong></a>
             </li>
@@ -384,16 +212,6 @@
 
 <div class="form_container" id="flex_form">
 
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    {% for message in messages %}
-      <div class="alert alert-{{ message }} alert-dismissible" role="alert">{{ message }}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
-
 {% block body %}
 {% endblock %}
 
@@ -404,7 +222,10 @@
 <script src="\static\js\dataTables.bootstrap.min.js"></script>
 <script>
     $('#myTable').dataTable();
+    $('#myTable2').dataTable();
 </script>
+{% block scripts %}
+{% endblock %}
 
 <script type="\static\js\dataTables.buttons.min.js"></script>
 <script type="\static\js\buttons.html5.min.js"></script>
@@ -415,19 +236,8 @@
 
 <script type="\static\js\vfs_fonts.js"></script>
 <script type="\static\js\buttons.colVis.min.js"></script>
-<script src="\static\js\jquery-1.12.4.min.js"></script>
-    <script>
-        $(document).ready(function() {
-        var table = $('#myTable2').dataTable( {
-        lengthChange: false,
-        buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
-    } );
-        table.buttons().container()
-        .appendTo( '#example_wrapper' );
-} );
-    </script>
 
-
+    
 
 </body>
 </html>

@@ -6,24 +6,25 @@
 {% endif %}
 {% block body %}
 
-
+	   <link rel="stylesheet" type="text/css" href="/static/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/buttons.dataTables.min.css">
+		
 		<h1  style="margin-bottom: 4%;">List of Stalls</h1>
 		
 		<table class="table table-striped table-bordered table-hover" id="myTable3">
-		
-					<div class="dataTables_wrapper form-inline df-bootstrap"></div>
-			<thead>
+					<thead>
 				<tr>
-					<th>Stall Number</th>
+					<th style="width:115px;">Stall Number</th>
 					<th>Location</th>
 					<th>Rate</th>
 					<th>Type</th>
 				</tr>
 			</thead>
+			
 			<tbody>
 				{% for res in result_stall %}
 				<tr>
-					<td>
+					<td style="text-align:center;">
 						{{ res.stall_no }}
 					</td>
 					<td>
@@ -39,55 +40,44 @@
 				{% endfor %}
 			</tbody>
 		</table>
-	</div>
-
-	</script>
-    <script src="\static\js\jquery-3.2.1.min.js"></script>	
+	
+ <script src="\static\js\jquery-3.2.1.min.js"></script>
    	<script src="\static\js\jquery.dataTables.min.js"></script>	
 	<script src="\static\js\dataTables.bootstrap.min.js"></script>
-	<script type="\static\js\dataTables.buttons.min.js"></script>
-	<script type="\static\js\buttons.html5.min.js"></script>
-	<script type="\static\js\buttons.flash.min.js"></script>
-	<script type="\static\js\buttons.print.min.js"></script>
-	<script type="\static\js\jszip.min.js"></script>
-	<script type="\static\js\pdfmake.min.js"></script>
+	<script src="\static\js\dataTables.buttons.min.js"></script>
+	<script src="\static\js\buttons.flash.min.js"></script>
+	<script src="\static\js\buttons.print.min.js"></script>
+	<script src="\static\js\buttons.html5.min.js"></script>
+	<script src="\static\js\pdfmake.min.js"></script>
+	<script src="\static\js\jszip.min.js"></script>
+	<script src="\static\js\vfs_fonts.min.js"></script>
 
-	<script type="\static\js\vfs_fonts.js"></script>
-	<script type="\static\js\buttons.colVis.min.js"></script>
-
-	<link rel="stylesheet" type="text/css" href="\static\css\datatables.css"/>
-
-<script type="text/javascript" src="\static\js\datatables.js"></script>
-		
-<script type="text/javascript" charset="utf-8">
-$(document).ready(function (){
-	$('#myTable3').DataTable({
-    // var table = $('#myTable3').DataTable({
-    //     dom: 'Brtip',
-    //     buttons: [
-    //       {
-    //          extend: 'collection',
-    //          text: 'Export',
-    //          buttons: [ 'pdfHtml5', 'csvHtml5', 'copyHtml5', 'excelHtml5' ]
-    //       }
-    //    ]
-    // });
-    
-    // $('#btn-pdf').on('click', function(){
-    //     table.button( '0-0' ).trigger();
-    // });
-    
-    // $('#btn-csv').on('click', function(){
-    //     table.button( '0-1' ).trigger();
-    });   
-});
- 
-</script>
-
+	
 	<script>
-
-
+	$(document).ready(function() {
+    $('#myTable3').DataTable( {
+        dom: 'Blfrtip',
+        buttons: [
+      {
+        extend: 'collection',
+        text: 'Export',
+        buttons: [
+          'copy',
+          'excel',
+          'csv',
+          'pdf',
+          'print'
+        ]
+      }         
+    ]
+    
+    } );
+    table.buttons().container()
+        .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
+} );
 		$('.form_container').css({'height':'unset', 'padding':'0% 2%', 'top':'12%'});
 		$('#myTable_filter').css({'position':'absolute','top':'-68px','left':'46%'});
+	</script>
+
 
 {% endblock %}

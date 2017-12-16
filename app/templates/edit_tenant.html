@@ -1,0 +1,82 @@
+{% if current_user.roleID==1 %}
+{% extends 'admin_layout.html' %}
+{% else %}
+{% extends 'layout.html' %}
+{% endif %}
+
+
+{% block body %}
+<div class="container" style="width:96%;position:absolute; top:29%; left: 3%;">
+    <form method='POST'>
+    <div class="form_tag" style="left:2%; top:-26%;">
+        Edit Tenant Form
+    </div>
+
+    <div class="row" style="box-shadow:0 13px 20px 0px #bdbdbd; background-color:white; width:100%; padding:2% 1%;">
+        
+        <div class="col-lg-9" >
+            {{form1.hidden_tag()}}
+            <div class="row">
+                <div class="col-lg-4">
+                    <label for="fname">First Name:</label> <br>
+                    {{ form1.fname(placeholder = "Juan", class="form-control", id="fname") }}
+                    {% if form1.fname.errors %}
+                    {% for error in form1.fname.errors %}<span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}<br>
+                </div>
+                <div class="col-lg-4">
+                     <label for="mname">Middle Name:</label> <br>
+                    {{ form1.mname(placeholder = "Reyes", class="form-control", id="mname") }}{% if form1.mname.errors %}
+                    {% for error in form1.mname.errors %}<span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}<br>
+                </div>
+                <div class="col-lg-4">
+                    <label for="lname">Last Name:</label> <br>
+                    {{ form1.lname(placeholder = "Dela Cruz", class="form-control", id="lname") }} {% if form1.lname.errors %}
+                    {% for error in form1.lname.errors %} <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}<br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <label for="address" >Present Address: </label><br>
+                    {{ form1.address(placeholder = "P-8 Isabel Village, Cirilo St., Upper Portion, Pala-o, Iligan City" , class="form-control", id="address") }} {% if form1.address.errors %}
+                    {% for error in form1.address.errors %}  <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br>
+                </div>
+                <div class="col-lg-4">
+                    <label for="contnum"  >Contact Number:</label> <br>
+                    {{ form1.contnum(placeholder = "09123456789", class="form-control", id="contnum") }}
+                        {% if form1.contnum.errors %}
+                    {% for error in form1.contnum.errors %} <span class="help-inline">{{ error }} </span> {% endfor %} {% endif %}<br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3" style="margin-top:0.5%;">
+                        <br/>{{form1.submit(class="btn btn-primary")}}
+                </div>
+
+            </div>
+        </div>
+
+    
+        <div class="col-lg-3">
+            <div style="position:absolute; left:15%; width:72%; height: 90%; top:9%; background-color:gray;">
+                <img style="height: 100%; width: 100%; object-fit:contain;" src="/{{tenant.tenant_photo}}"/>
+            </div>
+            &nbsp;
+            <div class="row" style="margin-top:64%;">
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+<script src="\static\js\jquery-3.2.1.min.js"></script>
+<script src="\static\js\jquery.dataTables.min.js"></script>
+<script src="\static\js\dataTables.bootstrap.min.js"></script>
+
+<script>
+    $('#myTable3').dataTable();
+    $('#myTable4').dataTable();
+    $('.form_container').removeClass('form_container');
+</script>
+
+
+{% endblock %}

@@ -37,12 +37,44 @@
 						{{ x1[loop.index-1] }}
 					</td>
 					<td>
-						lalalalaala
+						{% if res.tenant_status == '1' %}
+							<span style="color:blue"><b>Active</b></span>
+						{% else %}
+							<span style="color:red"><b>Inactive</b></span>
+						{% endif %}
 					</td>
 					<td>
-						&nbsp;&nbsp;<a href="/"><span style="color: cyan; font-size: 22px" class="glyphicon glyphicon-edit"></span></a> &nbsp;&nbsp;
-						<a href="/"><span style="color: red; font-size: 22px" class="glyphicon glyphicon-remove"></span></a>&nbsp;&nbsp;
-						<a href="/payment_table/{{ res.tenantID }}/{{ res.stallID }}"><span style="color: orange; font-size: 22px" class="glyphicon glyphicon-usd"></span></a>
+						<button type="button" class="btn btn-primary">
+							<a href="/edit_tenant/{{res.tenantID}}/{{res.stallID}}" data-toggle="tooltip" data-placement="top" title="Edit Tenant">
+								<span class="glyphicon glyphicon-edit" style="color:white;"></span>
+							</a>
+						</button>
+
+
+
+						&nbsp;&nbsp;
+						<button type="button" class="btn btn-success">
+							<a href="/payment_table/{{res.tenantID}}/{{res.stallID}}" data-toggle="tooltip" data-placement="top" title="Add payment">
+								<span class="glyphicon glyphicon-usd" style="color: white;"></span>
+							</a>
+						</button>
+
+						&nbsp;
+
+						{% if res.tenant_status=='1' %}
+						<button type="button" class="btn btn-danger" id = "evict" onclick="evict_({{ res.tenantID }}, {{ res.stallID }})">
+							<!-- <a href="/evict_tenant/{{res.tenantID}}/{{res.stallID}}" data-toggle="tooltip" data-placement="top" title="Remove Tenant">
+								<span class="glyphicon glyphicon-remove" style="color: white;"></span>
+							</a> -->
+								<span class="glyphicon glyphicon-remove" style="color: white;"></span>
+						</button>
+						{% else %}
+						<button type="button" class="btn btn-danger" id = "evict" disabled>
+							
+								<span class="glyphicon glyphicon-remove" style="color: white;"></span>
+							
+						</button>
+						{% endif %}
 					</td>
 				</tr>
 				{% endfor %}
@@ -53,10 +85,39 @@
     <script src="\static\js\jquery-3.2.1.min.js"></script>
    	<script src="\static\js\jquery.dataTables.min.js"></script>	
 	<script src="\static\js\dataTables.bootstrap.min.js"></script>
+
 	<script>
 		$('#myTable1').dataTable();
-		$('.form_container').css({'height':'unset', 'padding':'0% 2%', 'top':'12%'});
+		$('.form_container').css({'height':'unset', 'padding':'0% 2%', 'top':'12%', 'width':'90%','left':'5%'});
+		$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip();
+		});
+		//document.querySelector('#evict').onsubmit = function(){
 
+		function evict_(tid, sid){
+		 swal({
+		    title: "Are you sure?",
+		    text: "You will not be able to recover this imaginary file!",
+		    type: "warning",
+		    showCancelButton: true,
+		    confirmButtonColor: '#DD6B55',
+		    confirmButtonText: 'Yes, I am sure!',
+		    cancelButtonText: "No, cancel it!",
+		    closeOnConfirm: false,
+		    closeOnCancel: false
+		 },
+		 function(isConfirm){
+
+		   if (isConfirm){
+		     //swal("Shortlisted!", "Candidates are successfully shortlisted!", "success");
+		     window.open('/evict_tenant/'+tid+'/'+sid);
+		     console.log("earll");
+
+		    } else {
+		      swal("Cancelled", "Your imaginary file is safe :)", "error");
+		    }
+		 });
+		};
 	</script>
 
 {% endblock %}
