@@ -159,12 +159,12 @@
                                                 </div>
                                                 <div class="row">
                                                     <label for="sCharge" >Service Charge: </label>
-                                                    {{ form.sCharge(placeholder = "Service Charge", class="form-control") }} {% if form.sCharge.errors %}
+                                                    {{ form.sCharge(placeholder = "Service Charge", class="form-control", value=rate_) }} {% if form.sCharge.errors %}
                                                     {% for error in form.sCharge.errors %} <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}
                                                 </div>
                                                 <div class="row">
                                                     <label for="total" >Total: </label>
-                                                    {{ form.total(placeholder = "Total", class="form-control") }} {% if form.total.errors %}
+                                                    {{ form.total(placeholder = "3000", class="form-control", value=rate_2) }} {% if form.total.errors %}
                                                     {% for error in form.total.errors %} <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}
                                                 </div>
                                                 <div class="row">
@@ -174,7 +174,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <label for="issued_by" >Issued By: </label>
-                                                    {{ form.issued_by(placeholder = "Issued by", class="form-control") }} {% if form.issued_by.errors %}
+                                                    {{ form.issued_by(placeholder = "Issued by", class="form-control", value=curr_user) }} {% if form.issued_by.errors %}
                                                     {% for error in form.issued_by.errors %} <span class="help-inline">{{ error }}</span> {% endfor %} {% endif %}
                                                 </div>
                                                 <div class="row">

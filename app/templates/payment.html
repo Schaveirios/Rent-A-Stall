@@ -221,6 +221,10 @@ function select_tenant(tenant_id, stall_id){
             console.log(glob_tenant_id);
             console.log(glob_stall_id);
 
+            $('#scharge').val(data.rate_);
+            $('#total').val(data.rate_2);
+            $('#issued_by').val(data.curr_user);
+
             $('#selecta').html("");
             $('#profile2').html("");
               var stringRes = "";

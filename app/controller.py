@@ -18,7 +18,7 @@ datelog = str(now)
 
 
 img_folder = 'app/static/profile/'
-loc_default = 'static/profile/default.jpg'
+loc_default = 'static/profile/default.png'
 available_extension = set(['png', 'jpg', 'PNG', 'JPG'])
 
 def search_panel(cond):
@@ -401,7 +401,6 @@ def login():
     else:
         if request.method == "POST" and form.validate_on_submit():
             user = Users.query.filter_by(username=form.username.data).first()
-            print user.username
             if user:
                 if user.roleID == 2:
                     if user is not None and check_password_hash(user.passwrd, form.passwrd.data):
@@ -425,7 +424,7 @@ def login():
                         dbase.session.add(logmessage)
                         login_user(user)
                         login_user(user)
-                        flash('You were log in')
+                        flash('You were logged in')
                         return redirect(url_for('index2'))
                     #return '<h1>Invalid username or password!</h1>'
                     flash('Invalid username or password')
@@ -527,6 +526,13 @@ def paymenttable(id, s_id):
     typee = Types.query.filter_by(typeID=someNum.typeID).first()
     form= PaymentForm()
 
+    rate_='0'
+    if str(datetime.datetime.now())[8]+str(datetime.datetime.now())[9]=='21':
+        rate_= (float(someNum.stall_rate)*0.25)
+
+    curr_user = current_user.last_name+', '+current_user.first_name+' '+current_user.mid_name
+    print rate_
+
     remark_re=""
     if form.remark.data=='1':
         remark_re = 'Advance'
@@ -553,8 +559,8 @@ def paymenttable(id, s_id):
         dbase.session.commit()
         return redirect(url_for("paymenttable", id=id, s_id=s_id))
     if current_user.roleID == 1:
-        return render_template('paymenttable_admin.html', form=form, pays=pays, id=id, s_id=s_id, stall=someNum, typee=typee, tenant=tenant_1, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
-    return render_template('paymenttable.html', form =form, pays=pays, id=id, s_id=s_id, stall=someNum, typee=typee, tenant=tenant_1, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
+        return render_template('paymenttable_admin.html', rate_2=someNum.stall_rate+int(rate_), curr_user=curr_user, rate_=rate_, form=form, pays=pays, id=id, s_id=s_id, stall=someNum, typee=typee, tenant=tenant_1, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
+    return render_template('paymenttable.html', rate_2=someNum.stall_rate+int(rate_), curr_user=curr_user, rate_=rate_, form =form, pays=pays, id=id, s_id=s_id, stall=someNum, typee=typee, tenant=tenant_1, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
 
 
 @app.route('/payment')
@@ -563,8 +569,9 @@ def paymenttable(id, s_id):
 @required_roles(1,2)
 def payment():
     form= PaymentForm()
+    curr_user = current_user.last_name+', '+current_user.first_name+' '+current_user.mid_name
     tenant = Tenants.query.filter_by(tenant_status='1').all()
-    return render_template('payment.html', form=form, tenn=tenant, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
+    return render_template('payment.html', curr_user=curr_user, form=form, tenn=tenant, result=search_panel(0)[0], x=search_panel(0)[1], result2=search_panel(1)[0], y=search_panel(1)[1])
 
 
 @app.route('/edit_tenant/<int:id>/<int:s_id>', methods=["GET", "POST"])
@@ -607,7 +614,12 @@ def select_tenant():
     type = Types.query.filter_by(typeID=stall.typeID).first()
     pays = Pays.query.filter(and_(Pays.tenantID==tenant.tenantID, Pays.stallID==stall.stallID)).first()
     name = str(tenant.last_name)+', '+str(tenant.first_name)+' '+str(tenant.mid_name)
-    return jsonify(prof= tenant.tenant_photo, name = name, cnum = tenant.contact_no, addr = tenant.present_addr, stallnum = stall.stall_no, stallloc = stall.stall_loc, stalltype = type.stall_type, rate = stall.stall_rate, balance= 0)
+    curr_user = current_user.last_name+', '+current_user.first_name+' '+current_user.mid_name
+    rate_='0'
+    if str(datetime.datetime.now())[8]+str(datetime.datetime.now())[9]=='21':
+        rate_= (float(someNum.stall_rate)*0.25)
+
+    return jsonify(rate_=rate_, rate_2=stall.stall_rate+int(rate_), curr_user=curr_user, prof= tenant.tenant_photo, name = name, cnum = tenant.contact_no, addr = tenant.present_addr, stallnum = stall.stall_no, stallloc = stall.stall_loc, stalltype = type.stall_type, rate = stall.stall_rate, balance= 0)
 
 @app.route('/alternate/payment/transac')
 def pay_tenant():
@@ -689,5 +701,10 @@ def notify():
         print tpays.date_issued
     print "dsadjasjfkjab"
     return render_template('showtenants.html')
+
+@app.route('/about')
+@app.route('/about/')
+def about():
+    return render_template('about.html')
 
 
